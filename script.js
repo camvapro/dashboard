@@ -1,6 +1,6 @@
 /**
- * script.js - Complete Camva Pro CRM JavaScript with Supabase Integration
- * Single Page Application with full customer management functionality
+ * script.js - Updated Camva Pro CRM with Message Templates & Total Amount
+ * Enhanced customer management with professional messaging system
  */
 
 // ===============================================
@@ -45,6 +45,222 @@ const renewCustomerInfoEl = document.getElementById('renewCustomerInfo');
 
 // Search Elements
 const searchInputEl = document.getElementById('searchInput');
+
+// ===============================================
+// MESSAGE TEMPLATES
+// ===============================================
+
+const MESSAGE_TEMPLATES = {
+    welcome: {
+        title: "Welcome Message",
+        whatsapp: `🎉 Welcome to Camva Pro, {NAME}!
+
+Your {PLAN} subscription is now active and ready to use.
+
+✅ Plan: {PLAN}
+📅 Valid Until: {EXPIRY_DATE}
+💰 Full access to premium features
+
+Start creating amazing designs now!
+
+Need help? Contact us:
+📱 WhatsApp: +91 6387617678
+
+Thank you for choosing Camva Pro! 🚀`,
+        email: {
+            subject: "🎉 Welcome to Camva Pro!",
+            body: `🎉 Welcome to Camva Pro, {NAME}!
+
+Your {PLAN} subscription is now active and ready to use.
+
+✅ Plan: {PLAN}
+📅 Valid Until: {EXPIRY_DATE}
+💰 Full access to premium features
+
+Start creating amazing designs now!
+
+Need help? Contact us:
+📱 WhatsApp: +91 6387617678
+
+Thank you for choosing Camva Pro! 🚀
+
+Best regards,
+Camva Pro Team
+📱 +91 6387617678`
+        }
+    },
+    
+    subscriptionStart: {
+        title: "Subscription Start",
+        whatsapp: `🚀 Subscription Activated - {NAME}
+
+Your Canva Pro {PLAN} subscription is now live!
+
+📦 Plan: {PLAN}
+📅 Valid Until: {EXPIRY_DATE}
+✨ All premium features unlocked
+
+Start designing with:
+• Unlimited downloads
+• Premium templates
+• Background remover
+• Advanced editing tools
+
+Support: +91 6387617678`,
+        email: {
+            subject: "🚀 Your Canva Pro Subscription is Active",
+            body: `🚀 Subscription Activated - {NAME}
+
+Your Canva Pro {PLAN} subscription is now live!
+
+📦 Plan: {PLAN}
+📅 Valid Until: {EXPIRY_DATE}
+✨ All premium features unlocked
+
+Start designing with:
+• Unlimited downloads
+• Premium templates
+• Background remover
+• Advanced editing tools
+
+Best regards,
+Camva Pro Team
+📱 +91 6387617678`
+        }
+    },
+    
+    renewal: {
+        title: "Renewal Confirmation",
+        whatsapp: `✅ Subscription Renewed Successfully! 
+
+Hi {NAME}, great news! Your Camva Pro subscription has been renewed.
+
+🔄 New Plan: {PLAN}
+📅 Valid Until: {EXPIRY_DATE}
+💎 Continued premium access
+
+Thank you for staying with Camva Pro!
+
+Questions? Contact us: +91 6387617678`,
+        email: {
+            subject: "✅ Canva Pro Subscription Renewed!",
+            body: `✅ Subscription Renewed Successfully! 
+
+Hi {NAME}, great news! Your Camva Pro subscription has been renewed.
+
+🔄 New Plan: {PLAN}
+📅 Valid Until: {EXPIRY_DATE}
+💎 Continued premium access
+
+Thank you for staying with Camva Pro!
+
+Best regards,
+Camva Pro Team
+📱 +91 6387617678`
+        }
+    },
+    
+    reminder: {
+        title: "Expiry Reminder",
+        whatsapp: `⏰ Subscription Reminder - {NAME}
+
+Your Canva Pro {PLAN} subscription expires in {DAYS_LEFT} days.
+
+📅 Expiry Date: {EXPIRY_DATE}
+📦 Current Plan: {PLAN}
+
+Renew now to avoid service interruption!
+
+Contact us to renew:
+📱 WhatsApp: +91 6387617678
+✉️ Email: support@camvapro.com`,
+        email: {
+            subject: "⏰ Canva Pro Subscription Reminder",
+            body: `⏰ Subscription Reminder - {NAME}
+
+Your Canva Pro {PLAN} subscription expires in {DAYS_LEFT} days.
+
+📅 Expiry Date: {EXPIRY_DATE}
+📦 Current Plan: {PLAN}
+
+Renew now to avoid service interruption!
+
+Contact us to renew:
+📱 WhatsApp: +91 6387617678
+✉️ Email: support@camvapro.com
+
+Best regards,
+Camva Pro Team
+📱 +91 6387617678`
+        }
+    },
+    
+    expired: {
+        title: "Subscription Expired",
+        whatsapp: `⚠️ Subscription Expired - {NAME}
+
+Your Canva Pro {PLAN} subscription has expired on {EXPIRY_DATE}.
+
+📦 Previous Plan: {PLAN}
+🚫 Premium features are now locked
+
+Renew now to restore full access:
+• All premium templates
+• Advanced editing tools
+• Unlimited downloads
+
+Contact us: +91 6387617678`,
+        email: {
+            subject: "⚠️ Canva Pro Subscription Expired",
+            body: `⚠️ Subscription Expired - {NAME}
+
+Your Canva Pro {PLAN} subscription has expired on {EXPIRY_DATE}.
+
+📦 Previous Plan: {PLAN}
+🚫 Premium features are now locked
+
+Renew now to restore full access:
+• All premium templates
+• Advanced editing tools
+• Unlimited downloads
+
+Best regards,
+Camva Pro Team
+📱 +91 6387617678`
+        }
+    },
+    
+    status: {
+        title: "Status Update",
+        whatsapp: `Hi {NAME}! 
+
+Your Canva Pro {PLAN} subscription status update:
+
+✅ Account: {STATUS}
+📦 Plan: {PLAN}
+🎨 Access: All premium features
+
+Need help? Contact us: +91 6387617678
+
+Best regards,
+Camva Pro Team 🚀`,
+        email: {
+            subject: "🚦 Your Canva Pro Subscription Status",
+            body: `Hi {NAME}! 
+
+Your Canva Pro {PLAN} subscription status update:
+
+✅ Account: {STATUS}
+📦 Plan: {PLAN}
+🎨 Access: All premium features
+
+Need help? Contact us: +91 6387617678
+
+Best regards,
+Camva Pro Team 🚀`
+        }
+    }
+};
 
 // ===============================================
 // UTILITY FUNCTIONS
@@ -191,7 +407,7 @@ async function fetchCustomers() {
         const { data, error } = await supabaseClient
             .from('customers')
             .select('*')
-            .order('created_at', { ascending: false });
+            .order('id', { ascending: false });
         
         if (error) {
             console.error('Supabase fetch error:', error);
@@ -228,6 +444,7 @@ async function addCustomer(customerData) {
             .insert([{
                 ...customerData,
                 status: getCustomerStatus(customerData.expiry_date),
+                total_amount: customerData.payment_amount || 0, // Initialize total_amount
                 created_at: new Date().toISOString()
             }])
             .select()
@@ -242,12 +459,6 @@ async function addCustomer(customerData) {
         }
         
         showToast('Customer added successfully!', 'success');
-        
-        // Send welcome message
-        if (data && customerData.send_welcome) {
-            sendWelcomeMessage(data.phone, data.email, data.name);
-        }
-        
         return data;
         
     } catch (error) {
@@ -296,17 +507,33 @@ async function updateCustomer(customerId, customerData) {
 }
 
 /**
- * Renew customer subscription
+ * Renew customer subscription with total_amount update
  */
 async function renewSubscription(customerId, renewalData) {
     try {
         showLoadingOverlay(true);
+        
+        // First get the current customer data
+        const { data: currentCustomer, error: fetchError } = await supabaseClient
+            .from('customers')
+            .select('total_amount')
+            .eq('id', customerId)
+            .single();
+        
+        if (fetchError) {
+            throw new Error('Failed to fetch current customer data');
+        }
+        
+        // Calculate new total amount
+        const currentTotal = parseFloat(currentCustomer?.total_amount) || 0;
+        const newTotal = currentTotal + parseFloat(renewalData.payment_amount);
         
         const { data, error } = await supabaseClient
             .from('customers')
             .update({
                 expiry_date: renewalData.expiry_date,
                 payment_amount: renewalData.payment_amount,
+                total_amount: newTotal, // Updated total amount
                 plan_type: renewalData.plan_type || null,
                 status: getCustomerStatus(renewalData.expiry_date),
                 last_renewal: new Date().toISOString(),
@@ -326,12 +553,6 @@ async function renewSubscription(customerId, renewalData) {
         }
         
         showToast('Subscription renewed successfully!', 'success');
-        
-        // Send renewal message
-        if (data && renewalData.send_message) {
-            sendRenewalMessage(data.phone, data.email, data.name, renewalData.expiry_date);
-        }
-        
         return data;
         
     } catch (error) {
@@ -366,16 +587,168 @@ function updateDashboardStats(customers) {
         c.expiry_date && c.expiry_date >= today && c.expiry_date <= weekFromToday
     ).length;
     
-    // Total revenue from active customers
-    const totalRevenue = customers
-        .filter(c => c.expiry_date && c.expiry_date >= today)
-        .reduce((sum, c) => sum + (parseFloat(c.payment_amount) || 0), 0);
+    // Total revenue from all customers (using total_amount)
+    const totalRevenue = customers.reduce((sum, c) => sum + (parseFloat(c.total_amount) || 0), 0);
     
     // Update DOM elements
     totalCustomersEl.textContent = totalCustomers;
     activeSubscriptionsEl.textContent = activeSubscriptions;
     expiringThisWeekEl.textContent = expiringThisWeek;
     totalRevenueEl.textContent = formatCurrency(totalRevenue);
+}
+
+// ===============================================
+// MESSAGE SYSTEM
+// ===============================================
+
+/**
+ * Replace template variables with customer data
+ */
+function replaceMessageVariables(template, customer) {
+    const today = getTodayDate();
+    const daysLeft = customer.expiry_date ? daysDifference(today, customer.expiry_date) : 0;
+    
+    return template
+        .replace(/{NAME}/g, customer.name || '')
+        .replace(/{PLAN}/g, customer.plan_type || 'Monthly')
+        .replace(/{EXPIRY_DATE}/g, formatDate(customer.expiry_date))
+        .replace(/{STATUS}/g, (customer.status || 'active').toUpperCase())
+        .replace(/{DAYS_LEFT}/g, daysLeft.toString())
+        .replace(/{PHONE}/g, customer.phone || '')
+        .replace(/{EMAIL}/g, customer.email || '');
+}
+
+/**
+ * Send message via WhatsApp
+ */
+function sendWhatsAppMessage(phone, message) {
+    const cleanPhone = phone.replace(/\D/g, '');
+    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+/**
+ * Send message via Email
+ */
+function sendEmailMessage(email, subject, body) {
+    const emailUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(emailUrl, '_blank');
+}
+
+/**
+ * Show message dropdown for customer
+ */
+function showMessageDropdown(customerId) {
+    const customer = allCustomers.find(c => c.id === customerId);
+    if (!customer) {
+        showToast('Customer not found', 'error');
+        return;
+    }
+    
+    // Create dropdown HTML
+    const dropdownHtml = `
+        <div class="message-dropdown-overlay" onclick="closeMessageDropdown()">
+            <div class="message-dropdown" onclick="event.stopPropagation()">
+                <div class="message-dropdown-header">
+                    <h4>Send Message to ${customer.name}</h4>
+                    <button onclick="closeMessageDropdown()">&times;</button>
+                </div>
+                
+                <div class="message-dropdown-content">
+                    <div class="message-type-selection">
+                        <label>Select Message Type:</label>
+                        <select id="messageTypeSelect" onchange="updateMessagePreview('${customerId}')">
+                            <option value="welcome">Welcome Message</option>
+                            <option value="subscriptionStart">Subscription Start</option>
+                            <option value="renewal">Renewal Confirmation</option>
+                            <option value="reminder">Expiry Reminder</option>
+                            <option value="expired">Subscription Expired</option>
+                            <option value="status">Status Update</option>
+                        </select>
+                    </div>
+                    
+                    <div class="message-preview">
+                        <label>Message Preview:</label>
+                        <textarea id="messagePreview" rows="8" readonly></textarea>
+                    </div>
+                    
+                    <div class="message-actions">
+                        <button class="btn btn-success" onclick="sendSelectedWhatsApp('${customerId}')">
+                            <i class="fab fa-whatsapp"></i> Send WhatsApp
+                        </button>
+                        <button class="btn btn-primary" onclick="sendSelectedEmail('${customerId}')">
+                            <i class="fas fa-envelope"></i> Send Email
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add to body
+    const dropdownEl = document.createElement('div');
+    dropdownEl.innerHTML = dropdownHtml;
+    document.body.appendChild(dropdownEl);
+    
+    // Initialize with first option
+    updateMessagePreview(customerId);
+}
+
+/**
+ * Update message preview based on selected type
+ */
+function updateMessagePreview(customerId) {
+    const customer = allCustomers.find(c => c.id === customerId);
+    const messageType = document.getElementById('messageTypeSelect').value;
+    const template = MESSAGE_TEMPLATES[messageType];
+    
+    if (template && customer) {
+        const message = replaceMessageVariables(template.whatsapp, customer);
+        document.getElementById('messagePreview').value = message;
+    }
+}
+
+/**
+ * Send selected WhatsApp message
+ */
+function sendSelectedWhatsApp(customerId) {
+    const customer = allCustomers.find(c => c.id === customerId);
+    const messageType = document.getElementById('messageTypeSelect').value;
+    const template = MESSAGE_TEMPLATES[messageType];
+    
+    if (template && customer) {
+        const message = replaceMessageVariables(template.whatsapp, customer);
+        sendWhatsAppMessage(customer.phone, message);
+        showToast(`WhatsApp message opened for ${customer.name}`, 'success');
+        closeMessageDropdown();
+    }
+}
+
+/**
+ * Send selected Email message
+ */
+function sendSelectedEmail(customerId) {
+    const customer = allCustomers.find(c => c.id === customerId);
+    const messageType = document.getElementById('messageTypeSelect').value;
+    const template = MESSAGE_TEMPLATES[messageType];
+    
+    if (template && customer) {
+        const subject = template.email.subject;
+        const body = replaceMessageVariables(template.email.body, customer);
+        sendEmailMessage(customer.email, subject, body);
+        showToast(`Email opened for ${customer.name}`, 'success');
+        closeMessageDropdown();
+    }
+}
+
+/**
+ * Close message dropdown
+ */
+function closeMessageDropdown() {
+    const dropdown = document.querySelector('.message-dropdown-overlay');
+    if (dropdown) {
+        dropdown.remove();
+    }
 }
 
 // ===============================================
@@ -410,9 +783,6 @@ function createCustomerCard(customer) {
     card.className = 'customer-card';
     
     const statusClass = `status-${customer.status}`;
-    const expiryInfo = customer.expiry_date ? 
-        `Expires: ${formatDate(customer.expiry_date)}` : 
-        'No expiry date';
     
     card.innerHTML = `
         <div class="customer-header">
@@ -437,8 +807,12 @@ function createCustomerCard(customer) {
                 <span class="detail-value">${customer.plan_type || '-'}</span>
             </div>
             <div class="detail-row">
-                <span class="detail-label">Payment:</span>
+                <span class="detail-label">Last Payment:</span>
                 <span class="detail-value">${customer.payment_amount ? formatCurrency(customer.payment_amount) : '-'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Total Paid:</span>
+                <span class="detail-value">${customer.total_amount ? formatCurrency(customer.total_amount) : '-'}</span>
             </div>
             <div class="detail-row">
                 <span class="detail-label">Join Date:</span>
@@ -457,14 +831,9 @@ function createCustomerCard(customer) {
             <button class="btn btn-sm btn-success" onclick="showRenewModal('${customer.id}')">
                 <i class="fas fa-sync-alt"></i> Renew
             </button>
-            <button class="btn btn-sm btn-info" onclick="sendMessage('${customer.id}')">
+            <button class="btn btn-sm btn-info" onclick="showMessageDropdown('${customer.id}')">
                 <i class="fas fa-paper-plane"></i> Message
             </button>
-            ${customer.status === 'expiring' ? `
-                <button class="btn btn-sm btn-warning" onclick="sendReminderMessage('${customer.id}')">
-                    <i class="fas fa-bell"></i> Remind
-                </button>
-            ` : ''}
         </div>
     `;
     
@@ -652,6 +1021,10 @@ function showRenewModal(customerId) {
             <span class="detail-value">${formatDate(customer.expiry_date)}</span>
         </div>
         <div class="detail-row">
+            <span class="detail-label">Total Paid:</span>
+            <span class="detail-value">${formatCurrency(customer.total_amount || 0)}</span>
+        </div>
+        <div class="detail-row">
             <span class="detail-label">Status:</span>
             <span class="detail-value status-${customer.status}">${customer.status.toUpperCase()}</span>
         </div>
@@ -698,18 +1071,18 @@ function closeRenewModal() {
 customerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    const formData = new FormData(customerForm);
     const customerData = {
-        name: formData.get('customerName') || document.getElementById('customerName').value,
-        email: formData.get('customerEmail') || document.getElementById('customerEmail').value,
-        phone: formData.get('customerPhone') || document.getElementById('customerPhone').value,
-        company: formData.get('customerCompany') || '',
+        name: document.getElementById('customerName').value,
+        email: document.getElementById('customerEmail').value,
+        phone: document.getElementById('customerPhone').value,
+        company: document.getElementById('customerCompany') ? document.getElementById('customerCompany').value : '',
         team: document.getElementById('customerTeam').value,
         plan_type: document.getElementById('planType').value,
         payment_amount: parseFloat(document.getElementById('planAmount').value) || 0,
         join_date: document.getElementById('joinDate').value,
         expiry_date: document.getElementById('expiryDate').value,
-        notes: document.getElementById('customerNotes').value,
+        notes: document.getElementById('customerNotes').value
+        // Remove send_welcome from here
     };
     
     // Validation
@@ -728,6 +1101,13 @@ customerForm.addEventListener('submit', async (e) => {
     if (result) {
         closeCustomerModal();
         await loadData();
+        
+        // Auto-send welcome message for new customers
+        if (!currentEditingCustomer) {
+            setTimeout(() => {
+                showMessageDropdown(result.id);
+            }, 500);
+        }
     }
 });
 
@@ -741,8 +1121,7 @@ renewForm.addEventListener('submit', async (e) => {
     const renewalData = {
         expiry_date: document.getElementById('newExpiryDate').value,
         payment_amount: parseFloat(document.getElementById('renewalAmount').value) || 0,
-        notes: document.getElementById('renewalNotes').value,
-        send_message: true
+        notes: document.getElementById('renewalNotes').value
     };
     
     // Validation
@@ -756,87 +1135,15 @@ renewForm.addEventListener('submit', async (e) => {
     if (result) {
         closeRenewModal();
         await loadData();
+        
+        // Auto-show renewal message
+        setTimeout(() => {
+            showMessageDropdown(customerId);
+            document.getElementById('messageTypeSelect').value = 'renewal';
+            updateMessagePreview(customerId);
+        }, 500);
     }
 });
-
-// ===============================================
-// MESSAGING FUNCTIONS
-// ===============================================
-
-/**
- * Send welcome message via WhatsApp and Email
- */
-function sendWelcomeMessage(phone, email, name) {
-    const message = `Hello ${name}!\n\nWelcome to Camva Pro CRM! 🎉\n\nWe're excited to have you on board. Your subscription is now active and you can start exploring all our features.\n\nIf you have any questions, feel free to reach out to us.\n\nBest regards,\nCamva Pro Team`;
-    
-    // Open WhatsApp
-    const whatsappUrl = `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-    
-    // Open Email
-    const emailUrl = `mailto:${email}?subject=Welcome to Camva Pro CRM&body=${encodeURIComponent(message)}`;
-    window.open(emailUrl, '_blank');
-    
-    showToast('Welcome message links opened', 'success');
-}
-
-/**
- * Send renewal message
- */
-function sendRenewalMessage(phone, email, name, expiryDate) {
-    const message = `Hello ${name}!\n\nYour Camva Pro CRM subscription has been successfully renewed! ✅\n\nNew expiry date: ${formatDate(expiryDate)}\n\nThank you for continuing with us. We appreciate your trust in our services.\n\nBest regards,\nCamva Pro Team`;
-    
-    // Open WhatsApp
-    const whatsappUrl = `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-    
-    // Open Email
-    const emailUrl = `mailto:${email}?subject=Subscription Renewed - Camva Pro CRM&body=${encodeURIComponent(message)}`;
-    window.open(emailUrl, '_blank');
-    
-    showToast('Renewal message links opened', 'success');
-}
-
-/**
- * Send reminder message for expiring subscription
- */
-function sendReminderMessage(customerId) {
-    const customer = allCustomers.find(c => c.id === customerId);
-    if (!customer) return;
-    
-    const daysLeft = daysDifference(getTodayDate(), customer.expiry_date);
-    const message = `Hello ${customer.name}!\n\nThis is a friendly reminder that your Camva Pro CRM subscription will expire in ${daysLeft} days (${formatDate(customer.expiry_date)}).\n\nTo avoid any interruption in service, please renew your subscription at your earliest convenience.\n\nIf you have any questions or need assistance, please don't hesitate to contact us.\n\nBest regards,\nCamva Pro Team`;
-    
-    // Open WhatsApp
-    const whatsappUrl = `https://wa.me/${customer.phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-    
-    // Open Email
-    const emailUrl = `mailto:${customer.email}?subject=Subscription Expiry Reminder - Camva Pro CRM&body=${encodeURIComponent(message)}`;
-    window.open(emailUrl, '_blank');
-    
-    showToast('Reminder message links opened', 'success');
-}
-
-/**
- * Send general message to customer
- */
-function sendMessage(customerId) {
-    const customer = allCustomers.find(c => c.id === customerId);
-    if (!customer) return;
-    
-    const message = `Hello ${customer.name}!\n\nI hope you're doing well. This is a message from Camva Pro CRM team.\n\n[Please customize this message as needed]\n\nBest regards,\nCamva Pro Team`;
-    
-    // Open WhatsApp
-    const whatsappUrl = `https://wa.me/${customer.phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-    
-    // Open Email
-    const emailUrl = `mailto:${customer.email}?subject=Message from Camva Pro CRM&body=${encodeURIComponent(message)}`;
-    window.open(emailUrl, '_blank');
-    
-    showToast('Message links opened', 'success');
-}
 
 // ===============================================
 // MAIN DATA LOADING & REFRESH
@@ -895,6 +1202,9 @@ document.addEventListener('keydown', (e) => {
         if (renewModal.classList.contains('show')) {
             closeRenewModal();
         }
+        if (document.querySelector('.message-dropdown-overlay')) {
+            closeMessageDropdown();
+        }
     }
 });
 
@@ -936,8 +1246,11 @@ window.filterCustomers = filterCustomers;
 window.searchCustomers = searchCustomers;
 window.showExpiringCustomers = showExpiringCustomers;
 window.refreshData = refreshData;
-window.sendMessage = sendMessage;
-window.sendReminderMessage = sendReminderMessage;
 window.removeToast = removeToast;
+window.showMessageDropdown = showMessageDropdown;
+window.closeMessageDropdown = closeMessageDropdown;
+window.updateMessagePreview = updateMessagePreview;
+window.sendSelectedWhatsApp = sendSelectedWhatsApp;
+window.sendSelectedEmail = sendSelectedEmail;
 
 console.log('📝 Camva Pro CRM script loaded');
