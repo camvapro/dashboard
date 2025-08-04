@@ -11,22 +11,10 @@
     <!-- Local CSS -->
     <link rel="stylesheet" href="styles.css">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-    
-    <!-- Meta Tags for SEO -->
+    <!-- Meta Tags -->
     <meta name="description" content="Camva Pro CRM - Professional customer relationship management system with subscription tracking, messaging, and analytics.">
     <meta name="keywords" content="CRM, Customer Management, Subscription, WhatsApp, Email, Analytics">
-    <meta name="author" content="Camva Pro Team">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Camva Pro CRM">
-    <meta property="og:description" content="Professional Customer Management System">
-    <meta property="og:type" content="website">
-    
-    <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#3b82f6">
-    <link rel="manifest" href="/assets/manifest.json">
 </head>
 
 <body>
@@ -141,9 +129,6 @@
                         <button class="btn btn-outline" onclick="showExpiringCustomers()">
                             <i class="fas fa-clock"></i> Expiring This Week
                         </button>
-                        <button class="btn btn-outline" onclick="exportCustomers()">
-                            <i class="fas fa-download"></i> Export Data
-                        </button>
                     </div>
                 </div>
                 
@@ -195,13 +180,13 @@
                             <label for="customerName">
                                 <i class="fas fa-user"></i> Full Name *
                             </label>
-                            <input type="text" id="customerName" required placeholder="Enter full name">
+                            <input type="text" id="customerName" class="form-control" required placeholder="Enter full name">
                         </div>
                         <div class="form-group">
                             <label for="customerEmail">
                                 <i class="fas fa-envelope"></i> Email Address *
                             </label>
-                            <input type="email" id="customerEmail" required placeholder="Enter email address">
+                            <input type="email" id="customerEmail" class="form-control" required placeholder="Enter email address">
                         </div>
                     </div>
                     
@@ -210,13 +195,13 @@
                             <label for="customerPhone">
                                 <i class="fas fa-phone"></i> Phone Number *
                             </label>
-                            <input type="tel" id="customerPhone" required placeholder="Enter phone number">
+                            <input type="tel" id="customerPhone" class="form-control" required placeholder="Enter phone number">
                         </div>
                         <div class="form-group">
                             <label for="customerCompany">
                                 <i class="fas fa-building"></i> Company Name
                             </label>
-                            <input type="text" id="customerCompany" placeholder="Enter company name">
+                            <input type="text" id="customerCompany" class="form-control" placeholder="Enter company name">
                         </div>
                     </div>
                 </div>
@@ -230,7 +215,7 @@
                             <label for="customerTeam">
                                 <i class="fas fa-users"></i> Team Type
                             </label>
-                            <select id="customerTeam">
+                            <select id="customerTeam" class="form-control">
                                 <option value="startup">🚀 Startup</option>
                                 <option value="professional">💼 Professional</option>
                                 <option value="enterprise">🏢 Enterprise</option>
@@ -240,7 +225,7 @@
                             <label for="planType">
                                 <i class="fas fa-calendar"></i> Plan Type
                             </label>
-                            <select id="planType">
+                            <select id="planType" class="form-control">
                                 <option value="monthly">📅 Monthly</option>
                                 <option value="quarterly">📈 Quarterly</option>
                                 <option value="yearly">🎯 Yearly</option>
@@ -253,13 +238,13 @@
                             <label for="planAmount">
                                 <i class="fas fa-rupee-sign"></i> Plan Amount (₹)
                             </label>
-                            <input type="number" id="planAmount" min="0" step="0.01" placeholder="Enter amount">
+                            <input type="number" id="planAmount" class="form-control" min="0" step="0.01" placeholder="Enter amount">
                         </div>
                         <div class="form-group">
                             <label for="joinDate">
                                 <i class="fas fa-calendar-plus"></i> Join Date
                             </label>
-                            <input type="date" id="joinDate">
+                            <input type="date" id="joinDate" class="form-control">
                         </div>
                     </div>
                     
@@ -268,7 +253,7 @@
                             <label for="expiryDate">
                                 <i class="fas fa-calendar-times"></i> Expiry Date
                             </label>
-                            <input type="date" id="expiryDate">
+                            <input type="date" id="expiryDate" class="form-control">
                         </div>
                         <div class="form-group">
                             <!-- Empty space for alignment -->
@@ -284,7 +269,7 @@
                         <label for="customerNotes">
                             <i class="fas fa-comment"></i> Notes
                         </label>
-                        <textarea id="customerNotes" rows="3" placeholder="Additional notes about the customer..."></textarea>
+                        <textarea id="customerNotes" class="form-control" rows="3" placeholder="Additional notes about the customer..."></textarea>
                     </div>
                 </div>
                 
@@ -329,13 +314,13 @@
                                 <label for="newExpiryDate">
                                     <i class="fas fa-calendar-plus"></i> New Expiry Date *
                                 </label>
-                                <input type="date" id="newExpiryDate" required>
+                                <input type="date" id="newExpiryDate" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="renewalAmount">
                                     <i class="fas fa-rupee-sign"></i> Payment Amount (₹) *
                                 </label>
-                                <input type="number" id="renewalAmount" min="0" step="0.01" required placeholder="Enter payment amount">
+                                <input type="number" id="renewalAmount" class="form-control" min="0" step="0.01" required placeholder="Enter payment amount">
                             </div>
                         </div>
                         
@@ -343,7 +328,7 @@
                             <label for="renewalNotes">
                                 <i class="fas fa-comment"></i> Renewal Notes
                             </label>
-                            <textarea id="renewalNotes" rows="3" placeholder="Payment details, reference number, etc..."></textarea>
+                            <textarea id="renewalNotes" class="form-control" rows="3" placeholder="Payment details, reference number, etc..."></textarea>
                         </div>
                     </div>
                     
@@ -371,20 +356,8 @@
         </div>
     </div>
 
-    <!-- Quick Stats Summary (Hidden, for potential future use) -->
-    <div id="quickStats" class="quick-stats" style="display: none;">
-        <div class="quick-stat">
-            <span class="quick-stat-label">Today's Revenue:</span>
-            <span class="quick-stat-value" id="todayRevenue">₹0</span>
-        </div>
-        <div class="quick-stat">
-            <span class="quick-stat-label">This Month:</span>
-            <span class="quick-stat-value" id="monthRevenue">₹0</span>
-        </div>
-    </div>
-
-    <!-- Footer (Optional) -->
-    <footer class="footer" style="margin-top: 3rem; padding: 2rem 0; background: var(--bg-primary); border-top: 1px solid var(--border-color); text-align: center; color: var(--text-secondary);">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
             <p>
                 <i class="fas fa-heart" style="color: #ef4444;"></i> 
@@ -392,9 +365,7 @@
                 <i class="fas fa-phone"></i> +91 6387617678 | 
                 <i class="fas fa-envelope"></i> support@camvapro.com
             </p>
-            <p style="font-size: 0.875rem; margin-top: 0.5rem;">
-                © 2025 Camva Pro CRM. All rights reserved. | Version 2.0
-            </p>
+            <p class="footer-version">© 2025 Camva Pro CRM. All rights reserved. | Version 2.0</p>
         </div>
     </footer>
 
@@ -403,338 +374,5 @@
     
     <!-- Local Scripts -->
     <script src="script.js"></script>
-
-    <!-- Service Worker Registration (Optional PWA) -->
-    <script>
-        // Register service worker for PWA capabilities
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                        console.log('ServiceWorker registration successful');
-                    })
-                    .catch(function(err) {
-                        console.log('ServiceWorker registration failed: ', err);
-                    });
-            });
-        }
-
-        // Add to home screen prompt
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            // Show install button or banner
-        });
-
-        // Performance monitoring
-        window.addEventListener('load', function() {
-            const loadTime = performance.now();
-            console.log(`Page load time: ${Math.round(loadTime)}ms`);
-            
-            // Optional: Send to analytics
-            if (window.gtag) {
-                gtag('event', 'page_load_time', {
-                    event_category: 'Performance',
-                    event_label: 'Load Time',
-                    value: Math.round(loadTime)
-                });
-            }
-        });
-
-        // Enhanced error handling
-        window.addEventListener('error', function(e) {
-            console.error('Global error:', e.error);
-            // Optional: Send to error tracking service
-        });
-
-        window.addEventListener('unhandledrejection', function(e) {
-            console.error('Unhandled promise rejection:', e.reason);
-            // Optional: Send to error tracking service
-        });
-    </script>
-
-    <!-- Additional CSS for Message Dropdown and Enhanced Features -->
-    <style>
-        /* Form Sections */
-        .form-section {
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .form-section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .form-section h4 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .form-section h4 i {
-            color: var(--primary-color);
-        }
-
-        /* Enhanced Form Labels */
-        .form-group label i {
-            width: 16px;
-            color: var(--text-secondary);
-            margin-right: 0.5rem;
-        }
-
-        /* Filter Tabs with Icons */
-        .filter-tabs .tab-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* Enhanced Customer Info */
-        .customer-info {
-            background: linear-gradient(135deg, var(--bg-gray) 0%, var(--bg-secondary) 100%);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
-            border: 1px solid var(--border-color);
-        }
-
-        .customer-info h4 {
-            font-size: var(--font-size-lg);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-sm);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
-
-        .customer-info h4::before {
-            content: '👤';
-            font-size: var(--font-size-lg);
-        }
-
-        /* Quick Stats */
-        .quick-stats {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--bg-primary);
-            border-radius: var(--border-radius);
-            margin-bottom: 1rem;
-        }
-
-        .quick-stat {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .quick-stat-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        .quick-stat-value {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        /* Message Dropdown Styles */
-        .message-dropdown-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: var(--spacing-md);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .message-dropdown {
-            background: var(--bg-primary);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            width: 100%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: slideUp 0.3s ease;
-        }
-
-        .message-dropdown-header {
-            padding: var(--spacing-lg);
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .message-dropdown-header h4 {
-            font-size: var(--font-size-lg);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 0;
-        }
-
-        .message-dropdown-header button {
-            background: none;
-            border: none;
-            font-size: var(--font-size-2xl);
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 0;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.2s ease;
-        }
-
-        .message-dropdown-header button:hover {
-            background-color: var(--bg-gray);
-            color: var(--text-primary);
-        }
-
-        .message-dropdown-content {
-            padding: var(--spacing-lg);
-        }
-
-        .message-type-selection {
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .message-type-selection label {
-            display: block;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-sm);
-            font-size: var(--font-size-sm);
-        }
-
-        .message-type-selection select {
-            width: 100%;
-            padding: var(--spacing-sm);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            font-size: var(--font-size-base);
-            background-color: var(--bg-primary);
-            transition: border-color 0.2s ease;
-        }
-
-        .message-type-selection select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .message-preview {
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .message-preview label {
-            display: block;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-sm);
-            font-size: var(--font-size-sm);
-        }
-
-        .message-preview textarea {
-            width: 100%;
-            padding: var(--spacing-md);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            font-size: var(--font-size-sm);
-            font-family: var(--font-family);
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            line-height: 1.5;
-            resize: vertical;
-            min-height: 200px;
-        }
-
-        .message-preview textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .message-actions {
-            display: flex;
-            gap: var(--spacing-sm);
-            justify-content: flex-end;
-        }
-
-        .message-actions .btn {
-            min-width: 140px;
-            justify-content: center;
-        }
-
-        /* WhatsApp Button Styling */
-        .btn:has(.fab.fa-whatsapp) {
-            background-color: #25d366;
-            border-color: #25d366;
-            color: white;
-        }
-
-        .btn:has(.fab.fa-whatsapp):hover {
-            background-color: #128c7e;
-            border-color: #128c7e;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .message-dropdown-overlay {
-                padding: var(--spacing-sm);
-            }
-            
-            .message-dropdown {
-                max-width: none;
-                width: 100%;
-            }
-            
-            .message-actions {
-                flex-direction: column;
-            }
-            
-            .message-actions .btn {
-                width: 100%;
-                min-width: auto;
-            }
-        }
-    </style>
 </body>
 </html>
