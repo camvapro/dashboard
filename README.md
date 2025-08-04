@@ -1,0 +1,1 @@
+Camva Pro CRM🚀 1-Page CRM – HTML, CSS, JavaScript, SupabaseA complete customer management platform (CRM) as a single-page web app with full Supabase integration for storage.No backend code needed (client-side JS only)•Responsive (desktop/tablet/mobile)•Features: Dashboard, Add/Edit/Renew/Remind/Search/Filter customers, Messaging via Email & WhatsApp
