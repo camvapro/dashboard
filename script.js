@@ -1082,7 +1082,6 @@ customerForm.addEventListener('submit', async (e) => {
         join_date: document.getElementById('joinDate').value,
         expiry_date: document.getElementById('expiryDate').value,
         notes: document.getElementById('customerNotes').value
-        // Remove send_welcome from here
     };
     
     // Validation
