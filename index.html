@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Protected Login</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+    }
+    .password-container {
+      background: #fff;
+      padding: 36px 24px;
+      box-shadow: 0 10px 40px #3333;
+      border-radius: 14px;
+      width: 90%;
+      max-width: 370px;
+      text-align: center;
+      animation: fadein 0.7s;
+    }
+    @keyframes fadein { from {opacity: 0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);} }
+    .lock-icon { font-size: 2.4em; color: #667eea; margin-bottom: 14px;}
+    h2 { margin:0 0 10px 0; font-size:1.3em; color:#222;}
+    .sub { color:#666; margin-bottom:22px; font-size:0.98em;}
+    input[type='password'] {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 1.1em;
+      border: 2px solid #e0e0e0;
+      margin-bottom: 16px;
+      outline: none;
+      transition: border-color 0.3s;
+      text-align: center;
+      background: #f7faff;
+    }
+    input[type='password']:focus {border-color:#667eea;}
+    button {
+      width: 100%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      padding: 13px 0;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.09em;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 7px;
+      transition: box-shadow 0.3s;
+    }
+    button:hover { box-shadow: 0 8px 24px #667eea33; }
+    .error-msg {
+      color: #e74c3c;
+      font-size: 0.97em;
+      min-height: 1.3em;
+      height: 1.3em;
+      transition: opacity 0.2s;
+    }
+    @media(max-width:400px){ .password-container{padding:18px 5px;}}
+  </style>
+</head>
+<body>
+  <div class="password-container">
+    <div class="lock-icon">🔒</div>
+    <h2>Dashboard Protected</h2>
+    <div class="sub">Enter password to continue</div>
+    <input type="password" id="passwordInput" maxlength="6" placeholder="Enter Password" autocomplete="off" />
+    <button id="checkBtn">Access Dashboard</button>
+    <div id="errorMsg" class="error-msg"></div>
+  </div>
+  <script>
+    const CORRECT_PASSWORD = "734872";
+    const input = document.getElementById('passwordInput');
+    const btn = document.getElementById('checkBtn');
+    const msg = document.getElementById('errorMsg');
+    input.focus();
+
+    function checkPass() {
+      if(input.value.trim() === CORRECT_PASSWORD){
+        // Redirect to your main Dashboard page
+        window.location.href = "Dashboard.html"; // Change this if your file name is different
+      } else {
+        msg.textContent = "Incorrect password!";
+        input.value = '';
+        input.focus();
+      }
+    }
+    btn.onclick = checkPass;
+    input.addEventListener('keyup', function(e){
+      if(e.key==="Enter") checkPass();
+    });
+  </script>
+</body>
+</html>
