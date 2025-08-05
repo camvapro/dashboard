@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Data Search - Camva Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .search-title {
+            font-size: 1.4rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .email-input {
+            flex: 1;
+            min-width: 280px;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+
+        .email-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background: white;
+        }
+
+        .email-input.invalid {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .search-btn {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .search-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: #667eea;
+            font-size: 1.1rem;
+            margin: 20px 0;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .result-card {
+            background: #2d3748;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            color: white;
+            display: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card.show {
+            display: block;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .customer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .customer-info {
+            background: #4a5568;
+            padding: 20px;
+            border-radius: 15px;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .customer-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #a0aec0;
+            font-size: 0.95rem;
+        }
+
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            align-self: flex-start;
+        }
+
+        .status-active {
+            background: #48bb78;
+            color: white;
+        }
+
+        .status-expired {
+            background: #f56565;
+            color: white;
+        }
+
+        .status-expiring {
+            background: #ed8936;
+            color: white;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #4a5568;
+        }
+
+        .detail-label {
+            color: #a0aec0;
+            font-size: 0.95rem;
+        }
+
+        .detail-value {
+            color: white;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-edit {
+            background: #4fd1c7;
+            color: #2d3748;
+        }
+
+        .btn-renew {
+            background: #4fd1c7;
+            color: #2d3748;
+        }
+
+        .btn-message {
+            background: #a0aec0;
+            color: #2d3748;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .no-result {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .no-result.show {
+            display: block;
+        }
+
+        .no-result-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .no-result h3 {
+            color: #333;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .no-result p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .error-message {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .search-box {
+                padding: 20px;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+
+            .email-input {
+                min-width: 100%;
+            }
+
+            .customer-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .customer-info {
+                min-width: 100%;
+            }
+
+            .result-card {
+                padding: 20px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .customer-name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Customer Search</h1>
+            <p>Search customer details by email address</p>
+        </div>
+
+        <div class="search-box">
+            <h2 class="search-title">Find Customer</h2>
+            <div class="search-form">
+                <input 
+                    type="email" 
+                    id="emailInput" 
+                    class="email-input" 
+                    placeholder="Enter customer email address..."
+                    autocomplete="off"
+                >
+                <button id="searchBtn" class="search-btn" disabled>
+                    🔍 Search
+                </button>
+            </div>
+            <div id="errorMessage" class="error-message"></div>
+        </div>
+
+        <div id="loading" class="loading">
+            <div>🔄 Searching customer data...</div>
+        </div>
+
+        <div id="resultCard" class="result-card">
+            <div class="customer-header">
+                <div class="customer-info">
+                    <h2 id="customerName" class="customer-name"></h2>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>📧</span>
+                            <span id="customerEmail"></span>
+                        </div>
+                        <div class="contact-item">
+                            <span>📱</span>
+                            <span id="customerPhone"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="statusBadge" class="status-badge"></div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Team:</span>
+                    <span id="customerTeam" class="detail-value"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Plan:</span>
+                    <span id="customerPlan" class="detail-value"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Last Payment:</span>
+                    <span id="lastPayment" class="detail-value"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Total Paid:</span>
+                    <span id="totalPaid" class="detail-value"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Join Date:</span>
+                    <span id="joinDate" class="detail-value"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Expiry:</span>
+                    <span id="expiryDate" class="detail-value"></span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-btn btn-edit">
+                    ✏️ Edit
+                </button>
+                <button class="action-btn btn-renew">
+                    🔄 Renew
+                </button>
+                <button class="action-btn btn-message">
+                    💬 Message
+                </button>
+            </div>
+        </div>
+
+        <div id="noResult" class="no-result">
+            <div class="no-result-icon">🤷‍♂️</div>
+            <h3>No Customer Found</h3>
+            <p>We couldn't find any customer with this email address. Please check the email and try again.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Supabase Configuration
+        const SUPABASE_URL = 'https://wpwdzccyvfupcjrwtaqb.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indwd2R6Y2N5dmZ1cGNqcnd0YXFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQwNDE1MjUsImV4cCI6MjA2OTYxNzUyNX0.N8n1p9IrvLFODHs_pSCROSB3yzKHtqWSGL9SZkrs6v8';
+        
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // DOM Elements
+        const emailInput = document.getElementById('emailInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const loading = document.getElementById('loading');
+        const resultCard = document.getElementById('resultCard');
+        const noResult = document.getElementById('noResult');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Customer data elements
+        const customerName = document.getElementById('customerName');
+        const customerEmail = document.getElementById('customerEmail');
+        const customerPhone = document.getElementById('customerPhone');
+        const statusBadge = document.getElementById('statusBadge');
+        const customerTeam = document.getElementById('customerTeam');
+        const customerPlan = document.getElementById('customerPlan');
+        const lastPayment = document.getElementById('lastPayment');
+        const totalPaid = document.getElementById('totalPaid');
+        const joinDate = document.getElementById('joinDate');
+        const expiryDate = document.getElementById('expiryDate');
+
+        // Email validation function
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Enable/disable search button based on email validity
+        function validateInput() {
+            const email = emailInput.value.trim();
+            const isValid = isValidEmail(email);
+            
+            searchBtn.disabled = !isValid;
+            
+            if (email && !isValid) {
+                emailInput.classList.add('invalid');
+            } else {
+                emailInput.classList.remove('invalid');
+            }
+        }
+
+        // Format date function
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-GB');
+        }
+
+        // Format currency function
+        function formatCurrency(amount) {
+            if (!amount) return '₹0';
+            return `₹${amount}`;
+        }
+
+        // Determine subscription status
+        function getSubscriptionStatus(expiryDate) {
+            if (!expiryDate) return 'active';
+            
+            const today = new Date();
+            const expiry = new Date(expiryDate);
+            const weekFromToday = new Date();
+            weekFromToday.setDate(weekFromToday.getDate() + 7);
+            
+            if (expiry < today) {
+                return 'expired';
+            } else if (expiry <= weekFromToday) {
+                return 'expiring';
+            } else {
+                return 'active';
+            }
+        }
+
+        // Display customer data
+        function displayCustomer(customer) {
+            customerName.textContent = customer.name || 'N/A';
+            customerEmail.textContent = customer.email || 'N/A';
+            customerPhone.textContent = customer.phone || 'N/A';
+            customerTeam.textContent = customer.team || 'N/A';
+            customerPlan.textContent = customer.plan_type || 'N/A';
+            lastPayment.textContent = formatCurrency(customer.payment_amount);
+            totalPaid.textContent = formatCurrency(customer.total_amount);
+            joinDate.textContent = formatDate(customer.join_date);
+            expiryDate.textContent = formatDate(customer.expiry_date);
+
+            // Set status badge
+            const status = getSubscriptionStatus(customer.expiry_date);
+            statusBadge.textContent = status.toUpperCase();
+            statusBadge.className = `status-badge status-${status}`;
+
+            // Show result card
+            hideAllResults();
+            resultCard.classList.add('show');
+        }
+
+        // Hide all result elements
+        function hideAllResults() {
+            resultCard.classList.remove('show');
+            noResult.classList.remove('show');
+            errorMessage.classList.remove('show');
+        }
+
+        // Show error message
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+        }
+
+        // Search customer function
+        async function searchCustomer() {
+            const email = emailInput.value.trim().toLowerCase();
+            
+            if (!isValidEmail(email)) {
+                showError('Please enter a valid email address');
+                return;
+            }
+
+            // Show loading
+            hideAllResults();
+            loading.classList.add('show');
+            searchBtn.disabled = true;
+            searchBtn.textContent = '⏳ Searching...';
+
+            try {
+                // Query Supabase
+                const { data, error } = await supabase
+                    .from('customers')
+                    .select('*')
+                    .eq('email', email)
+                    .single();
+
+                if (error) {
+                    if (error.code === 'PGRST116') {
+                        // No rows returned
+                        hideAllResults();
+                        noResult.classList.add('show');
+                    } else {
+                        throw error;
+                    }
+                } else {
+                    // Customer found
+                    displayCustomer(data);
+                }
+
+            } catch (error) {
+                console.error('Search error:', error);
+                hideAllResults();
+                showError('An error occurred while searching. Please try again.');
+            } finally {
+                // Hide loading
+                loading.classList.remove('show');
+                searchBtn.disabled = false;
+                searchBtn.textContent = '🔍 Search';
+            }
+        }
+
+        // Event listeners
+        emailInput.addEventListener('input', validateInput);
+        emailInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !searchBtn.disabled) {
+                searchCustomer();
+            }
+        });
+
+        searchBtn.addEventListener('click', searchCustomer);
+
+        // Focus email input on load
+        emailInput.focus();
+
+        // Initial validation
+        validateInput();
+    </script>
+</body>
+</html>
