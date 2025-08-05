@@ -1,100 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Protected Login</title>
-  <style>
-    body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-    }
-    .password-container {
-      background: #fff;
-      padding: 36px 24px;
-      box-shadow: 0 10px 40px #3333;
-      border-radius: 14px;
-      width: 90%;
-      max-width: 370px;
-      text-align: center;
-      animation: fadein 0.7s;
-    }
-    @keyframes fadein { from {opacity: 0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);} }
-    .lock-icon { font-size: 2.4em; color: #667eea; margin-bottom: 14px;}
-    h2 { margin:0 0 10px 0; font-size:1.3em; color:#222;}
-    .sub { color:#666; margin-bottom:22px; font-size:0.98em;}
-    input[type='password'] {
-      width: 100%;
-      padding: 14px;
-      border-radius: 8px;
-      font-size: 1.1em;
-      border: 2px solid #e0e0e0;
-      margin-bottom: 16px;
-      outline: none;
-      transition: border-color 0.3s;
-      text-align: center;
-      background: #f7faff;
-    }
-    input[type='password']:focus {border-color:#667eea;}
-    button {
-      width: 100%;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      padding: 13px 0;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.09em;
-      font-weight: 600;
-      cursor: pointer;
-      margin-bottom: 7px;
-      transition: box-shadow 0.3s;
-    }
-    button:hover { box-shadow: 0 8px 24px #667eea33; }
-    .error-msg {
-      color: #e74c3c;
-      font-size: 0.97em;
-      min-height: 1.3em;
-      height: 1.3em;
-      transition: opacity 0.2s;
-    }
-    @media(max-width:400px){ .password-container{padding:18px 5px;}}
-  </style>
-</head>
-<body>
-  <div class="password-container">
-    <div class="lock-icon">🔒</div>
-    <h2>Dashboard Protected</h2>
-    <div class="sub">Enter password to continue</div>
-    <input type="password" id="passwordInput" maxlength="6" placeholder="Enter Password" autocomplete="off" />
-    <button id="checkBtn">Access Dashboard</button>
-    <div id="errorMsg" class="error-msg"></div>
-  </div>
-  <script>
-    const CORRECT_PASSWORD = "734872";
-    const input = document.getElementById('passwordInput');
-    const btn = document.getElementById('checkBtn');
-    const msg = document.getElementById('errorMsg');
-    input.focus();
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Camva Pro – Secure Gateway</title>
 
-    function checkPass() {
-      if(input.value.trim() === CORRECT_PASSWORD){
-        // Redirect to your main Dashboard page
-        window.location.href = "Dashboard.html"; // Change this if your file name is different
-      } else {
-        msg.textContent = "Incorrect password!";
-        input.value = '';
-        input.focus();
-      }
+<!-- ----------  INLINE CSS  ---------- -->
+<style>
+  :root{
+    --g1:#667eea; --g2:#764ba2; --grey:#f4f6fa; --dark:#1f2937;
+    --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,'Segoe UI',Roboto,sans-serif}
+  body{
+    min-height:100vh;display:flex;justify-content:center;align-items:center;
+    background:linear-gradient(135deg,var(--g1),var(--g2));padding:20px;
+  }
+  .wrap{
+    width:100%;max-width:420px;background:#fff;border-radius:var(--radius);
+    box-shadow:0 20px 60px #0003;padding:40px 30px;text-align:center;
+  }
+  .logo{font-size:2.8rem;margin-bottom:12px;color:var(--g1)}
+  h1{font-size:1.6rem;color:var(--dark);margin-bottom:6px;font-weight:600}
+  p.sub{color:#555;font-size:.95rem;margin-bottom:28px}
+  input{
+    width:100%;padding:14px;border:2px solid var(--grey);border-radius:12px;
+    font-size:1.15rem;letter-spacing:2px;text-align:center;
+    transition:border .25s;outline:none;background:#fafbff
+  }
+  input:focus{border-color:var(--g1)}
+  button{
+    width:100%;margin-top:16px;padding:14px;border:none;border-radius:12px;
+    background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;
+    font-size:1.05rem;font-weight:600;cursor:pointer;transition:all .25s
+  }
+  button:hover{box-shadow:0 10px 28px #667eea44;transform:translateY(-2px)}
+  .error{color:#e74c3c;font-size:.9rem;height:20px;margin-top:10px;opacity:0;transition:opacity .3s}
+  .links{margin-top:32px;display:grid;gap:14px}
+  .links a{
+    display:block;padding:13px;border-radius:10px;text-decoration:none;text-align:center;
+    background:#fff;border:2px solid var(--g1);color:var(--g1);font-weight:600;
+    transition:all .25s;font-size:.96rem
+  }
+  .links a:hover{background:var(--g1);color:#fff;box-shadow:0 8px 22px #667eea33}
+  @media(max-width:500px){.wrap{padding:32px 20px}}
+</style>
+</head>
+
+<!-- ----------  HTML  ---------- -->
+<body>
+  <div class="wrap">
+    <div class="logo">🔒</div>
+    <h1>Secure Access</h1>
+    <p class="sub">Enter your access code to continue</p>
+
+    <input id="pwd" type="password" maxlength="6" autocomplete="off" placeholder="••••••"/>
+    <button id="submit">Unlock</button>
+    <div id="msg" class="error"></div>
+
+    <div class="links">
+      <a href="subscription.html">➕ New Subscription</a>
+      <a href="trial.html">🎁 1-Day Free Trial</a>
+    </div>
+  </div>
+
+<!-- ----------  INLINE JS  ---------- -->
+<script>
+  const pwd = document.getElementById('pwd'),
+        btn = document.getElementById('submit'),
+        msg = document.getElementById('msg');
+
+  function go(){
+    const code = pwd.value.trim();
+    if(code==='121212'){
+      window.location.href='data.html';
+    }else if(code==='734872'){
+      window.location.href='Dashboard.html';
+    }else{
+      msg.textContent='Incorrect code, try again';msg.style.opacity=1;
+      pwd.value='';pwd.focus();
     }
-    btn.onclick = checkPass;
-    input.addEventListener('keyup', function(e){
-      if(e.key==="Enter") checkPass();
-    });
-  </script>
+  }
+
+  btn.onclick = go;
+  pwd.addEventListener('keyup',e=>{ if(e.key==='Enter') go(); });
+  pwd.focus();
+</script>
 </body>
 </html>
