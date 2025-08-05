@@ -453,18 +453,30 @@
                 </div>
             </div>
 
-            <div class="action-buttons">
-                <button class="action-btn btn-edit">
-                    ✏️ Edit
-                </button>
-                <button class="action-btn btn-renew">
-                    🔄 Renew
-                </button>
-                <button class="action-btn btn-message">
-                    💬 Message
-                </button>
-            </div>
-        </div>
+            <!-- Action Buttons Section (replace in your HTML) -->
+<div class="action-buttons">
+  <a class="action-btn btn-edit" 
+     style="text-decoration:none"
+     href="https://wa.me/{{customerPhoneNumber}}?text=please%20edit%20my%20information"
+     id="editBtn"
+     target="_blank">
+    ✏️ Edit
+  </a>
+  <a class="action-btn btn-renew" 
+     style="text-decoration:none"
+     href="https://wa.me/{{customerPhoneNumber}}?text=please%20renew%20my%20information"
+     id="renewBtn"
+     target="_blank">
+    🔄 Renew
+  </a>
+  <a class="action-btn btn-message" 
+     style="text-decoration:none"
+     href="https://wa.me/916306356544?text=Hi%20I%20need%20help%20with%20my%20account"
+     id="helpBtn"
+     target="_blank">
+    💬 Message
+  </a>
+</div>
 
         <div id="noResult" class="no-result">
             <div class="no-result-icon">🤷‍♂️</div>
