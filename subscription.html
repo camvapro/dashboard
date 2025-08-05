@@ -1,657 +1,666 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Camva Pro Subscription</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Form - सब्स्क्रिप्शन फॉर्म</title>
 
-    body {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
-      padding: 20px;
-    }
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .main {
-      width: 100%;
-      max-width: 450px;
-      background: rgba(16, 19, 26, 0.95);
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(35, 33, 77, 0.3);
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-    .header {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      padding: 30px 20px;
-      text-align: center;
-      position: relative;
-    }
+        /* Glassmorphism Container */
+        .main {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            position: relative;
+            overflow: hidden;
+        }
 
-    .header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-      opacity: 0.3;
-    }
+        .main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            pointer-events: none;
+        }
 
-    .header h1 {
-      color: white;
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 1;
-    }
+        /* Header Styles */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
 
-    .header .desc {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.95rem;
-      position: relative;
-      z-index: 1;
-    }
+        h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
 
-    .form-container {
-      padding: 30px 25px;
-    }
+        .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
 
-    .form-group {
-      margin-bottom: 20px;
-      position: relative;
-    }
+        /* Form Styles */
+        .subscription-form {
+            position: relative;
+            z-index: 2;
+        }
 
-    .form-group label {
-      display: block;
-      color: #b6badb;
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-bottom: 8px;
-      letter-spacing: 0.3px;
-    }
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
 
-    .input-wrapper {
-      position: relative;
-    }
+        .form-group label {
+            display: block;
+            color: white;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
 
-    .input-wrapper svg {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 18px;
-      height: 18px;
-      fill: #667eea;
-      opacity: 0.7;
-      z-index: 2;
-    }
+        .input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
 
-    input, select {
-      width: 100%;
-      padding: 15px 15px 15px 45px;
-      border: 2px solid #302b5a;
-      border-radius: 12px;
-      font-size: 1rem;
-      background: #1a1d28;
-      color: white;
-      outline: none;
-      transition: all 0.3s ease;
-    }
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            z-index: 3;
+        }
 
-    input:focus, select:focus {
-      border-color: #667eea;
-      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-      background: #212530;
-    }
+        .form-input, .form-select {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
 
-    input::placeholder {
-      color: #6b7280;
-    }
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
 
-    select {
-      cursor: pointer;
-    }
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
 
-    select option {
-      background: #1a1d28;
-      color: white;
-    }
+        .form-select {
+            cursor: pointer;
+        }
 
-    .submit-btn {
-      width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-      position: relative;
-      overflow: hidden;
-    }
+        .form-select option {
+            background: #333;
+            color: white;
+        }
 
-    .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
-    }
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-    .submit-btn:active {
-      transform: translateY(0);
-    }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
 
-    .submit-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: white;
-    }
+        .submit-btn:active {
+            transform: translateY(0);
+        }
 
-    /* Payment Section */
-    .payment-section {
-      display: none;
-      background: #131428;
-      padding: 25px;
-      border-top: 1px solid #302b5a;
-    }
+        /* Payment Section */
+        .payment-section {
+            display: none;
+            margin-top: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
 
-    .payment-section.show {
-      display: block;
-      animation: slideDown 0.5s ease-out;
-    }
+        .payment-section.show {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
 
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .qr-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
 
-    .payment-title {
-      color: #d8f3ff;
-      font-size: 1.2rem;
-      font-weight: 600;
-      text-align: center;
-      margin-bottom: 20px;
-    }
+        .qr-code {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
 
-    .qr-container {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+        .amount-display {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
 
-    .qr-img {
-      width: 180px;
-      height: 180px;
-      border-radius: 15px;
-      border: 3px solid #667eea;
-      object-fit: cover;
-      margin: 0 auto 15px auto;
-      display: block;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
+        .pay-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 10px 0;
+        }
 
-    .payment-hint {
-      color: #82f7c8;
-      font-size: 0.9rem;
-      text-align: center;
-      margin-bottom: 20px;
-      line-height: 1.4;
-    }
+        .pay-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
 
-    .pay-btn {
-      width: 100%;
-      padding: 15px;
-      background: linear-gradient(135deg, #48bb78, #38a169);
-      color: white;
-      text-decoration: none;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: all 0.3s ease;
-      margin-bottom: 25px;
-    }
+        /* Upload Section */
+        .upload-section {
+            margin-top: 30px;
+            position: relative;
+            z-index: 2;
+        }
 
-    .pay-btn:hover {
-      background: linear-gradient(135deg, #38a169, #2f855a);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(72, 187, 120, 0.3);
-    }
+        .file-upload-container {
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
 
-    .pay-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: white;
-    }
+        .file-upload-container:hover {
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+        }
 
-    /* Upload Section */
-    .upload-section {
-      background: rgba(26, 29, 40, 0.8);
-      padding: 20px;
-      border-radius: 15px;
-      border: 2px dashed #667eea;
-      text-align: center;
-    }
+        .file-input {
+            display: none;
+        }
 
-    .upload-title {
-      color: #d8f3ff;
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 15px;
-    }
+        .upload-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px;
+            opacity: 0.7;
+        }
 
-    .upload-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 20px;
-      background: linear-gradient(135deg, #4fd1c5, #38b2ac);
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
+        .upload-text {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
 
-    .upload-btn:hover {
-      background: linear-gradient(135deg, #38b2ac, #2c7a7b);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba(79, 209, 197, 0.3);
-    }
+        .upload-status {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
 
-    .upload-btn svg {
-      width: 18px;
-      height: 18px;
-      fill: white;
-    }
+        .status-uploading {
+            color: #ffc107;
+        }
 
-    .upload-status {
-      margin-top: 15px;
-      font-size: 0.9rem;
-      min-height: 20px;
-    }
+        .status-success {
+            color: #28a745;
+        }
 
-    .success {
-      color: #48bb78;
-    }
+        .status-error {
+            color: #dc3545;
+        }
 
-    .error {
-      color: #f56565;
-    }
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
 
-    .loading {
-      color: #667eea;
-    }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
 
-    /* Form validation styles */
-    .form-group.error input,
-    .form-group.error select {
-      border-color: #f56565;
-      box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.1);
-    }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .error-message {
-      color: #f56565;
-      font-size: 0.8rem;
-      margin-top: 5px;
-      display: none;
-    }
+        /* Error Messages */
+        .error-message {
+            color: #ff4757;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            font-weight: 500;
+        }
 
-    .form-group.error .error-message {
-      display: block;
-    }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main {
+                padding: 25px;
+                margin: 10px;
+            }
 
-    /* Loading state */
-    .submit-btn.loading {
-      pointer-events: none;
-      opacity: 0.7;
-    }
+            h1 {
+                font-size: 2rem;
+            }
 
-    .submit-btn.loading::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border: 2px solid transparent;
-      border-top: 2px solid white;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
+            .form-input, .form-select {
+                padding: 12px 12px 12px 45px;
+                font-size: 14px;
+            }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+            .submit-btn {
+                padding: 15px;
+                font-size: 16px;
+            }
+        }
 
-    /* Responsive Design */
-    @media (max-width: 480px) {
-      .main {
-        margin: 10px;
-        max-width: none;
-      }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
 
-      .form-container {
-        padding: 25px 20px;
-      }
-
-      .header {
-        padding: 25px 20px;
-      }
-
-      .header h1 {
-        font-size: 1.6rem;
-      }
-
-      .qr-img {
-        width: 150px;
-        height: 150px;
-      }
-    }
-  </style>
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="main">
-    <div class="header">
-      <h1>🚀 Start Subscription</h1>
-      <div class="desc">Fill your details below to get premium access</div>
+    <div class="main">
+        <div class="header">
+            <h1>🎯 Start Subscription</h1>
+            <p class="subtitle">अपनी सब्स्क्रिप्शन शुरू करें और premium features का आनंद लें</p>
+        </div>
+
+        <form class="subscription-form" id="subscriptionForm">
+            <div class="form-group">
+                <label for="fullName">Full Name / पूरा नाम</label>
+                <div class="input-container">
+                    <svg class="input-icon" fill="white" viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                    <input type="text" class="form-input" id="fullName" name="fullName" placeholder="अपना पूरा नाम दर्ज करें" required>
+                </div>
+                <div class="error-message" id="nameError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="canvaEmail">Canva Existing Email / कैन्वा ईमेल</label>
+                <div class="input-container">
+                    <svg class="input-icon" fill="white" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    <input type="email" class="form-input" id="canvaEmail" name="canvaEmail" placeholder="example@gmail.com" required>
+                </div>
+                <div class="error-message" id="emailError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="whatsappNumber">WhatsApp Number / व्हाट्सएप नंबर</label>
+                <div class="input-container">
+                    <svg class="input-icon" fill="white" viewBox="0 0 24 24">
+                        <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.2c.27-.27.35-.67.24-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z"/>
+                    </svg>
+                    <input type="tel" class="form-input" id="whatsappNumber" name="whatsappNumber" placeholder="+91 9876543210" required>
+                </div>
+                <div class="error-message" id="phoneError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="subscriptionPlan">Subscription Plan / सब्स्क्रिप्शन प्लान</label>
+                <div class="input-container">
+                    <svg class="input-icon" fill="white" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <select class="form-select" id="subscriptionPlan" name="subscriptionPlan" required>
+                        <option value="">प्लान चुनें / Select Plan</option>
+                        <option value="monthly">Monthly - ₹49/महीना</option>
+                        <option value="quarterly">Quarterly - ₹99/तिमाही (33% Off)</option>
+                        <option value="annually">Annually - ₹299/साल (50% Off)</option>
+                    </select>
+                </div>
+                <div class="error-message" id="planError"></div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <span id="submitText">🚀 Subscribe Now / अब सब्स्क्राइब करें</span>
+                <span id="submitLoader" class="loading" style="display: none;"></span>
+            </button>
+        </form>
+
+        <!-- Payment Section -->
+        <div class="payment-section" id="paymentSection">
+            <h2 style="color: white; margin-bottom: 20px;">💳 Payment / भुगतान करें</h2>
+            <div class="amount-display" id="amountDisplay"></div>
+            <div class="qr-container">
+                <img class="qr-code" id="qrCodeImage" src="" alt="QR Code">
+                <p style="color: #333; margin-top: 10px; font-weight: 600;">स्कैन करें और भुगतान करें</p>
+            </div>
+            <a href="#" class="pay-btn" id="payButton" target="_blank">
+                💸 Pay Now / अब भुगतान करें
+            </a>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <h3 style="color: white; margin-bottom: 15px; text-align: center;">📸 Upload Payment Screenshot</h3>
+            <div class="file-upload-container" onclick="document.getElementById('screenshotFile').click()">
+                <svg class="upload-icon" fill="white" viewBox="0 0 24 24">
+                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+                </svg>
+                <div class="upload-text">Click to upload payment screenshot</div>
+                <div class="upload-text" style="font-size: 0.9rem; opacity: 0.8;">भुगतान स्क्रीनशॉट अपलोड करें</div>
+            </div>
+            <input type="file" class="file-input" id="screenshotFile" accept="image/*">
+            <div class="upload-status" id="uploadStatus"></div>
+        </div>
     </div>
 
-    <div class="form-container">
-      <form id="subscriptionForm" novalidate>
-        <div class="form-group">
-          <label for="fullName">Full Name</label>
-          <div class="input-wrapper">
-            <svg viewBox="0 0 24 24">
-              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-            </svg>
-            <input type="text" id="fullName" placeholder="Enter your full name" required>
-          </div>
-          <div class="error-message">Please enter your full name</div>
-        </div>
+    <script>
+        // Configuration
+        const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwhK9vU9-XVVVXGlbL0zpjLK8n0NA6CnVjwWSQ5Ta0iMykyByOBP4WGgSXHbf387iPs/exec';
+        const DRIVE_URL = 'https://script.google.com/macros/s/AKfycbwhK9vU9-XVVVXGlbL0zpjLK8n0NA6CnVjwWSQ5Ta0iMykyByOBP4WGgSXHbf387iPs/exec'; // Replace with your Drive upload script URL
 
-        <div class="form-group">
-          <label for="canvaEmail">Canva Email Address</label>
-          <div class="input-wrapper">
-            <svg viewBox="0 0 24 24">
-              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-            </svg>
-            <input type="email" id="canvaEmail" placeholder="your.email@example.com" required>
-          </div>
-          <div class="error-message">Please enter a valid email address</div>
-        </div>
-
-        <div class="form-group">
-          <label for="whatsappNumber">WhatsApp Number</label>
-          <div class="input-wrapper">
-            <svg viewBox="0 0 24 24">
-              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-            </svg>
-            <input type="tel" id="whatsappNumber" placeholder="With country code (e.g., +91)" required>
-          </div>
-          <div class="error-message">Please enter a valid WhatsApp number</div>
-        </div>
-
-        <div class="form-group">
-          <label for="subscriptionPlan">Select Plan</label>
-          <div class="input-wrapper">
-            <svg viewBox="0 0 24 24">
-              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-            </svg>
-            <select id="subscriptionPlan" required>
-              <option value="">Choose your plan</option>
-              <option value="monthly">Monthly Plan - ₹49</option>
-              <option value="quarterly">Quarterly Plan - ₹99</option>
-              <option value="annually">Annual Plan - ₹299</option>
-            </select>
-          </div>
-          <div class="error-message">Please select a subscription plan</div>
-        </div>
-
-        <button type="submit" class="submit-btn" id="submitBtn">
-          <svg viewBox="0 0 24 24">
-            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM15.1 8H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
-          </svg>
-          Submit & Continue
-        </button>
-      </form>
-    </div>
-
-    <!-- Payment Section (Hidden initially) -->
-    <div id="paymentSection" class="payment-section">
-      <div class="payment-title">💳 Complete Payment</div>
-      
-      <div class="qr-container">
-        <img id="qrCodeImage" class="qr-img" src="" alt="Payment QR Code">
-        <div class="payment-hint">
-          Scan the QR code above with any UPI app to make payment
-        </div>
-      </div>
-
-      <a id="payNowBtn" class="pay-btn" href="#" target="_blank">
-        <svg viewBox="0 0 24 24">
-          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10z"/>
-        </svg>
-        Pay Now
-      </a>
-
-      <!-- Upload Section -->
-      <div class="upload-section">
-        <div class="upload-title">📸 Upload Payment Screenshot</div>
-        <input type="file" id="screenshotUpload" accept="image/*" style="display: none;">
-        <label for="screenshotUpload" class="upload-btn">
-          <svg viewBox="0 0 24 24">
-            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
-          </svg>
-          Choose Screenshot
-        </label>
-        <div id="uploadStatus" class="upload-status"></div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Configuration
-    const CONFIG = {
-      PLANS: {
-        monthly: {
-          qr: 'icon/monthly49.png',
-          paymentLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=49'
-        },
-        quarterly: {
-          qr: 'icon/quarterly99.png',
-          paymentLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=99'
-        },
-        annually: {
-          qr: 'icon/annual299.png',
-          paymentLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=299'
-        }
-      },
-      SHEET_URL: 'https://script.google.com/macros/s/AKfycbzzvNe7qBHwFEYYmaqLNEDzi3OytmO4h7Lr4dvU-rLMOq3ziLNJNNp2UFHSUSUX4pbe/exec',
-      DRIVE_URL: 'https://script.google.com/macros/s/AKfycbwhK9vU9-XVVVXGlbL0zpjLK8n0NA6CnVjwWSQ5Ta0iMykyByOBP4WGgSXHbf387iPs/exec'
-    };
-
-    // DOM Elements
-    const form = document.getElementById('subscriptionForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const paymentSection = document.getElementById('paymentSection');
-    const qrCodeImage = document.getElementById('qrCodeImage');
-    const payNowBtn = document.getElementById('payNowBtn');
-    const screenshotUpload = document.getElementById('screenshotUpload');
-    const uploadStatus = document.getElementById('uploadStatus');
-    const planSelect = document.getElementById('subscriptionPlan');
-
-    // Form validation
-    function validateForm() {
-      const fields = [
-        { id: 'fullName', validator: (val) => val.trim().length >= 2 },
-        { id: 'canvaEmail', validator: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) },
-        { id: 'whatsappNumber', validator: (val) => /^\+?[\d\s-]{10,15}$/.test(val.replace(/\s/g, '')) },
-        { id: 'subscriptionPlan', validator: (val) => val !== '' }
-      ];
-
-      let isValid = true;
-      fields.forEach(field => {
-        const element = document.getElementById(field.id);
-        const formGroup = element.closest('.form-group');
-        
-        if (!field.validator(element.value)) {
-          formGroup.classList.add('error');
-          isValid = false;
-        } else {
-          formGroup.classList.remove('error');
-        }
-      });
-
-      return isValid;
-    }
-
-    // Clear errors on input
-    form.addEventListener('input', (e) => {
-      const formGroup = e.target.closest('.form-group');
-      if (formGroup) {
-        formGroup.classList.remove('error');
-      }
-    });
-
-    // Plan selection handler
-    planSelect.addEventListener('change', () => {
-      const selectedPlan = planSelect.value;
-      if (selectedPlan && CONFIG.PLANS[selectedPlan]) {
-        qrCodeImage.src = CONFIG.PLANS[selectedPlan].qr;
-        payNowBtn.href = CONFIG.PLANS[selectedPlan].paymentLink;
-      }
-    });
-
-    // Form submission
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      if (!validateForm()) {
-        return;
-      }
-
-      // Show loading state
-      submitBtn.classList.add('loading');
-      submitBtn.textContent = 'Processing...';
-
-      try {
-        // Prepare form data
-        const formData = {
-          name: document.getElementById('fullName').value.trim(),
-          email: document.getElementById('canvaEmail').value.trim(),
-          whatsapp: document.getElementById('whatsappNumber').value.trim(),
-          plan: document.getElementById('subscriptionPlan').value
+        // Plan configuration
+        const planConfig = {
+            monthly: {
+                amount: '₹49',
+                qrCode: 'icon/monthly49.png',
+                payLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=99'
+            },
+            quarterly: {
+                amount: '₹99',
+                qrCode: 'icon/quarterly99.png',
+                payLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=99'
+            },
+            annually: {
+                amount: '₹299',
+                qrCode: 'icon/annual299.png',
+                payLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=299'
+            }
         };
 
-        // Send to Google Sheets
-        const sheetUrl = `${CONFIG.SHEET_URL}?name=${encodeURIComponent(formData.name)}&email=${encodeURIComponent(formData.email)}&whatsapp=${encodeURIComponent(formData.whatsapp)}&plan=${encodeURIComponent(formData.plan)}`;
-        
-        await fetch(sheetUrl, { mode: 'no-cors' });
+        // DOM Elements
+        const form = document.getElementById('subscriptionForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitText = document.getElementById('submitText');
+        const submitLoader = document.getElementById('submitLoader');
+        const paymentSection = document.getElementById('paymentSection');
+        const amountDisplay = document.getElementById('amountDisplay');
+        const qrCodeImage = document.getElementById('qrCodeImage');
+        const payButton = document.getElementById('payButton');
+        const fileInput = document.getElementById('screenshotFile');
+        const uploadStatus = document.getElementById('uploadStatus');
 
-        // Show payment section
-        paymentSection.classList.add('show');
-        
-        // Scroll to payment section
-        setTimeout(() => {
-          paymentSection.scrollIntoView({ behavior: 'smooth' });
-        }, 300);
+        // Form validation functions
+        function validateName(name) {
+            return name.trim().length >= 2;
+        }
 
-      } catch (error) {
-        console.error('Error submitting form:', error);
-        alert('There was an error submitting your form. Please try again.');
-      } finally {
-        // Reset button state
-        submitBtn.classList.remove('loading');
-        submitBtn.innerHTML = `
-          <svg viewBox="0 0 24 24">
-            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-          </svg>
-          Form Submitted Successfully!
-        `;
-      }
-    });
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
 
-    // Screenshot upload handler
-    screenshotUpload.addEventListener('change', async () => {
-      const file = screenshotUpload.files[0];
-      if (!file) return;
+        function validatePhone(phone) {
+            const phoneRegex = /^[\+]?[1-9]?[0-9]{7,15}$/;
+            return phoneRegex.test(phone.replace(/\s/g, ''));
+        }
 
-      // Validate file type
-      if (!file.type.startsWith('image/')) {
-        uploadStatus.innerHTML = '<span class="error">Please select an image file</span>';
-        return;
-      }
+        function showError(elementId, message) {
+            document.getElementById(elementId).textContent = message;
+            document.getElementById(elementId).style.display = 'block';
+        }
 
-      // Validate file size (max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        uploadStatus.innerHTML = '<span class="error">File size must be less than 5MB</span>';
-        return;
-      }
+        function clearErrors() {
+            const errorElements = ['nameError', 'emailError', 'phoneError', 'planError'];
+            errorElements.forEach(id => {
+                document.getElementById(id).textContent = '';
+                document.getElementById(id).style.display = 'none';
+            });
+        }
 
-      uploadStatus.innerHTML = '<span class="loading">Uploading screenshot...</span>';
-
-      try {
-        const formData = new FormData();
-        formData.append('file', file);
-
-        const response = await fetch(CONFIG.DRIVE_URL, {
-          method: 'POST',
-          body: formData
+        // Plan selection handler
+        document.getElementById('subscriptionPlan').addEventListener('change', function() {
+            const selectedPlan = this.value;
+            if (selectedPlan && planConfig[selectedPlan]) {
+                const config = planConfig[selectedPlan];
+                amountDisplay.textContent = config.amount;
+                qrCodeImage.src = config.qrCode;
+                payButton.href = config.payLink;
+            }
         });
 
-        if (response.ok) {
-          uploadStatus.innerHTML = '<span class="success">✅ Screenshot uploaded successfully!</span>';
-        } else {
-          throw new Error('Upload failed');
+        // Form submission
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            clearErrors();
+
+            // Get form data
+            const formData = new FormData(form);
+            const fullName = formData.get('fullName');
+            const canvaEmail = formData.get('canvaEmail');
+            const whatsappNumber = formData.get('whatsappNumber');
+            const subscriptionPlan = formData.get('subscriptionPlan');
+
+            // Validation
+            let isValid = true;
+
+            if (!validateName(fullName)) {
+                showError('nameError', 'कृपया वैध नाम दर्ज करें');
+                isValid = false;
+            }
+
+            if (!validateEmail(canvaEmail)) {
+                showError('emailError', 'कृपया वैध ईमेल दर्ज करें');
+                isValid = false;
+            }
+
+            if (!validatePhone(whatsappNumber)) {
+                showError('phoneError', 'कृपया वैध फोन नंबर दर्ज करें');
+                isValid = false;
+            }
+
+            if (!subscriptionPlan) {
+                showError('planError', 'कृपया एक प्लान चुनें');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Show loading
+            submitText.style.display = 'none';
+            submitLoader.style.display = 'inline-block';
+            submitBtn.disabled = true;
+
+            try {
+                // Submit to Google Sheets
+                const response = await fetch(SHEET_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    // Show payment section
+                    paymentSection.classList.add('show');
+
+                    // Scroll to payment section
+                    paymentSection.scrollIntoView({ behavior: 'smooth' });
+
+                    // Update submit button
+                    submitText.textContent = '✅ Form Submitted Successfully!';
+                    submitText.style.display = 'inline-block';
+                    submitLoader.style.display = 'none';
+                    submitBtn.style.background = 'linear-gradient(45deg, #28a745, #20c997)';
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                submitText.textContent = '❌ Error! Please try again';
+                submitText.style.display = 'inline-block';
+                submitLoader.style.display = 'none';
+                submitBtn.disabled = false;
+                submitBtn.style.background = 'linear-gradient(45deg, #dc3545, #fd7e14)';
+            }
+        });
+
+        // File upload handler
+        fileInput.addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                uploadStatus.textContent = '❌ केवल image files अपलोड करें';
+                uploadStatus.className = 'upload-status status-error';
+                return;
+            }
+
+            // Validate file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                uploadStatus.textContent = '❌ File size 5MB से कम होनी चाहिए';
+                uploadStatus.className = 'upload-status status-error';
+                return;
+            }
+
+            // Show uploading status
+            uploadStatus.textContent = '📤 Uploading... कृपया प्रतीक्षा करें';
+            uploadStatus.className = 'upload-status status-uploading';
+
+            try {
+                // Create form data for file upload
+                const formData = new FormData();
+                formData.append('file', file);
+
+                // Upload to Google Drive
+                const response = await fetch(DRIVE_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    uploadStatus.textContent = '✅ Screenshot uploaded successfully! स्क्रीनशॉट अपलोड हो गया';
+                    uploadStatus.className = 'upload-status status-success';
+                } else {
+                    throw new Error(result.error || 'Upload failed');
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+                uploadStatus.textContent = '❌ Upload failed! कृपया दोबारा कोशिश करें';
+                uploadStatus.className = 'upload-status status-error';
+            }
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.parentElement.style.transform = 'translateY(-2px)';
+                this.parentElement.parentElement.style.transition = 'transform 0.3s ease';
+            });
+
+            input.addEventListener('blur', function() {
+                this.parentElement.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add typing effect to placeholder
+        function typeEffect(element, text, speed = 100) {
+            let i = 0;
+            element.placeholder = '';
+            const timer = setInterval(() => {
+                if (i < text.length) {
+                    element.placeholder += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(timer);
+                }
+            }, speed);
         }
-      } catch (error) {
-        console.error('Upload error:', error);
-        uploadStatus.innerHTML = '<span class="error">❌ Upload failed. Please try again.</span>';
-      }
-    });
 
-    // Add smooth animations
-    window.addEventListener('load', () => {
-      document.querySelector('.main').style.animation = 'fadeIn 0.6s ease-out';
-    });
-
-    // Add fade in animation
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-    `;
-    document.head.appendChild(style);
-  </script>
+        // Initialize typing effects when page loads
+        window.addEventListener('load', function() {
+            const nameInput = document.getElementById('fullName');
+            setTimeout(() => typeEffect(nameInput, 'अपना पूरा नाम दर्ज करें'), 500);
+        });
+    </script>
 </body>
 </html>
