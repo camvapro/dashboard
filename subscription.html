@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Camva Pro Subscription</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh; margin:0; padding:0;
+      display: flex; justify-content:center; align-items:center;
+      font-family:-apple-system,'Segoe UI',Roboto,sans-serif
+    }
+    .main {
+      width: 100%; max-width: 410px;
+      background: #10131aee;
+      border-radius: 18px;
+      box-shadow: 0 8px 34px #23214d28;
+      padding:30px 18px 0 18px;
+    }
+    h2 { color: #fff; text-align: center; font-size: 1.5rem; font-weight:800; margin-bottom: 2px;}
+    .desc{color:#b6badb;text-align:center;margin-bottom:22px;}
+    label{display:block;color:#b6badb;margin-bottom:6px;margin-top:13px;font-size:15px;}
+    .inp-wrap{position:relative;}
+    .inp-wrap svg{position:absolute;left:12px;top:13px;width:19px;height:19px;opacity:.47}
+    input,select {
+      width:100%;padding:12px 12px 12px 40px;margin-bottom:6px;
+      border:2px solid #302b5a;border-radius:8px;font-size:1rem;
+      background:#181a22;color:#fff;outline:none
+    }
+    input:focus,select:focus{border-color:#667eea}
+    select{padding-left:40px;}
+    .plan-opt{color:#4fd1c5;font-weight:600}
+    button, .pay-btn, .upl-btn {
+      width:100%;padding:13px;margin:11px 0 0 0;font-size:1rem;font-weight:600;
+      background:linear-gradient(135deg,#667eea,#19e0c2);color:#fff;
+      border:none;border-radius:9px;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center;gap:7px;
+    }
+    .pay-btn{background:#48bb78;}
+    .pay-btn:hover,.upl-btn:hover{background:#2f855a;}
+    button:hover{background:linear-gradient(135deg,#667eea,#764ba2);}
+    .qr-card{display:none;text-align:center;padding:20px 0 0 0}
+    .qr-img{display:block;margin:13px auto 10px auto;width:150px;height:150px;background:#222;border-radius:10px;}
+    .pay-now-hint{color:#82f7c8;font-size:14px;}
+    .pmnt-title{color:#d8f3ff;font-size:16px;margin-bottom:8px}
+    .upl-card{display:none;background:#131428;padding:15px 10px;margin:15px -18px 0 -18px;border-radius:0 0 18px 18px;text-align:center;box-shadow:0 8px 24px #23214d18}
+    .upl-btn{background:#4fd1c5;font-weight:600;}
+    .upl-status{margin-top:7px;color:#82f7c8;}
+    .succ{color:#48bb78}
+    .prog{color:#d3ceff}
+    @media(max-width:470px){.main{padding:14px 4px 0 4px;}}
+  </style>
+</head>
+<body>
+<div class="main">
+  <h2>Start Subscription</h2>
+  <div class="desc">Begin by filling your details below to get access</div>
+  <form id="subForm" autocomplete="off">
+    <label for="fname">Full Name</label>
+    <div class="inp-wrap">
+      <!-- user icon -->
+      <svg><use href="#user"></use></svg>
+      <input type="text" id="fname" required placeholder="Full Name"/>
+    </div>
+    <label for="email">Canva Existing Email</label>
+    <div class="inp-wrap">
+      <svg><use href="#mail"></use></svg>
+      <input type="email" id="email" required placeholder="Canva Email"/>
+    </div>
+    <label for="whats">WhatsApp Number</label>
+    <div class="inp-wrap">
+      <svg><use href="#phone"></use></svg>
+      <input type="tel" id="whats" maxlength="12"  placeholder="With Country Code"/>
+    </div>
+    <label for="plan">Select Plan</label>
+    <div class="inp-wrap">
+      <svg><use href="#check"></use></svg>
+      <select id="plan" required>
+        <option value="">-- Choose Plan --</option>
+        <option value="monthly">Monthly – ₹49</option>
+        <option value="quarterly">Quarterly – ₹99</option>
+        <option value="annually">Annually – ₹299</option>
+      </select>
+    </div>
+    <button type="submit" id="submitBtn"><svg><use href="#lock"></use></svg> Submit</button>
+  </form>
+
+  <div id="qrCard" class="qr-card">
+    <div class="pmnt-title">Pay to Proceed</div>
+    <img id="qrImg" class="qr-img" src="" alt="QR Code"/>
+    <div class="pay-now-hint">Scan and pay the exact plan amount.</div>
+    <a id="payBtn" class="pay-btn" href="#" target="_blank">
+      <svg><use href="#pay"></use></svg>&nbsp;Pay Now
+    </a>
+  </div>
+
+  <div id="uplCard" class="upl-card">
+    <div class="pmnt-title">Upload your payment screenshot 📷</div>
+    <input type="file" id="uplInput" style="display:none" accept="image/*"/>
+    <label for="uplInput" class="upl-btn"><svg><use href="#upl"></use></svg> Choose File</label>
+    <div id="uplStatus" class="upl-status"></div>
+  </div>
+</div>
+
+<!-- SVG icons sprite -->
+<svg style="display:none">
+  <symbol id="user"    viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 16-4 16 0"/></symbol>
+  <symbol id="mail"    viewBox="0 0 24 24"><rect width="24" height="18" y="3" rx="3"/><polyline points="3 6 12 13 21 6"/></symbol>
+  <symbol id="phone"   viewBox="0 0 24 24"><path d="M5 4c1-2 5-2 7.5.6 3.2 3.3-3 5.6-2 8 .7 1.6 5.4 5 8.5 3.8"/><path d="M15 19l2 2 4-4-2-2"/></symbol>
+  <symbol id="check"   viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></symbol>
+  <symbol id="pay"     viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="3"/><path d="M2 10h20"/><circle cx="8" cy="12" r="1"/></symbol>
+  <symbol id="upl"     viewBox="0 0 24 24"><path d="M16 16v-5h4l-8-8-8 8h4v5h8zM8 16v5h8v-5"/></symbol>
+  <symbol id="lock"    viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="9" rx="4"/><path d="M16 11V7a4 4 0 00-8 0v4"/></symbol>
+</svg>
+
+<script>
+const qrCard = document.getElementById('qrCard');
+const qrImg  = document.getElementById('qrImg');
+const payBtn = document.getElementById('payBtn');
+const uplCard= document.getElementById('uplCard');
+const form   = document.getElementById('subForm');
+const fname  = document.getElementById('fname');
+const email  = document.getElementById('email');
+const whats  = document.getElementById('whats');
+const plan   = document.getElementById('plan');
+const uplInput = document.getElementById('uplInput');
+const uplStatus= document.getElementById('uplStatus');
+
+// --- CONFIG: Set correct URLs ---
+const PLAN_CONFIG = {
+  monthly:   { qr:'icon/monthly49.jpg',   pay:'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=49'   },
+  quarterly: { qr:'icon/quarterly99.jpg', pay:'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=99' },
+  annually:  { qr:'icon/annual299.',   pay:'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=299'  }
+};
+const SHEET_URL  = 'https://script.google.com/macros/s/AKfycbzzvNe7qBHwFEYYmaqLNEDzi3OytmO4h7Lr4dvU-rLMOq3ziLNJNNp2UFHSUSUX4pbe/exec'; // Google Sheet Apps Script web app
+const DRIVE_URL  = 'https://script.google.com/macros/s/AKfycbwHB4n82Gw2eSjoiQFCb8wAr1prl2i6UbuTorSYQHPtx2489iRtUq-_fAOWZCipl1hq/exec'; // File upload Apps Script
+
+// --- PLAN CHANGE: Show QR & Pay Now ---
+plan.addEventListener('change', ()=>{
+  if(PLAN_CONFIG[plan.value]){
+    qrImg.src = PLAN_CONFIG[plan.value].qr;
+    payBtn.href= PLAN_CONFIG[plan.value].pay;
+  }else{
+    qrImg.src = ""; payBtn.href="#";
+  }
+  qrCard.classList.remove('active');
+  uplCard.classList.remove('active');
+});
+
+// --- FORM SUBMIT: Save to Sheet, Show QR block ---
+form.addEventListener('submit', async e=>{
+  e.preventDefault();
+  // Save in Google Sheet (GET method basic fallback)
+  const url = SHEET_URL
+    + '?name='   + encodeURIComponent(fname.value.trim())
+    + '&email='  + encodeURIComponent(email.value.trim())
+    + '&whatsapp='+ encodeURIComponent(whats.value.trim())
+    + '&plan='   + encodeURIComponent(plan.value.trim());
+  fetch(url,{mode:'no-cors'});
+
+  // Show QR and Pay Now
+  qrCard.classList.add('active');
+  uplCard.classList.add('active');
+  form.style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+// --- Upload Screenshot to Google Drive (Apps Script backend expected) ---
+uplInput.addEventListener('change', async ()=>{
+  if(!uplInput.files[0]) return;
+  uplStatus.innerHTML = '<span class="prog">Uploading...</span>';
+  const fd=new FormData(); fd.append('file',uplInput.files[0]);
+  try{
+    const result = await fetch(DRIVE_URL,{method:'POST',body:fd});
+    if(result.ok) uplStatus.innerHTML='<b class="succ">Success! Uploaded.</b>';
+    else throw new Error('Failed');
+  }catch{ uplStatus.innerHTML='<span style="color:#e53e3e">Error! Try again.</span>'; }
+});
+
+</script>
+</body>
+</html>
