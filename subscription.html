@@ -5,178 +5,653 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Camva Pro Subscription</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       background: linear-gradient(135deg, #667eea, #764ba2);
-      min-height: 100vh; margin:0; padding:0;
-      display: flex; justify-content:center; align-items:center;
-      font-family:-apple-system,'Segoe UI',Roboto,sans-serif
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
+      padding: 20px;
     }
+
     .main {
-      width: 100%; max-width: 410px;
-      background: #10131aee;
-      border-radius: 18px;
-      box-shadow: 0 8px 34px #23214d28;
-      padding:30px 18px 0 18px;
+      width: 100%;
+      max-width: 450px;
+      background: rgba(16, 19, 26, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(35, 33, 77, 0.3);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    h2 { color: #fff; text-align: center; font-size: 1.5rem; font-weight:800; margin-bottom: 2px;}
-    .desc{color:#b6badb;text-align:center;margin-bottom:22px;}
-    label{display:block;color:#b6badb;margin-bottom:6px;margin-top:13px;font-size:15px;}
-    .inp-wrap{position:relative;}
-    .inp-wrap svg{position:absolute;left:12px;top:13px;width:19px;height:19px;opacity:.47}
-    input,select {
-      width:100%;padding:12px 12px 12px 40px;margin-bottom:6px;
-      border:2px solid #302b5a;border-radius:8px;font-size:1rem;
-      background:#181a22;color:#fff;outline:none
+
+    .header {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
     }
-    input:focus,select:focus{border-color:#667eea}
-    select{padding-left:40px;}
-    .plan-opt{color:#4fd1c5;font-weight:600}
-    button, .pay-btn, .upl-btn {
-      width:100%;padding:13px;margin:11px 0 0 0;font-size:1rem;font-weight:600;
-      background:linear-gradient(135deg,#667eea,#19e0c2);color:#fff;
-      border:none;border-radius:9px;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center;gap:7px;
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
     }
-    .pay-btn{background:#48bb78;}
-    .pay-btn:hover,.upl-btn:hover{background:#2f855a;}
-    button:hover{background:linear-gradient(135deg,#667eea,#764ba2);}
-    .qr-card{display:none;text-align:center;padding:20px 0 0 0}
-    .qr-img{display:block;margin:13px auto 10px auto;width:150px;height:150px;background:#222;border-radius:10px;}
-    .pay-now-hint{color:#82f7c8;font-size:14px;}
-    .pmnt-title{color:#d8f3ff;font-size:16px;margin-bottom:8px}
-    .upl-card{display:none;background:#131428;padding:15px 10px;margin:15px -18px 0 -18px;border-radius:0 0 18px 18px;text-align:center;box-shadow:0 8px 24px #23214d18}
-    .upl-btn{background:#4fd1c5;font-weight:600;}
-    .upl-status{margin-top:7px;color:#82f7c8;}
-    .succ{color:#48bb78}
-    .prog{color:#d3ceff}
-    @media(max-width:470px){.main{padding:14px 4px 0 4px;}}
+
+    .header h1 {
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header .desc {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-container {
+      padding: 30px 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      color: #b6badb;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper svg {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      fill: #667eea;
+      opacity: 0.7;
+      z-index: 2;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 15px 15px 15px 45px;
+      border: 2px solid #302b5a;
+      border-radius: 12px;
+      font-size: 1rem;
+      background: #1a1d28;
+      color: white;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      background: #212530;
+    }
+
+    input::placeholder {
+      color: #6b7280;
+    }
+
+    select {
+      cursor: pointer;
+    }
+
+    select option {
+      background: #1a1d28;
+      color: white;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    /* Payment Section */
+    .payment-section {
+      display: none;
+      background: #131428;
+      padding: 25px;
+      border-top: 1px solid #302b5a;
+    }
+
+    .payment-section.show {
+      display: block;
+      animation: slideDown 0.5s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .payment-title {
+      color: #d8f3ff;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .qr-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .qr-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 15px;
+      border: 3px solid #667eea;
+      object-fit: cover;
+      margin: 0 auto 15px auto;
+      display: block;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .payment-hint {
+      color: #82f7c8;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .pay-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #48bb78, #38a169);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      margin-bottom: 25px;
+    }
+
+    .pay-btn:hover {
+      background: linear-gradient(135deg, #38a169, #2f855a);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(72, 187, 120, 0.3);
+    }
+
+    .pay-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    /* Upload Section */
+    .upload-section {
+      background: rgba(26, 29, 40, 0.8);
+      padding: 20px;
+      border-radius: 15px;
+      border: 2px dashed #667eea;
+      text-align: center;
+    }
+
+    .upload-title {
+      color: #d8f3ff;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .upload-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #4fd1c5, #38b2ac);
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .upload-btn:hover {
+      background: linear-gradient(135deg, #38b2ac, #2c7a7b);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(79, 209, 197, 0.3);
+    }
+
+    .upload-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: white;
+    }
+
+    .upload-status {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      min-height: 20px;
+    }
+
+    .success {
+      color: #48bb78;
+    }
+
+    .error {
+      color: #f56565;
+    }
+
+    .loading {
+      color: #667eea;
+    }
+
+    /* Form validation styles */
+    .form-group.error input,
+    .form-group.error select {
+      border-color: #f56565;
+      box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.1);
+    }
+
+    .error-message {
+      color: #f56565;
+      font-size: 0.8rem;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .form-group.error .error-message {
+      display: block;
+    }
+
+    /* Loading state */
+    .submit-btn.loading {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .submit-btn.loading::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      .main {
+        margin: 10px;
+        max-width: none;
+      }
+
+      .form-container {
+        padding: 25px 20px;
+      }
+
+      .header {
+        padding: 25px 20px;
+      }
+
+      .header h1 {
+        font-size: 1.6rem;
+      }
+
+      .qr-img {
+        width: 150px;
+        height: 150px;
+      }
+    }
   </style>
 </head>
 <body>
-<div class="main">
-  <h2>Start Subscription</h2>
-  <div class="desc">Begin by filling your details below to get access</div>
-  <form id="subForm" autocomplete="off">
-    <label for="fname">Full Name</label>
-    <div class="inp-wrap">
-      <!-- user icon -->
-      <svg><use href="#user"></use></svg>
-      <input type="text" id="fname" required placeholder="Full Name"/>
+  <div class="main">
+    <div class="header">
+      <h1>🚀 Start Subscription</h1>
+      <div class="desc">Fill your details below to get premium access</div>
     </div>
-    <label for="email">Canva Existing Email</label>
-    <div class="inp-wrap">
-      <svg><use href="#mail"></use></svg>
-      <input type="email" id="email" required placeholder="Canva Email"/>
-    </div>
-    <label for="whats">WhatsApp Number</label>
-    <div class="inp-wrap">
-      <svg><use href="#phone"></use></svg>
-      <input type="tel" id="whats" maxlength="12"  placeholder="With Country Code"/>
-    </div>
-    <label for="plan">Select Plan</label>
-    <div class="inp-wrap">
-      <svg><use href="#check"></use></svg>
-      <select id="plan" required>
-        <option value="">-- Choose Plan --</option>
-        <option value="monthly">Monthly – ₹49</option>
-        <option value="quarterly">Quarterly – ₹99</option>
-        <option value="annually">Annually – ₹299</option>
-      </select>
-    </div>
-    <button type="submit" id="submitBtn"><svg><use href="#lock"></use></svg> Submit</button>
-  </form>
 
-  <div id="qrCard" class="qr-card">
-    <div class="pmnt-title">Pay to Proceed</div>
-    <img id="qrImg" class="qr-img" src="" alt="QR Code"/>
-    <div class="pay-now-hint">Scan and pay the exact plan amount.</div>
-    <a id="payBtn" class="pay-btn" href="#" target="_blank">
-      <svg><use href="#pay"></use></svg>&nbsp;Pay Now
-    </a>
+    <div class="form-container">
+      <form id="subscriptionForm" novalidate>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <div class="input-wrapper">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <input type="text" id="fullName" placeholder="Enter your full name" required>
+          </div>
+          <div class="error-message">Please enter your full name</div>
+        </div>
+
+        <div class="form-group">
+          <label for="canvaEmail">Canva Email Address</label>
+          <div class="input-wrapper">
+            <svg viewBox="0 0 24 24">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            <input type="email" id="canvaEmail" placeholder="your.email@example.com" required>
+          </div>
+          <div class="error-message">Please enter a valid email address</div>
+        </div>
+
+        <div class="form-group">
+          <label for="whatsappNumber">WhatsApp Number</label>
+          <div class="input-wrapper">
+            <svg viewBox="0 0 24 24">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+            <input type="tel" id="whatsappNumber" placeholder="With country code (e.g., +91)" required>
+          </div>
+          <div class="error-message">Please enter a valid WhatsApp number</div>
+        </div>
+
+        <div class="form-group">
+          <label for="subscriptionPlan">Select Plan</label>
+          <div class="input-wrapper">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+            </svg>
+            <select id="subscriptionPlan" required>
+              <option value="">Choose your plan</option>
+              <option value="monthly">Monthly Plan - ₹49</option>
+              <option value="quarterly">Quarterly Plan - ₹99</option>
+              <option value="annually">Annual Plan - ₹299</option>
+            </select>
+          </div>
+          <div class="error-message">Please select a subscription plan</div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <svg viewBox="0 0 24 24">
+            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM15.1 8H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+          </svg>
+          Submit & Continue
+        </button>
+      </form>
+    </div>
+
+    <!-- Payment Section (Hidden initially) -->
+    <div id="paymentSection" class="payment-section">
+      <div class="payment-title">💳 Complete Payment</div>
+      
+      <div class="qr-container">
+        <img id="qrCodeImage" class="qr-img" src="" alt="Payment QR Code">
+        <div class="payment-hint">
+          Scan the QR code above with any UPI app to make payment
+        </div>
+      </div>
+
+      <a id="payNowBtn" class="pay-btn" href="#" target="_blank">
+        <svg viewBox="0 0 24 24">
+          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10z"/>
+        </svg>
+        Pay Now
+      </a>
+
+      <!-- Upload Section -->
+      <div class="upload-section">
+        <div class="upload-title">📸 Upload Payment Screenshot</div>
+        <input type="file" id="screenshotUpload" accept="image/*" style="display: none;">
+        <label for="screenshotUpload" class="upload-btn">
+          <svg viewBox="0 0 24 24">
+            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+          </svg>
+          Choose Screenshot
+        </label>
+        <div id="uploadStatus" class="upload-status"></div>
+      </div>
+    </div>
   </div>
 
-  <div id="uplCard" class="upl-card">
-    <div class="pmnt-title">Upload your payment screenshot 📷</div>
-    <input type="file" id="uplInput" style="display:none" accept="image/*"/>
-    <label for="uplInput" class="upl-btn"><svg><use href="#upl"></use></svg> Choose File</label>
-    <div id="uplStatus" class="upl-status"></div>
-  </div>
-</div>
+  <script>
+    // Configuration
+    const CONFIG = {
+      PLANS: {
+        monthly: {
+          qr: 'icon/monthly49.png',
+          paymentLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=49'
+        },
+        quarterly: {
+          qr: 'icon/quarterly99.png',
+          paymentLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=99'
+        },
+        annually: {
+          qr: 'icon/annual299.png',
+          paymentLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=299'
+        }
+      },
+      SHEET_URL: 'https://script.google.com/macros/s/AKfycbzzvNe7qBHwFEYYmaqLNEDzi3OytmO4h7Lr4dvU-rLMOq3ziLNJNNp2UFHSUSUX4pbe/exec',
+      DRIVE_URL: 'https://script.google.com/macros/s/AKfycbwHB4n82Gw2eSjoiQFCb8wAr1prl2i6UbuTorSYQHPtx2489iRtUq-_fAOWZCipl1hq/exec'
+    };
 
-<!-- SVG icons sprite -->
-<svg style="display:none">
-  <symbol id="user"    viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 16-4 16 0"/></symbol>
-  <symbol id="mail"    viewBox="0 0 24 24"><rect width="24" height="18" y="3" rx="3"/><polyline points="3 6 12 13 21 6"/></symbol>
-  <symbol id="phone"   viewBox="0 0 24 24"><path d="M5 4c1-2 5-2 7.5.6 3.2 3.3-3 5.6-2 8 .7 1.6 5.4 5 8.5 3.8"/><path d="M15 19l2 2 4-4-2-2"/></symbol>
-  <symbol id="check"   viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></symbol>
-  <symbol id="pay"     viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="3"/><path d="M2 10h20"/><circle cx="8" cy="12" r="1"/></symbol>
-  <symbol id="upl"     viewBox="0 0 24 24"><path d="M16 16v-5h4l-8-8-8 8h4v5h8zM8 16v5h8v-5"/></symbol>
-  <symbol id="lock"    viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="9" rx="4"/><path d="M16 11V7a4 4 0 00-8 0v4"/></symbol>
-</svg>
+    // DOM Elements
+    const form = document.getElementById('subscriptionForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const paymentSection = document.getElementById('paymentSection');
+    const qrCodeImage = document.getElementById('qrCodeImage');
+    const payNowBtn = document.getElementById('payNowBtn');
+    const screenshotUpload = document.getElementById('screenshotUpload');
+    const uploadStatus = document.getElementById('uploadStatus');
+    const planSelect = document.getElementById('subscriptionPlan');
 
-<script>
-const qrCard = document.getElementById('qrCard');
-const qrImg  = document.getElementById('qrImg');
-const payBtn = document.getElementById('payBtn');
-const uplCard= document.getElementById('uplCard');
-const form   = document.getElementById('subForm');
-const fname  = document.getElementById('fname');
-const email  = document.getElementById('email');
-const whats  = document.getElementById('whats');
-const plan   = document.getElementById('plan');
-const uplInput = document.getElementById('uplInput');
-const uplStatus= document.getElementById('uplStatus');
+    // Form validation
+    function validateForm() {
+      const fields = [
+        { id: 'fullName', validator: (val) => val.trim().length >= 2 },
+        { id: 'canvaEmail', validator: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) },
+        { id: 'whatsappNumber', validator: (val) => /^\+?[\d\s-]{10,15}$/.test(val.replace(/\s/g, '')) },
+        { id: 'subscriptionPlan', validator: (val) => val !== '' }
+      ];
 
-// --- CONFIG: Set correct URLs ---
-const PLAN_CONFIG = {
-  monthly:   { qr:'icon/monthly49.jpg',   pay:'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=49'   },
-  quarterly: { qr:'icon/quarterly99.jpg', pay:'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=99' },
-  annually:  { qr:'icon/annual299.',   pay:'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=299'  }
-};
-const SHEET_URL  = 'https://script.google.com/macros/s/AKfycbzzvNe7qBHwFEYYmaqLNEDzi3OytmO4h7Lr4dvU-rLMOq3ziLNJNNp2UFHSUSUX4pbe/exec'; // Google Sheet Apps Script web app
-const DRIVE_URL  = 'https://script.google.com/macros/s/AKfycbwHB4n82Gw2eSjoiQFCb8wAr1prl2i6UbuTorSYQHPtx2489iRtUq-_fAOWZCipl1hq/exec'; // File upload Apps Script
+      let isValid = true;
+      fields.forEach(field => {
+        const element = document.getElementById(field.id);
+        const formGroup = element.closest('.form-group');
+        
+        if (!field.validator(element.value)) {
+          formGroup.classList.add('error');
+          isValid = false;
+        } else {
+          formGroup.classList.remove('error');
+        }
+      });
 
-// --- PLAN CHANGE: Show QR & Pay Now ---
-plan.addEventListener('change', ()=>{
-  if(PLAN_CONFIG[plan.value]){
-    qrImg.src = PLAN_CONFIG[plan.value].qr;
-    payBtn.href= PLAN_CONFIG[plan.value].pay;
-  }else{
-    qrImg.src = ""; payBtn.href="#";
-  }
-  qrCard.classList.remove('active');
-  uplCard.classList.remove('active');
-});
+      return isValid;
+    }
 
-// --- FORM SUBMIT: Save to Sheet, Show QR block ---
-form.addEventListener('submit', async e=>{
-  e.preventDefault();
-  // Save in Google Sheet (GET method basic fallback)
-  const url = SHEET_URL
-    + '?name='   + encodeURIComponent(fname.value.trim())
-    + '&email='  + encodeURIComponent(email.value.trim())
-    + '&whatsapp='+ encodeURIComponent(whats.value.trim())
-    + '&plan='   + encodeURIComponent(plan.value.trim());
-  fetch(url,{mode:'no-cors'});
+    // Clear errors on input
+    form.addEventListener('input', (e) => {
+      const formGroup = e.target.closest('.form-group');
+      if (formGroup) {
+        formGroup.classList.remove('error');
+      }
+    });
 
-  // Show QR and Pay Now
-  qrCard.classList.add('active');
-  uplCard.classList.add('active');
-  form.style.display='none';
-  window.scrollTo({top:0,behavior:'smooth'});
-});
+    // Plan selection handler
+    planSelect.addEventListener('change', () => {
+      const selectedPlan = planSelect.value;
+      if (selectedPlan && CONFIG.PLANS[selectedPlan]) {
+        qrCodeImage.src = CONFIG.PLANS[selectedPlan].qr;
+        payNowBtn.href = CONFIG.PLANS[selectedPlan].paymentLink;
+      }
+    });
 
-// --- Upload Screenshot to Google Drive (Apps Script backend expected) ---
-uplInput.addEventListener('change', async ()=>{
-  if(!uplInput.files[0]) return;
-  uplStatus.innerHTML = '<span class="prog">Uploading...</span>';
-  const fd=new FormData(); fd.append('file',uplInput.files[0]);
-  try{
-    const result = await fetch(DRIVE_URL,{method:'POST',body:fd});
-    if(result.ok) uplStatus.innerHTML='<b class="succ">Success! Uploaded.</b>';
-    else throw new Error('Failed');
-  }catch{ uplStatus.innerHTML='<span style="color:#e53e3e">Error! Try again.</span>'; }
-});
+    // Form submission
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (!validateForm()) {
+        return;
+      }
 
-</script>
+      // Show loading state
+      submitBtn.classList.add('loading');
+      submitBtn.textContent = 'Processing...';
+
+      try {
+        // Prepare form data
+        const formData = {
+          name: document.getElementById('fullName').value.trim(),
+          email: document.getElementById('canvaEmail').value.trim(),
+          whatsapp: document.getElementById('whatsappNumber').value.trim(),
+          plan: document.getElementById('subscriptionPlan').value
+        };
+
+        // Send to Google Sheets
+        const sheetUrl = `${CONFIG.SHEET_URL}?name=${encodeURIComponent(formData.name)}&email=${encodeURIComponent(formData.email)}&whatsapp=${encodeURIComponent(formData.whatsapp)}&plan=${encodeURIComponent(formData.plan)}`;
+        
+        await fetch(sheetUrl, { mode: 'no-cors' });
+
+        // Show payment section
+        paymentSection.classList.add('show');
+        
+        // Scroll to payment section
+        setTimeout(() => {
+          paymentSection.scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('There was an error submitting your form. Please try again.');
+      } finally {
+        // Reset button state
+        submitBtn.classList.remove('loading');
+        submitBtn.innerHTML = `
+          <svg viewBox="0 0 24 24">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+          </svg>
+          Form Submitted Successfully!
+        `;
+      }
+    });
+
+    // Screenshot upload handler
+    screenshotUpload.addEventListener('change', async () => {
+      const file = screenshotUpload.files[0];
+      if (!file) return;
+
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        uploadStatus.innerHTML = '<span class="error">Please select an image file</span>';
+        return;
+      }
+
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        uploadStatus.innerHTML = '<span class="error">File size must be less than 5MB</span>';
+        return;
+      }
+
+      uploadStatus.innerHTML = '<span class="loading">Uploading screenshot...</span>';
+
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch(CONFIG.DRIVE_URL, {
+          method: 'POST',
+          body: formData
+        });
+
+        if (response.ok) {
+          uploadStatus.innerHTML = '<span class="success">✅ Screenshot uploaded successfully!</span>';
+        } else {
+          throw new Error('Upload failed');
+        }
+      } catch (error) {
+        console.error('Upload error:', error);
+        uploadStatus.innerHTML = '<span class="error">❌ Upload failed. Please try again.</span>';
+      }
+    });
+
+    // Add smooth animations
+    window.addEventListener('load', () => {
+      document.querySelector('.main').style.animation = 'fadeIn 0.6s ease-out';
+    });
+
+    // Add fade in animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
 </body>
 </html>
