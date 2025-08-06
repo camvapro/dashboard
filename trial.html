@@ -4,33 +4,54 @@
   <meta charset="UTF-8">
   <title>Canva Pro • 1-Day Free Trial</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Get free 24-hour access to Canva Pro with all premium features. No credit card required, instant activation.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
+      /* Brand Colors */
       --brand-primary: #6366f1;
       --brand-secondary: #4f46e5;
+      --brand-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      
+      /* Status Colors */
       --success: #10b981;
+      --success-bg: #ecfdf5;
+      --success-border: #a7f3d0;
       --danger: #ef4444;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
       --warning: #f59e0b;
       --info: #3b82f6;
+      --info-bg: #eff6ff;
+      --info-border: #bfdbfe;
       
+      /* Background Colors */
       --bg-primary: #f8fafc;
       --bg-secondary: #f1f5f9;
+      --bg-tertiary: #e2e8f0;
       --card-bg: #ffffff;
-      --border-color: #e2e8f0;
-      --border-focus: #6366f1;
       
+      /* Text Colors */
       --text-primary: #1e293b;
       --text-secondary: #64748b;
       --text-light: #94a3b8;
+      --text-white: #ffffff;
       
+      /* Border & Shadow */
+      --border-color: #e2e8f0;
+      --border-focus: #6366f1;
       --radius-sm: 8px;
       --radius-md: 12px;
       --radius-lg: 18px;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-      --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-      --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
-      --shadow-xl: 0 20px 40px rgba(0,0,0,0.15);
+      --radius-xl: 24px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+      --shadow-xl: 0 25px 50px rgba(0,0,0,0.15);
+      
+      /* Animation */
+      --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * {
@@ -45,89 +66,157 @@
       color: var(--text-primary);
       line-height: 1.6;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
+    /* Animated Background */
     .background {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6366f1 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
       z-index: -1;
     }
 
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating particles */
+    .background::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 1px, transparent 1px),
+                        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 1px, transparent 1px),
+                        radial-gradient(circle at 40% 40%, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 100px 100px, 150px 150px, 80px 80px;
+      animation: floating 20s linear infinite;
+    }
+
+    @keyframes floating {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100px, -100px); }
+    }
+
     .container {
-      max-width: 460px;
-      margin: 40px auto;
-      padding: 0 20px;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .card {
       background: var(--card-bg);
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-xl);
       box-shadow: var(--shadow-xl);
-      border: 1px solid var(--border-color);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       overflow: hidden;
-      animation: slideUp 0.6s ease-out;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @keyframes slideUp {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(40px) scale(0.95);
       }
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
       }
     }
 
+    /* Header Section */
     .card-header {
-      background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
-      padding: 30px;
+      background: var(--brand-gradient);
+      padding: 40px 30px;
       text-align: center;
-      color: white;
+      color: var(--text-white);
+      position: relative;
+      overflow: hidden;
     }
 
-    .logo {
+    .card-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    .logo-container {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 15px;
+      margin-bottom: 20px;
+      z-index: 1;
+      position: relative;
     }
 
-    .logo svg {
-      width: 32px;
-      height: 32px;
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
     }
 
     .logo-text {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       font-weight: 700;
+      letter-spacing: -0.5px;
     }
 
     .card-title {
       font-family: 'Poppins', sans-serif;
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      letter-spacing: -1px;
+      z-index: 1;
+      position: relative;
     }
 
     .card-subtitle {
-      font-size: 1.1rem;
-      opacity: 0.9;
+      font-size: 1.15rem;
+      opacity: 0.95;
       font-weight: 500;
+      z-index: 1;
+      position: relative;
     }
 
+    /* Form Section */
     .card-body {
       padding: 40px 30px;
     }
 
     .form-group {
-      margin-bottom: 24px;
+      margin-bottom: 25px;
     }
 
     .form-label {
@@ -136,43 +225,61 @@
       margin-bottom: 8px;
       color: var(--text-primary);
       font-size: 0.95rem;
+      letter-spacing: -0.2px;
     }
 
     .form-input {
       width: 100%;
-      padding: 14px 16px;
+      padding: 16px;
       border: 2px solid var(--border-color);
       border-radius: var(--radius-md);
       font-size: 1rem;
       font-family: inherit;
       background: #f8fafc;
-      transition: all 0.2s ease;
+      transition: all var(--transition-base);
       color: var(--text-primary);
+      font-weight: 500;
     }
 
     .form-input:focus {
       outline: none;
       border-color: var(--border-focus);
       background: white;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .form-input:hover:not(:focus) {
+      border-color: #cbd5e1;
     }
 
     .form-input::placeholder {
       color: var(--text-light);
+      font-weight: 400;
+    }
+
+    .form-input.error {
+      border-color: var(--danger);
+      background-color: var(--danger-bg);
     }
 
     .checkbox-group {
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      margin: 20px 0;
+      margin: 25px 0;
+      padding: 20px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
     }
 
     .checkbox-input {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       accent-color: var(--brand-primary);
       margin-top: 2px;
+      cursor: pointer;
     }
 
     .checkbox-label {
@@ -180,50 +287,69 @@
       color: var(--text-secondary);
       line-height: 1.5;
       font-weight: 500;
+      cursor: pointer;
     }
 
     .submit-btn {
       width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
-      color: white;
+      padding: 18px;
+      background: var(--brand-gradient);
+      color: var(--text-white);
       border: none;
       border-radius: var(--radius-md);
       font-size: 1.1rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-md);
       font-family: inherit;
       position: relative;
       overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transition: all var(--transition-base);
+      letter-spacing: 0.5px;
     }
 
-    .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
+    .submit-btn:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(99, 102, 241, 0.3);
     }
 
     .submit-btn:active {
-      transform: translateY(0);
+      transform: translateY(-1px);
     }
 
     .submit-btn:disabled {
-      opacity: 0.7;
+      opacity: 0.8;
       cursor: not-allowed;
       transform: none;
     }
 
-    .btn-text {
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .submit-btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-content {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
+      z-index: 1;
+      position: relative;
     }
 
     .loading-spinner {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       border: 2px solid rgba(255,255,255,0.3);
       border-radius: 50%;
       border-top-color: white;
@@ -232,83 +358,174 @@
     }
 
     @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+      to { transform: rotate(360deg); }
     }
 
+    /* Alert Messages */
     .alert {
       margin-top: 20px;
-      padding: 16px;
+      padding: 18px 20px;
       border-radius: var(--radius-md);
       font-size: 0.95rem;
       font-weight: 500;
-      border-left: 4px solid;
-      animation: fadeIn 0.3s ease;
+      border: 1px solid;
+      animation: alertSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes alertSlide {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .alert::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
     }
 
     .alert-success {
-      background: #ecfdf5;
+      background: var(--success-bg);
       color: #065f46;
-      border-color: var(--success);
+      border-color: var(--success-border);
+    }
+
+    .alert-success::before {
+      background: var(--success);
     }
 
     .alert-error {
-      background: #fef2f2;
+      background: var(--danger-bg);
       color: #991b1b;
-      border-color: var(--danger);
+      border-color: var(--danger-border);
+    }
+
+    .alert-error::before {
+      background: var(--danger);
     }
 
     .alert-info {
-      background: #eff6ff;
+      background: var(--info-bg);
       color: #1e40af;
-      border-color: var(--info);
+      border-color: var(--info-border);
     }
 
+    .alert-info::before {
+      background: var(--info);
+    }
+
+    /* Success Details */
+    .success-details {
+      background: linear-gradient(135deg, var(--success-bg) 0%, #d1fae5 100%);
+      border: 1px solid var(--success-border);
+      border-radius: var(--radius-md);
+      padding: 30px;
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .success-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      animation: successPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes successPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+    }
+
+    .success-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #065f46;
+      margin-bottom: 15px;
+    }
+
+    .login-key-display {
+      background: white;
+      border: 2px dashed var(--success);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .login-key-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .login-key-value {
+      font-family: 'Courier New', Monaco, monospace;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--success);
+      letter-spacing: 3px;
+      word-break: break-all;
+    }
+
+    /* Info Section */
     .trial-info {
       background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
       border: 1px solid #bae6fd;
       border-radius: var(--radius-md);
-      padding: 20px;
-      margin-top: 24px;
+      padding: 25px;
+      margin-top: 30px;
     }
 
     .trial-info-title {
       font-weight: 700;
       color: var(--info);
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      font-size: 1.1rem;
     }
 
     .trial-info-list {
       list-style: none;
-      space-y: 8px;
     }
 
     .trial-info-list li {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
+      gap: 12px;
+      margin-bottom: 10px;
       color: var(--text-secondary);
+      font-size: 0.95rem;
     }
 
     .trial-info-list li::before {
       content: "✓";
       color: var(--success);
       font-weight: bold;
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
     }
 
-    .footer {
+    /* Footer */
+    .card-footer {
       padding: 30px;
-      text-align: center;
       background: #f8fafc;
       border-top: 1px solid var(--border-color);
     }
@@ -317,80 +534,57 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 16px;
-      margin-bottom: 16px;
+      gap: 15px;
+      margin-bottom: 20px;
     }
 
     .support-link {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 10px 16px;
+      gap: 8px;
+      padding: 12px 20px;
       background: white;
       color: var(--brand-primary);
       text-decoration: none;
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius-md);
       border: 1px solid var(--border-color);
-      font-weight: 500;
+      font-weight: 600;
       font-size: 0.9rem;
-      transition: all 0.2s ease;
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-sm);
     }
 
     .support-link:hover {
       background: var(--brand-primary);
       color: white;
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .support-link svg {
+      width: 18px;
+      height: 18px;
     }
 
     .copyright {
+      text-align: center;
       color: var(--text-light);
       font-size: 0.85rem;
+      font-weight: 500;
     }
 
-    .success-details {
-      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-      border: 1px solid #a7f3d0;
-      border-radius: var(--radius-md);
-      padding: 24px;
-      margin-top: 20px;
-    }
-
-    .login-key-display {
-      background: white;
-      border: 2px dashed var(--success);
-      border-radius: var(--radius-sm);
-      padding: 16px;
-      text-align: center;
-      margin: 16px 0;
-    }
-
-    .login-key-label {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
-
-    .login-key-value {
-      font-family: 'Courier New', monospace;
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: var(--success);
-      letter-spacing: 2px;
-    }
-
+    /* Responsive Design */
     @media (max-width: 520px) {
       .container {
-        margin: 20px auto;
-        padding: 0 16px;
+        padding: 15px;
       }
       
       .card-header {
-        padding: 24px 20px;
+        padding: 30px 25px;
       }
       
       .card-title {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
       }
       
       .card-subtitle {
@@ -398,7 +592,16 @@
       }
       
       .card-body {
-        padding: 30px 20px;
+        padding: 30px 25px;
+      }
+      
+      .form-input {
+        padding: 14px;
+      }
+      
+      .submit-btn {
+        padding: 16px;
+        font-size: 1rem;
       }
       
       .support-links {
@@ -408,9 +611,50 @@
       
       .support-link {
         width: 100%;
-        max-width: 200px;
+        max-width: 250px;
         justify-content: center;
       }
+
+      .login-key-value {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .card-header {
+        padding: 25px 20px;
+      }
+      
+      .card-body {
+        padding: 25px 20px;
+      }
+      
+      .card-title {
+        font-size: 1.6rem;
+      }
+      
+      .login-key-value {
+        font-size: 1rem;
+        letter-spacing: 1px;
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Focus visible for keyboard navigation */
+    .form-input:focus-visible,
+    .submit-btn:focus-visible,
+    .support-link:focus-visible {
+      outline: 2px solid var(--brand-primary);
+      outline-offset: 2px;
     }
   </style>
 </head>
@@ -419,21 +663,25 @@
   
   <div class="container">
     <div class="card">
+      <!-- Header -->
       <div class="card-header">
-        <div class="logo">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
+        <div class="logo-container">
+          <div class="logo-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
           <div class="logo-text">Canva Pro</div>
         </div>
         <h1 class="card-title">1-Day Free Trial</h1>
         <p class="card-subtitle">Full access • No card • Cancel anytime</p>
       </div>
 
+      <!-- Form -->
       <div class="card-body">
         <form id="trialForm" autocomplete="off" novalidate>
           <div class="form-group">
-            <label class="form-label" for="fullName">Full Name</label>
+            <label class="form-label" for="fullName">Full Name *</label>
             <input 
               class="form-input" 
               type="text" 
@@ -442,11 +690,12 @@
               placeholder="Enter your full name"
               required
               maxlength="50"
+              autocomplete="name"
             >
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="canvaEmail">Email Address</label>
+            <label class="form-label" for="canvaEmail">Email Address *</label>
             <input 
               class="form-input" 
               type="email" 
@@ -455,11 +704,12 @@
               placeholder="your.email@example.com"
               required
               maxlength="100"
+              autocomplete="email"
             >
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="whatsappNumber">WhatsApp Number</label>
+            <label class="form-label" for="whatsappNumber">WhatsApp Number *</label>
             <input 
               class="form-input" 
               type="tel" 
@@ -469,6 +719,7 @@
               pattern="[0-9]{10,14}"
               required
               maxlength="14"
+              autocomplete="tel"
             >
           </div>
 
@@ -480,13 +731,13 @@
               required
             >
             <label class="checkbox-label" for="agreeToTerms">
-              I agree to use this free trial only once and understand that one trial is allowed per user (email and WhatsApp number)
+              I agree to use this free trial only once and understand that one trial is allowed per user (email and WhatsApp number). I confirm that the information provided is accurate.
             </label>
           </div>
 
           <button type="submit" class="submit-btn" id="submitBtn">
-            <div class="btn-text">
-              <span class="btn-text-content">Start My Free Trial</span>
+            <div class="btn-content">
+              <span class="btn-text">Start My Free Trial</span>
               <div class="loading-spinner" id="loadingSpinner"></div>
             </div>
           </button>
@@ -494,40 +745,43 @@
           <div id="alertContainer"></div>
         </form>
 
+        <!-- Trial Info -->
         <div class="trial-info">
           <div class="trial-info-title">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </svg>
-            How it Works
+            How Your Free Trial Works
           </div>
           <ul class="trial-info-list">
-            <li>Instant activation - no credit card required</li>
-            <li>Full Canva Pro features for 24 hours</li>
-            <li>One free trial per person</li>
+            <li>Instant activation with no credit card required</li>
+            <li>Full access to all Canva Pro features for 24 hours</li>
+            <li>100M+ premium photos, videos, and graphics</li>
+            <li>Background remover and advanced editing tools</li>
+            <li>Premium templates and brand kit access</li>
             <li>Automatic expiry after 24 hours</li>
-            <li>Upgrade anytime to continue access</li>
           </ul>
         </div>
       </div>
 
-      <div class="footer">
+      <!-- Footer -->
+      <div class="card-footer">
         <div class="support-links">
           <a href="https://wa.me/916306356544" class="support-link" target="_blank" rel="noopener">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.488"/>
             </svg>
             WhatsApp Support
           </a>
           <a href="mailto:support@canvapro.design" class="support-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
             </svg>
             Email Support
           </a>
         </div>
         <div class="copyright">
-          © 2025 Canva Pro Trial • Made with ❤️ for designers
+          © 2025 Canva Pro Trial • Made with ❤️ for creative professionals
         </div>
       </div>
     </div>
@@ -535,14 +789,20 @@
 
   <script>
     // Configuration
-    const API_URL = 'https://script.google.com/macros/s/AKfycbwTk-hY2efDK_QHEGPh5MB2oCKslu4LkbJnLGylcXrJVDzjaIcmBBDSQD5_dbvGXZpnQg/exec';
-
+    const API_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID_HERE/exec';
+    
     // DOM Elements
     const form = document.getElementById('trialForm');
     const submitBtn = document.getElementById('submitBtn');
     const loadingSpinner = document.getElementById('loadingSpinner');
     const alertContainer = document.getElementById('alertContainer');
-    const btnTextContent = document.querySelector('.btn-text-content');
+    const btnText = document.querySelector('.btn-text');
+
+    // Form inputs
+    const nameInput = document.getElementById('fullName');
+    const emailInput = document.getElementById('canvaEmail');
+    const phoneInput = document.getElementById('whatsappNumber');
+    const agreeCheckbox = document.getElementById('agreeToTerms');
 
     // Utility Functions
     function showAlert(message, type = 'info') {
@@ -562,40 +822,7 @@
     function setLoading(isLoading) {
       submitBtn.disabled = isLoading;
       loadingSpinner.style.display = isLoading ? 'block' : 'none';
-      btnTextContent.textContent = isLoading ? 'Processing...' : 'Start My Free Trial';
-    }
-
-    function validateForm() {
-      const name = form.fullName.value.trim();
-      const email = form.canvaEmail.value.trim();
-      const phone = form.whatsappNumber.value.trim();
-      const agreed = form.agreeToTerms.checked;
-
-      if (name.length < 2) {
-        showAlert('Please enter your full name (at least 2 characters)', 'error');
-        form.fullName.focus();
-        return false;
-      }
-
-      if (!isValidEmail(email)) {
-        showAlert('Please enter a valid email address', 'error');
-        form.canvaEmail.focus();
-        return false;
-      }
-
-      if (!isValidPhone(phone)) {
-        showAlert('Please enter a valid WhatsApp number (10-14 digits)', 'error');
-        form.whatsappNumber.focus();
-        return false;
-      }
-
-      if (!agreed) {
-        showAlert('Please agree to the terms to continue', 'error');
-        form.agreeToTerms.focus();
-        return false;
-      }
-
-      return true;
+      btnText.textContent = isLoading ? 'Processing...' : 'Start My Free Trial';
     }
 
     function isValidEmail(email) {
@@ -608,49 +835,85 @@
       return phoneRegex.test(phone);
     }
 
+    function validateForm() {
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      const phone = phoneInput.value.trim();
+      const agreed = agreeCheckbox.checked;
+
+      // Reset error states
+      [nameInput, emailInput, phoneInput].forEach(input => {
+        input.classList.remove('error');
+      });
+
+      if (name.length < 2) {
+        nameInput.classList.add('error');
+        showAlert('Please enter your full name (minimum 2 characters)', 'error');
+        nameInput.focus();
+        return false;
+      }
+
+      if (!isValidEmail(email)) {
+        emailInput.classList.add('error');
+        showAlert('Please enter a valid email address', 'error');
+        emailInput.focus();
+        return false;
+      }
+
+      if (!isValidPhone(phone)) {
+        phoneInput.classList.add('error');
+        showAlert('Please enter a valid WhatsApp number (10-14 digits)', 'error');
+        phoneInput.focus();
+        return false;
+      }
+
+      if (!agreed) {
+        showAlert('Please agree to the terms to continue with your free trial', 'error');
+        agreeCheckbox.focus();
+        return false;
+      }
+
+      return true;
+    }
+
     function handleSuccess(data) {
-      let successMessage = `
+      const successHTML = `
         <div class="success-details">
-          <div style="text-align: center; margin-bottom: 20px;">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="#10b981" style="margin-bottom: 16px;">
+          <div class="success-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </svg>
-            <h3 style="color: #10b981; margin: 0; font-size: 1.5rem;">🎉 Trial Activated Successfully!</h3>
           </div>
           
-          <p style="text-align: center; margin-bottom: 20px; color: #065f46;">
-            Your Canva Pro trial is now active! Check your WhatsApp and email for confirmation details.
+          <div class="success-title">🎉 Trial Activated Successfully!</div>
+          
+          <p style="margin-bottom: 20px; color: #065f46; font-weight: 500;">
+            Your Canva Pro trial is now active! Check your WhatsApp and email for confirmation details and access instructions.
           </p>
-      `;
 
-      if (data.data && data.data.loginKey) {
-        successMessage += `
-          <div class="login-key-display">
-            <div class="login-key-label">Your Login Key</div>
-            <div class="login-key-value">${data.data.loginKey}</div>
+          ${data.data && data.data.loginKey ? `
+            <div class="login-key-display">
+              <div class="login-key-label">Your Unique Login Key</div>
+              <div class="login-key-value">${data.data.loginKey}</div>
+            </div>
+          ` : ''}
+
+          ${data.data && data.data.expiresAt ? `
+            <p style="text-align: center; margin-top: 15px; font-weight: 600; color: #059669;">
+              <strong>⏰ Trial expires:</strong> ${data.data.expiresAt}
+            </p>
+          ` : ''}
+
+          <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #a7f3d0; font-size: 0.9rem; color: #047857;">
+            <div style="margin-bottom: 8px;"><strong>✨ What's Next:</strong></div>
+            <div>• Check your WhatsApp for instant access details</div>
+            <div>• Check your email for complete trial information</div>
+            <div>• Start creating amazing designs right away!</div>
           </div>
-        `;
-      }
-
-      if (data.data && data.data.expiresAt) {
-        successMessage += `
-          <p style="text-align: center; margin-top: 16px; color: #065f46;">
-            <strong>Trial expires:</strong> ${data.data.expiresAt}
-          </p>
-        `;
-      }
-
-      successMessage += `
-          <p style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #047857;">
-            <strong>Next Steps:</strong><br>
-            1. Check your WhatsApp for instant access details<br>
-            2. Check your email for trial information<br>
-            3. Start creating amazing designs!
-          </p>
         </div>
       `;
 
-      showAlert(successMessage, 'success');
+      showAlert(successHTML, 'success');
       form.reset();
       submitBtn.style.display = 'none';
     }
@@ -661,16 +924,20 @@
       // Enhance common error messages
       if (message.includes('duplicate') || message.includes('already used')) {
         errorMessage = `
-          <strong>Trial Already Used</strong><br>
-          A free trial has already been claimed for this email or WhatsApp number. 
-          Each person can only use the free trial once.<br><br>
-          If you believe this is a mistake, please contact our support team.
+          <div style="text-align: center;">
+            <strong>🚫 Trial Already Used</strong><br><br>
+            A free trial has already been claimed for this email or WhatsApp number. 
+            Each person can only use the free trial once.<br><br>
+            If you believe this is a mistake or need assistance, please contact our support team using the links below.
+          </div>
         `;
-      } else if (message.includes('network') || message.includes('fetch')) {
+      } else if (message.includes('network') || message.includes('Connection')) {
         errorMessage = `
-          <strong>Connection Error</strong><br>
-          Unable to connect to our servers. Please check your internet connection and try again.
-          If the problem persists, contact our support team.
+          <div style="text-align: center;">
+            <strong>🌐 Connection Error</strong><br><br>
+            Unable to connect to our servers. Please check your internet connection and try again.
+            If the problem persists, please contact our support team.
+          </div>
         `;
       }
 
@@ -696,74 +963,91 @@
           body: formData
         });
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
         const result = await response.json();
 
         if (result.status === 'success') {
           handleSuccess(result);
         } else {
-          handleError(result.message || 'An error occurred while processing your request');
+          handleError(result.message || 'An unexpected error occurred while processing your request. Please try again.');
         }
 
       } catch (error) {
         console.error('Submission error:', error);
-        handleError('Network error: Unable to submit your request. Please try again.');
+        handleError('Connection error: Unable to submit your request. Please check your internet connection and try again.');
       } finally {
         setLoading(false);
       }
     });
 
     // Real-time validation
-    form.fullName.addEventListener('blur', () => {
-      const name = form.fullName.value.trim();
+    nameInput.addEventListener('blur', () => {
+      const name = nameInput.value.trim();
       if (name.length > 0 && name.length < 2) {
-        form.fullName.style.borderColor = '#ef4444';
+        nameInput.classList.add('error');
       } else {
-        form.fullName.style.borderColor = '#e2e8f0';
+        nameInput.classList.remove('error');
       }
     });
 
-    form.canvaEmail.addEventListener('blur', () => {
-      const email = form.canvaEmail.value.trim();
+    emailInput.addEventListener('blur', () => {
+      const email = emailInput.value.trim();
       if (email.length > 0 && !isValidEmail(email)) {
-        form.canvaEmail.style.borderColor = '#ef4444';
+        emailInput.classList.add('error');
       } else {
-        form.canvaEmail.style.borderColor = '#e2e8f0';
+        emailInput.classList.remove('error');
       }
     });
 
-    form.whatsappNumber.addEventListener('input', (e) => {
+    phoneInput.addEventListener('input', (e) => {
       // Only allow numbers
       e.target.value = e.target.value.replace(/\D/g, '');
     });
 
-    form.whatsappNumber.addEventListener('blur', () => {
-      const phone = form.whatsappNumber.value.trim();
+    phoneInput.addEventListener('blur', () => {
+      const phone = phoneInput.value.trim();
       if (phone.length > 0 && !isValidPhone(phone)) {
-        form.whatsappNumber.style.borderColor = '#ef4444';
+        phoneInput.classList.add('error');
       } else {
-        form.whatsappNumber.style.borderColor = '#e2e8f0';
+        phoneInput.classList.remove('error');
       }
     });
 
-    // Initialize form
+    // Form auto-save to prevent data loss (store in sessionStorage)
+    [nameInput, emailInput, phoneInput].forEach(input => {
+      input.addEventListener('input', (e) => {
+        sessionStorage.setItem(e.target.name, e.target.value);
+      });
+    });
+
+    // Initialize form with saved data
     document.addEventListener('DOMContentLoaded', () => {
-      // Focus on first input
-      form.fullName.focus();
-      
-      // Add smooth animations
-      const card = document.querySelector('.card');
-      card.style.transform = 'translateY(20px)';
-      card.style.opacity = '0';
-      
-      setTimeout(() => {
-        card.style.transition = 'all 0.6s ease-out';
-        card.style.transform = 'translateY(0)';
-        card.style.opacity = '1';
-      }, 100);
+      // Restore form data
+      [nameInput, emailInput, phoneInput].forEach(input => {
+        const saved = sessionStorage.getItem(input.name);
+        if (saved) {
+          input.value = saved;
+        }
+      });
+
+      // Focus on first empty input
+      const firstEmptyInput = [nameInput, emailInput, phoneInput].find(input => !input.value.trim());
+      if (firstEmptyInput) {
+        setTimeout(() => firstEmptyInput.focus(), 500);
+      }
+
+      // Clear session storage on successful submission
+      const clearStorage = () => {
+        sessionStorage.removeItem('fullName');
+        sessionStorage.removeItem('canvaEmail');
+        sessionStorage.removeItem('whatsappNumber');
+      };
+
+      // Add to success handler
+      const originalHandleSuccess = handleSuccess;
+      handleSuccess = (data) => {
+        originalHandleSuccess(data);
+        clearStorage();
+      };
     });
   </script>
 </body>
