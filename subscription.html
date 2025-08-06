@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscription Form - सब्स्क्रिप्शन फॉर्म</title>
+    <title>Enhanced Subscription Form - सब्स्क्रिप्शन फॉर्म</title>
 
     <style>
         /* Global Styles */
@@ -21,628 +21,766 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Glassmorphism Container */
-        .main {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px;
-            max-width: 600px;
+        /* Particle Background Animation */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-            position: relative;
+            height: 100%;
+            z-index: -1;
             overflow: hidden;
         }
 
-        .main::before {
-            content: '';
+        .particle {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-            pointer-events: none;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: particleFloat 6s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Glassmorphism Container */
+        .main {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 40px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: containerEntrance 1s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        .main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 35px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        @keyframes containerEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         /* Header Styles */
-        .header {
+        h1 {
             text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 2;
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: titleGlow 2s ease-in-out infinite alternate;
         }
 
-        h1 {
-            color: white;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        @keyframes titleGlow {
+            0% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+            100% { text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.5); }
         }
 
         .subtitle {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            margin-bottom: 20px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            font-weight: 300;
         }
 
         /* Form Styles */
-        .subscription-form {
-            position: relative;
-            z-index: 2;
-        }
-
         .form-group {
             margin-bottom: 25px;
             position: relative;
+            animation: slideInUp 0.8s ease-out;
         }
 
-        .form-group label {
+        .form-group:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes slideInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        label {
             display: block;
-            color: white;
-            font-weight: 600;
             margin-bottom: 8px;
-            font-size: 1rem;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
-        .input-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            z-index: 3;
-        }
-
-        .form-input, .form-select {
+        input, select {
             width: 100%;
-            padding: 15px 15px 15px 50px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            color: white;
-            font-size: 16px;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-        }
-
-        .form-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .form-input:focus, .form-select:focus {
-            outline: none;
-            border-color: rgba(255, 255, 255, 0.8);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-        }
-
-        .form-select {
-            cursor: pointer;
-        }
-
-        .form-select option {
-            background: #333;
-            color: white;
-        }
-
-        /* Submit Button */
-        .submit-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            padding: 15px 20px;
             border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 18px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1.1em;
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        select option {
+            background: #667eea;
+            color: #fff;
+        }
+
+        /* Button Styles */
+        .btn {
+            width: 100%;
+            padding: 16px 30px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.3em;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             text-transform: uppercase;
             letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
         }
 
-        .submit-btn:active {
-            transform: translateY(0);
+        .btn:hover:before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-next {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: #fff;
+            display: none;
+        }
+
+        .btn-next:hover {
+            background: linear-gradient(45deg, #218838, #1ba085);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-submit {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: #fff;
+            display: none;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(45deg, #0056b3, #004085);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
         }
 
         /* Payment Section */
         .payment-section {
             display: none;
             margin-top: 30px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInScale 0.5s ease-out;
         }
 
-        .payment-section.show {
-            display: block;
-            animation: fadeInUp 0.5s ease;
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .payment-title {
+            text-align: center;
+            color: #fff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
 
         .qr-container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 15px;
+            text-align: center;
             margin: 20px 0;
-            backdrop-filter: blur(10px);
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .qr-code {
-            max-width: 200px;
-            width: 100%;
-            height: auto;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            display: block;
             border-radius: 10px;
         }
 
-        .amount-display {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 15px 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .pay-btn {
-            display: inline-block;
-            padding: 15px 30px;
-            background: linear-gradient(45deg, #28a745, #20c997);
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin: 10px 0;
-        }
-
-        .pay-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Upload Section */
-        .upload-section {
-            margin-top: 30px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .file-upload-container {
-            border: 2px dashed rgba(255, 255, 255, 0.5);
-            border-radius: 15px;
-            padding: 30px;
+        .payment-info {
             text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.05);
+            color: #333;
+            font-weight: 600;
+            margin-top: 15px;
         }
 
-        .file-upload-container:hover {
-            border-color: rgba(255, 255, 255, 0.8);
-            background: rgba(255, 255, 255, 0.1);
+        /* File Upload Styles */
+        .file-upload-container {
+            position: relative;
+            margin: 20px 0;
         }
 
         .file-input {
             display: none;
         }
 
-        .upload-icon {
-            width: 50px;
-            height: 50px;
-            margin: 0 auto 15px;
-            opacity: 0.7;
-        }
-
-        .upload-text {
-            color: white;
-            font-size: 1.1rem;
+        .file-label {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            text-align: center;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
             font-weight: 600;
         }
 
-        .upload-status {
+        .file-label:hover {
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .file-preview {
             margin-top: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: none;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: rgba(40, 167, 69, 0.9);
+            border-radius: 15px;
+            color: #fff;
             font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .status-uploading {
-            color: #ffc107;
-        }
-
-        .status-success {
-            color: #28a745;
-        }
-
-        .status-error {
-            color: #dc3545;
+            margin-top: 20px;
         }
 
         /* Loading Animation */
         .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
+            display: none;
+            text-align: center;
+            color: #fff;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
+        /* Click Effect */
+        .click-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: rippleAnimation 0.6s linear;
+        }
+
+        @keyframes rippleAnimation {
             to {
-                opacity: 1;
-                transform: translateY(0);
+                transform: scale(4);
+                opacity: 0;
             }
         }
 
-        /* Error Messages */
-        .error-message {
-            color: #ff4757;
-            font-size: 0.9rem;
-            margin-top: 5px;
-            font-weight: 500;
-        }
-
-        /* Responsive Design */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .main {
                 padding: 25px;
-                margin: 10px;
+                margin: 15px;
             }
-
+            
             h1 {
-                font-size: 2rem;
+                font-size: 2em;
             }
-
-            .form-input, .form-select {
-                padding: 12px 12px 12px 45px;
-                font-size: 14px;
+            
+            .btn {
+                font-size: 1.1em;
             }
-
-            .submit-btn {
-                padding: 15px;
-                font-size: 16px;
+            
+            .qr-code {
+                width: 150px;
+                height: 150px;
             }
         }
 
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
-            }
+        /* Step Indicator */
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
 
-            .subtitle {
-                font-size: 1rem;
-            }
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            color: #fff;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            background: rgba(40, 167, 69, 0.9);
+            transform: scale(1.2);
+        }
+
+        .step.completed {
+            background: rgba(40, 167, 69, 0.9);
         }
     </style>
 </head>
 <body>
-    <div class="main">
-        <div class="header">
-            <h1>🎯 Start Subscription</h1>
-            <p class="subtitle">अपनी सब्स्क्रिप्शन शुरू करें और premium features का आनंद लें</p>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
+    <div class="main click-effect">
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+            <div class="step active" id="step1">1</div>
+            <div class="step" id="step2">2</div>
+            <div class="step" id="step3">3</div>
         </div>
 
-        <form class="subscription-form" id="subscriptionForm">
-            <div class="form-group">
-                <label for="fullName">Full Name / पूरा नाम</label>
-                <div class="input-container">
-                    <svg class="input-icon" fill="white" viewBox="0 0 24 24">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                    <input type="text" class="form-input" id="fullName" name="fullName" placeholder="अपना पूरा नाम दर्ज करें" required>
-                </div>
-                <div class="error-message" id="nameError"></div>
-            </div>
+        <h1>🎯 Start Subscription</h1>
+        <p class="subtitle">अपनी सब्स्क्रिप्शन शुरू करें और premium features का आनंद लें</p>
 
-            <div class="form-group">
-                <label for="canvaEmail">Canva Existing Email / कैन्वा ईमेल</label>
-                <div class="input-container">
-                    <svg class="input-icon" fill="white" viewBox="0 0 24 24">
-                        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
-                    <input type="email" class="form-input" id="canvaEmail" name="canvaEmail" placeholder="example@gmail.com" required>
+        <!-- Main Form -->
+        <form id="subscriptionForm">
+            <!-- Step 1: User Details -->
+            <div id="userDetails">
+                <div class="form-group">
+                    <label for="fullName">👤 Full Name / पूरा नाम</label>
+                    <input type="text" id="fullName" name="fullName" required>
                 </div>
-                <div class="error-message" id="emailError"></div>
-            </div>
 
-            <div class="form-group">
-                <label for="whatsappNumber">WhatsApp Number / व्हाट्सएप नंबर</label>
-                <div class="input-container">
-                    <svg class="input-icon" fill="white" viewBox="0 0 24 24">
-                        <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.2c.27-.27.35-.67.24-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z"/>
-                    </svg>
-                    <input type="tel" class="form-input" id="whatsappNumber" name="whatsappNumber" placeholder="+91 9876543210" required>
+                <div class="form-group">
+                    <label for="canvaEmail">📧 Canva Email / कैनवा ईमेल</label>
+                    <input type="email" id="canvaEmail" name="canvaEmail" required>
                 </div>
-                <div class="error-message" id="phoneError"></div>
-            </div>
 
-            <div class="form-group">
-                <label for="subscriptionPlan">Subscription Plan / सब्स्क्रिप्शन प्लान</label>
-                <div class="input-container">
-                    <svg class="input-icon" fill="white" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                    <select class="form-select" id="subscriptionPlan" name="subscriptionPlan" required>
-                        <option value="">प्लान चुनें / Select Plan</option>
-                        <option value="monthly">Monthly - ₹49/महीना</option>
-                        <option value="quarterly">Quarterly - ₹99/तिमाही (33% Off)</option>
-                        <option value="annually">Annually - ₹299/साल (50% Off)</option>
+                <div class="form-group">
+                    <label for="whatsappNumber">📱 WhatsApp Number</label>
+                    <input type="tel" id="whatsappNumber" name="whatsappNumber" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subscriptionPlan">💳 Select Plan / प्लान चुनें</label>
+                    <select id="subscriptionPlan" name="subscriptionPlan" required>
+                        <option value="">Select Plan / प्लान चुनें</option>
+                        <option value="monthly">Monthly Plan - ₹299/month</option>
+                        <option value="quarterly">Quarterly Plan - ₹799/3months</option>
+                        <option value="yearly">Yearly Plan - ₹2999/year</option>
                     </select>
                 </div>
-                <div class="error-message" id="planError"></div>
+
+                <button type="button" class="btn btn-next" id="nextBtn">Next / अगला ➡️</button>
             </div>
 
-            <button type="submit" class="submit-btn" id="submitBtn">
-                <span id="submitText">🚀 Subscribe Now / अब सब्स्क्राइब करें</span>
-                <span id="submitLoader" class="loading" style="display: none;"></span>
-            </button>
+            <!-- Step 2: Payment Section -->
+            <div class="payment-section" id="paymentSection">
+                <h2 class="payment-title">💳 Payment / भुगतान करें</h2>
+                <p style="color: #fff; text-align: center; margin-bottom: 20px;">स्कैन करें और भुगतान करें</p>
+
+                <div class="qr-container">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23fff'/%3E%3Ctext x='100' y='100' text-anchor='middle' dy='.3em' font-size='16' fill='%23333'%3EQR Code Here%3C/text%3E%3C/svg%3E" 
+                         alt="QR Code" class="qr-code" id="qrCode">
+                    <div class="payment-info">
+                        <p><strong>UPI ID:</strong> your-upi-id@paytm</p>
+                        <p><strong>Amount:</strong> <span id="paymentAmount">₹299</span></p>
+                    </div>
+                </div>
+
+                <!-- File Upload -->
+                <div class="file-upload-container">
+                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" class="file-input">
+                    <label for="paymentScreenshot" class="file-label">
+                        📸 Upload Payment Screenshot / भुगतान स्क्रीनशॉट अपलोड करें
+                    </label>
+                    <div class="file-preview" id="filePreview">
+                        <p>Selected file: <span id="fileName"></span></p>
+                        <img id="previewImage" style="max-width: 100%; height: auto; border-radius: 10px; margin-top: 10px;">
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-submit" id="submitBtn">Submit / जमा करें ✅</button>
+            </div>
         </form>
 
-        <!-- Payment Section -->
-        <div class="payment-section" id="paymentSection">
-            <h2 style="color: white; margin-bottom: 20px;">💳 Payment / भुगतान करें</h2>
-            <div class="amount-display" id="amountDisplay"></div>
-            <div class="qr-container">
-                <img class="qr-code" id="qrCodeImage" src="" alt="QR Code">
-                <p style="color: #333; margin-top: 10px; font-weight: 600;">स्कैन करें और भुगतान करें</p>
-            </div>
-            <a href="#" class="pay-btn" id="payButton" target="_blank">
-                💸 Pay Now / अब भुगतान करें
-            </a>
+        <!-- Loading -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Processing... / प्रक्रिया चल रही है...</p>
         </div>
 
-        <!-- Upload Section -->
-        <div class="upload-section">
-            <h3 style="color: white; margin-bottom: 15px; text-align: center;">📸 Upload Payment Screenshot</h3>
-            <div class="file-upload-container" onclick="document.getElementById('screenshotFile').click()">
-                <svg class="upload-icon" fill="white" viewBox="0 0 24 24">
-                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
-                </svg>
-                <div class="upload-text">Click to upload payment screenshot</div>
-                <div class="upload-text" style="font-size: 0.9rem; opacity: 0.8;">भुगतान स्क्रीनशॉट अपलोड करें</div>
-            </div>
-            <input type="file" class="file-input" id="screenshotFile" accept="image/*">
-            <div class="upload-status" id="uploadStatus"></div>
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            <h3>🎉 Success! / सफलता!</h3>
+            <p>Your subscription has been submitted successfully!</p>
+            <p>आपकी सब्स्क्रिप्शन सफलतापूर्वक जमा हो गई है!</p>
         </div>
     </div>
 
     <script>
         // Configuration
-        const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwMcCuN4eQmtpHdLo-kFxBLxKJ9NOIyp91p84W81n5RUwahjWl-v0sufhRMI-s_sJfWYw/exec';
-        const DRIVE_URL = 'https://script.google.com/macros/s/AKfycbwMcCuN4eQmtpHdLo-kFxBLxKJ9NOIyp91p84W81n5RUwahjWl-v0sufhRMI-s_sJfWYw/exec'; // Replace with your Drive upload script URL
-
-        // Plan configuration
-        const planConfig = {
-            monthly: {
-                amount: '₹47',
-                qrCode: 'icon/monthly49.png',
-                payLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=99'
-            },
-            quarterly: {
-                amount: '₹99',
-                qrCode: 'icon/quarterly99.png',
-                payLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=99'
-            },
-            annually: {
-                amount: '₹299',
-                qrCode: 'icon/annual299.png',
-                payLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=299'
-            }
-        };
-
+        const APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+        
         // DOM Elements
         const form = document.getElementById('subscriptionForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const submitText = document.getElementById('submitText');
-        const submitLoader = document.getElementById('submitLoader');
+        const userDetails = document.getElementById('userDetails');
         const paymentSection = document.getElementById('paymentSection');
-        const amountDisplay = document.getElementById('amountDisplay');
-        const qrCodeImage = document.getElementById('qrCodeImage');
-        const payButton = document.getElementById('payButton');
-        const fileInput = document.getElementById('screenshotFile');
-        const uploadStatus = document.getElementById('uploadStatus');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const fileInput = document.getElementById('paymentScreenshot');
+        const filePreview = document.getElementById('filePreview');
+        const fileName = document.getElementById('fileName');
+        const previewImage = document.getElementById('previewImage');
+        const loading = document.getElementById('loading');
+        const successMessage = document.getElementById('successMessage');
+        const paymentAmount = document.getElementById('paymentAmount');
+        
+        // Step management
+        const steps = {
+            step1: document.getElementById('step1'),
+            step2: document.getElementById('step2'),
+            step3: document.getElementById('step3')
+        };
 
-        // Form validation functions
-        function validateName(name) {
-            return name.trim().length >= 2;
+        // Initialize Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
         }
 
-        function validateEmail(email) {
+        // Click Effect
+        function addClickEffect(element) {
+            element.addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                const size = 60;
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        }
+
+        // Form Validation
+        function validateStep1() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const canvaEmail = document.getElementById('canvaEmail').value.trim();
+            const whatsappNumber = document.getElementById('whatsappNumber').value.trim();
+            const subscriptionPlan = document.getElementById('subscriptionPlan').value;
+
+            if (!fullName || fullName.length < 2) {
+                alert('कृपया वैध नाम दर्ज करें / Please enter valid name');
+                return false;
+            }
+
+            if (!canvaEmail || !isValidEmail(canvaEmail)) {
+                alert('कृपया वैध ईमेल दर्ज करें / Please enter valid email');
+                return false;
+            }
+
+            if (!whatsappNumber || whatsappNumber.length < 10) {
+                alert('कृपया वैध फोन नंबर दर्ज करें / Please enter valid phone number');
+                return false;
+            }
+
+            if (!subscriptionPlan) {
+                alert('कृपया प्लान चुनें / Please select a plan');
+                return false;
+            }
+
+            return true;
+        }
+
+        function isValidEmail(email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
         }
 
-        function validatePhone(phone) {
-            const phoneRegex = /^[\+]?[1-9]?[0-9]{7,15}$/;
-            return phoneRegex.test(phone.replace(/\s/g, ''));
+        // Update Payment Amount
+        function updatePaymentAmount() {
+            const plan = document.getElementById('subscriptionPlan').value;
+            let amount = '₹299';
+            
+            switch(plan) {
+                case 'monthly':
+                    amount = '₹299';
+                    break;
+                case 'quarterly':
+                    amount = '₹799';
+                    break;
+                case 'yearly':
+                    amount = '₹2999';
+                    break;
+            }
+            
+            paymentAmount.textContent = amount;
         }
 
-        function showError(elementId, message) {
-            document.getElementById(elementId).textContent = message;
-            document.getElementById(elementId).style.display = 'block';
-        }
-
-        function clearErrors() {
-            const errorElements = ['nameError', 'emailError', 'phoneError', 'planError'];
-            errorElements.forEach(id => {
-                document.getElementById(id).textContent = '';
-                document.getElementById(id).style.display = 'none';
+        // Step Management
+        function updateSteps(currentStep) {
+            Object.keys(steps).forEach((step, index) => {
+                const stepElement = steps[step];
+                stepElement.classList.remove('active', 'completed');
+                
+                if (index + 1 < currentStep) {
+                    stepElement.classList.add('completed');
+                } else if (index + 1 === currentStep) {
+                    stepElement.classList.add('active');
+                }
             });
         }
 
-        // Plan selection handler
-        document.getElementById('subscriptionPlan').addEventListener('change', function() {
-            const selectedPlan = this.value;
-            if (selectedPlan && planConfig[selectedPlan]) {
-                const config = planConfig[selectedPlan];
-                amountDisplay.textContent = config.amount;
-                qrCodeImage.src = config.qrCode;
-                payButton.href = config.payLink;
+        // Show Next Step
+        nextBtn.addEventListener('click', function() {
+            if (validateStep1()) {
+                updatePaymentAmount();
+                userDetails.style.display = 'none';
+                paymentSection.style.display = 'block';
+                nextBtn.style.display = 'none';
+                updateSteps(2);
             }
         });
 
-        // Form submission
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            clearErrors();
-
-            // Get form data
-            const formData = new FormData(form);
-            const fullName = formData.get('fullName');
-            const canvaEmail = formData.get('canvaEmail');
-            const whatsappNumber = formData.get('whatsappNumber');
-            const subscriptionPlan = formData.get('subscriptionPlan');
-
-            // Validation
-            let isValid = true;
-
-            if (!validateName(fullName)) {
-                showError('nameError', 'कृपया वैध नाम दर्ज करें');
-                isValid = false;
-            }
-
-            if (!validateEmail(canvaEmail)) {
-                showError('emailError', 'कृपया वैध ईमेल दर्ज करें');
-                isValid = false;
-            }
-
-            if (!validatePhone(whatsappNumber)) {
-                showError('phoneError', 'कृपया वैध फोन नंबर दर्ज करें');
-                isValid = false;
-            }
-
-            if (!subscriptionPlan) {
-                showError('planError', 'कृपया एक प्लान चुनें');
-                isValid = false;
-            }
-
-            if (!isValid) return;
-
-            // Show loading
-            submitText.style.display = 'none';
-            submitLoader.style.display = 'inline-block';
-            submitBtn.disabled = true;
-
-            try {
-                // Submit to Google Sheets
-                const response = await fetch(SHEET_URL, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (response.ok) {
-                    // Show payment section
-                    paymentSection.classList.add('show');
-
-                    // Scroll to payment section
-                    paymentSection.scrollIntoView({ behavior: 'smooth' });
-
-                    // Update submit button
-                    submitText.textContent = '✅ Form Submitted Successfully!';
-                    submitText.style.display = 'inline-block';
-                    submitLoader.style.display = 'none';
-                    submitBtn.style.background = 'linear-gradient(45deg, #28a745, #20c997)';
-                } else {
-                    throw new Error('Submission failed');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                submitText.textContent = '❌ Error! Please try again';
-                submitText.style.display = 'inline-block';
-                submitLoader.style.display = 'none';
-                submitBtn.disabled = false;
-                submitBtn.style.background = 'linear-gradient(45deg, #dc3545, #fd7e14)';
-            }
-        });
-
-        // File upload handler
-        fileInput.addEventListener('change', async function(e) {
+        // File Upload Handler
+        fileInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
-            if (!file) return;
+            
+            if (file) {
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('File size should be less than 10MB / फाइल का साइज 10MB से कम होना चाहिए');
+                    return;
+                }
 
-            // Validate file type
-            if (!file.type.startsWith('image/')) {
-                uploadStatus.textContent = '❌ केवल image files अपलोड करें';
-                uploadStatus.className = 'upload-status status-error';
+                fileName.textContent = file.name;
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    filePreview.style.display = 'block';
+                    submitBtn.style.display = 'block';
+                    updateSteps(3);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Form Submission
+        submitBtn.addEventListener('click', async function() {
+            if (!fileInput.files[0]) {
+                alert('कृपया payment screenshot अपलोड करें / Please upload payment screenshot');
                 return;
             }
 
-            // Validate file size (max 5MB)
-            if (file.size > 5 * 1024 * 1024) {
-                uploadStatus.textContent = '❌ File size 5MB से कम होनी चाहिए';
-                uploadStatus.className = 'upload-status status-error';
-                return;
-            }
-
-            // Show uploading status
-            uploadStatus.textContent = '📤 Uploading... कृपया प्रतीक्षा करें';
-            uploadStatus.className = 'upload-status status-uploading';
+            loading.style.display = 'block';
+            submitBtn.style.display = 'none';
 
             try {
-                // Create form data for file upload
+                // First, submit form data
                 const formData = new FormData();
-                formData.append('file', file);
+                formData.append('fullName', document.getElementById('fullName').value);
+                formData.append('canvaEmail', document.getElementById('canvaEmail').value);
+                formData.append('whatsappNumber', document.getElementById('whatsappNumber').value);
+                formData.append('subscriptionPlan', document.getElementById('subscriptionPlan').value);
 
-                // Upload to Google Drive
-                const response = await fetch(DRIVE_URL, {
+                const formResponse = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
                     body: formData
                 });
 
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    uploadStatus.textContent = '✅ Screenshot uploaded successfully! स्क्रीनशॉट अपलोड हो गया';
-                    uploadStatus.className = 'upload-status status-success';
-                } else {
-                    throw new Error(result.error || 'Upload failed');
+                if (!formResponse.ok) {
+                    throw new Error('Form submission failed');
                 }
+
+                // Then, upload file
+                const fileData = new FormData();
+                fileData.append('file', fileInput.files[0]);
+
+                const fileResponse = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    body: fileData
+                });
+
+                if (!fileResponse.ok) {
+                    throw new Error('File upload failed');
+                }
+
+                // Show success message
+                loading.style.display = 'none';
+                paymentSection.style.display = 'none';
+                successMessage.style.display = 'block';
+
+                // Reset form after 5 seconds
+                setTimeout(() => {
+                    location.reload();
+                }, 5000);
+
             } catch (error) {
-                console.error('Upload error:', error);
-                uploadStatus.textContent = '❌ Upload failed! कृपया दोबारा कोशिश करें';
-                uploadStatus.className = 'upload-status status-error';
+                loading.style.display = 'none';
+                submitBtn.style.display = 'block';
+                alert('Error: ' + error.message + '\nकृपया फिर से कोशिश करें / Please try again');
+                console.error('Submission error:', error);
             }
         });
 
-        // Add some interactive effects
-        document.querySelectorAll('.form-input, .form-select').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.parentElement.style.transform = 'translateY(-2px)';
-                this.parentElement.parentElement.style.transition = 'transform 0.3s ease';
-            });
-
-            input.addEventListener('blur', function() {
-                this.parentElement.parentElement.style.transform = 'translateY(0)';
-            });
+        // Plan change handler
+        document.getElementById('subscriptionPlan').addEventListener('change', function() {
+            if (this.value) {
+                nextBtn.style.display = 'block';
+            } else {
+                nextBtn.style.display = 'none';
+            }
         });
 
-        // Add typing effect to placeholder
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            // Add click effects to buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                addClickEffect(button);
+            });
+
+            // Add click effect to main container
+            addClickEffect(document.querySelector('.main'));
+
+            // Initialize typing effect for first input
+            setTimeout(() => {
+                const nameInput = document.getElementById('fullName');
+                typeEffect(nameInput, 'अपना पूरा नाम दर्ज करें');
+            }, 1000);
+        });
+
+        // Typing Effect Function
         function typeEffect(element, text, speed = 100) {
             let i = 0;
             element.placeholder = '';
@@ -656,10 +794,22 @@
             }, speed);
         }
 
-        // Initialize typing effects when page loads
-        window.addEventListener('load', function() {
-            const nameInput = document.getElementById('fullName');
-            setTimeout(() => typeEffect(nameInput, 'अपना पूरा नाम दर्ज करें'), 500);
+        // Enhanced Input Effects
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-5px)';
+                this.parentElement.style.transition = 'transform 0.3s ease';
+            });
+
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Prevent form default submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
         });
     </script>
 </body>
