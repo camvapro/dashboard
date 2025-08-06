@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Canva Pro Monthly Giveaway • Win Free Subscriptions</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Win free Canva Pro subscriptions! Monthly giveaway with 5 winners. Complete 5 simple steps to participate.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Brand Colors */
+      --brand-primary: #6366f1;
+      --brand-secondary: #4f46e5;
+      --brand-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      --brand-light: #a5b4fc;
+      
+      /* Status Colors */
+      --success: #10b981;
+      --success-bg: #ecfdf5;
+      --success-border: #a7f3d0;
+      --danger: #ef4444;
+      --danger-bg: #fef2f2;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --info-bg: #eff6ff;
+      
+      /* Giveaway Colors */
+      --gold: #f59e0b;
+      --gold-light: #fef3c7;
+      --silver: #6b7280;
+      --bronze: #92400e;
+      
+      /* Background */
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --card-bg: #ffffff;
+      
+      /* Text */
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-light: #94a3b8;
+      --text-white: #ffffff;
+      
+      /* Layout */
+      --border-color: #e2e8f0;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+      --shadow-xl: 0 25px 50px rgba(0,0,0,0.15);
+      
+      /* Animation */
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Animated Background */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 40%, #f093fb 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .background::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 2px, transparent 2px),
+                        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 2px, transparent 2px),
+                        radial-gradient(circle at 40% 40%, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 120px 120px, 180px 180px, 90px 90px;
+      animation: floating 25s linear infinite;
+    }
+
+    @keyframes floating {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-100px, -100px) rotate(360deg); }
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .giveaway-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      width: 100%;
+      backdrop-filter: blur(20px);
+      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Header */
+    .giveaway-header {
+      background: var(--brand-gradient);
+      padding: 40px 30px;
+      text-align: center;
+      color: var(--text-white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .giveaway-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    .giveaway-logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      z-index: 1;
+      position: relative;
+    }
+
+    .giveaway-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      z-index: 1;
+      position: relative;
+      background: linear-gradient(45deg, #fff, #f0f9ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .giveaway-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      margin-bottom: 30px;
+      z-index: 1;
+      position: relative;
+    }
+
+    /* Prizes Section */
+    .prizes-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 15px;
+      z-index: 1;
+      position: relative;
+    }
+
+    .prize-card {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: transform var(--transition);
+    }
+
+    .prize-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .prize-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .prize-count {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .prize-text {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    /* Steps Container */
+    .steps-container {
+      padding: 40px 30px;
+    }
+
+    .steps-progress {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .steps-progress::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--bg-secondary);
+      z-index: 0;
+    }
+
+    .progress-fill {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      height: 3px;
+      background: var(--brand-gradient);
+      transition: width 0.5s ease;
+      z-index: 1;
+    }
+
+    .step-indicator {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 3px solid var(--bg-secondary);
+      z-index: 2;
+      position: relative;
+      transition: all var(--transition);
+    }
+
+    .step-indicator.active {
+      background: var(--brand-primary);
+      color: white;
+      border-color: var(--brand-primary);
+      animation: pulse 2s infinite;
+    }
+
+    .step-indicator.completed {
+      background: var(--success);
+      border-color: var(--success);
+      color: white;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Step Content */
+    .step-content {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .step-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .step-number {
+      color: var(--brand-primary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .step-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .step-description {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-family: inherit;
+      background: #f8fafc;
+      transition: all var(--transition);
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--brand-primary);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Action Buttons */
+    .action-btn {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      background: var(--brand-gradient);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition);
+      margin-bottom: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(99, 102, 241, 0.3);
+    }
+
+    .action-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .action-btn:hover::before {
+      left: 100%;
+    }
+
+    .action-btn.youtube {
+      background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    }
+
+    .action-btn.instagram {
+      background: linear-gradient(135deg, #405de6 0%, #5851db 25%, #833ab4 50%, #c13584 75%, #e1306c 100%);
+    }
+
+    .action-btn.whatsapp {
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    }
+
+    .action-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .next-btn {
+      background: var(--brand-gradient);
+      color: white;
+      border: none;
+      padding: 16px 30px;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: none;
+      margin: 20px auto 0;
+    }
+
+    .next-btn.visible {
+      display: block;
+    }
+
+    .next-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+    }
+
+    /* Success Section */
+    .success-section {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .success-section.active {
+      display: block;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px;
+      animation: successPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes successPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); }
+    }
+
+    .participation-code {
+      background: var(--gold-light);
+      border: 2px dashed var(--gold);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin: 30px 0;
+    }
+
+    .code-label {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .code-value {
+      font-family: 'Courier New', Monaco, monospace;
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--gold);
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background: var(--gold);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .copy-btn:hover {
+      background: #d97706;
+      transform: translateY(-2px);
+    }
+
+    /* Alert Messages */
+    .alert {
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      margin: 20px 0;
+      font-weight: 500;
+      border: 1px solid;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .alert-error {
+      background: var(--danger-bg);
+      color: #991b1b;
+      border-color: #fecaca;
+    }
+
+    .alert-info {
+      background: var(--info-bg);
+      color: #1e40af;
+      border-color: #bfdbfe;
+    }
+
+    /* Loading Spinner */
+    .loading-spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+      display: none;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Footer */
+    .giveaway-footer {
+      background: #f8fafc;
+      padding: 30px;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+
+      .giveaway-header {
+        padding: 30px 20px;
+      }
+
+      .giveaway-title {
+        font-size: 2rem;
+      }
+
+      .prizes-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .steps-container {
+        padding: 30px 20px;
+      }
+
+      .step-title {
+        font-size: 1.5rem;
+      }
+
+      .code-value {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .giveaway-title {
+        font-size: 1.8rem;
+      }
+
+      .step-title {
+        font-size: 1.3rem;
+      }
+
+      .steps-progress {
+        margin-bottom: 30px;
+      }
+
+      .step-indicator {
+        width: 35px;
+        height: 35px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+  
+  <div class="container">
+    <div class="giveaway-card">
+      <!-- Header -->
+      <div class="giveaway-header">
+        <div class="giveaway-logo">🎁 Canva Pro</div>
+        <h1 class="giveaway-title">Monthly Giveaway</h1>
+        <p class="giveaway-subtitle">Win Free Canva Pro Subscriptions Every Month!</p>
+        
+        <!-- Prizes -->
+        <div class="prizes-grid">
+          <div class="prize-card">
+            <span class="prize-icon">🥇</span>
+            <div class="prize-count">3</div>
+            <div class="prize-text">Winners<br>1 Month Free</div>
+          </div>
+          <div class="prize-card">
+            <span class="prize-icon">🥈</span>
+            <div class="prize-count">2</div>
+            <div class="prize-text">Winners<br>3 Months Free</div>
+          </div>
+          <div class="prize-card">
+            <span class="prize-icon">🎯</span>
+            <div class="prize-count">5</div>
+            <div class="prize-text">Total<br>Winners</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Steps Container -->
+      <div class="steps-container">
+        <!-- Progress Indicator -->
+        <div class="steps-progress">
+          <div class="progress-fill" id="progressFill"></div>
+          <div class="step-indicator active" data-step="1">1</div>
+          <div class="step-indicator" data-step="2">2</div>
+          <div class="step-indicator" data-step="3">3</div>
+          <div class="step-indicator" data-step="4">4</div>
+          <div class="step-indicator" data-step="5">5</div>
+        </div>
+
+        <!-- Step 1: Basic Details -->
+        <div class="step-content active" id="step1">
+          <div class="step-header">
+            <div class="step-number">Step 1 of 5</div>
+            <h2 class="step-title">Basic Details</h2>
+            <p class="step-description">Enter your details to get started with the giveaway participation</p>
+          </div>
+          
+          <form id="detailsForm">
+            <div class="form-group">
+              <label class="form-label" for="fullName">Full Name *</label>
+              <input class="form-input" type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address *</label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="your.email@example.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="whatsapp">WhatsApp Number *</label>
+              <input class="form-input" type="tel" id="whatsapp" name="whatsapp" placeholder="9876543210" required>
+            </div>
+            <button type="button" class="next-btn visible" onclick="validateStep1()">Next Step →</button>
+          </form>
+          <div id="step1Alert"></div>
+        </div>
+
+        <!-- Step 2: YouTube Video -->
+        <div class="step-content" id="step2">
+          <div class="step-header">
+            <div class="step-number">Step 2 of 5</div>
+            <h2 class="step-title">Watch & Like YouTube Video</h2>
+            <p class="step-description">Watch our latest video and leave a sweet comment with a like ❤️</p>
+          </div>
+          
+          <a href="https://youtube.com/@YourChannel" class="action-btn youtube" id="youtubeBtn" target="_blank">
+            ▶️ Watch Video & Leave Comment
+          </a>
+          <button type="button" class="next-btn" id="step2Next" onclick="nextStep(3)">Next Step →</button>
+        </div>
+
+        <!-- Step 3: Instagram Follow -->
+        <div class="step-content" id="step3">
+          <div class="step-header">
+            <div class="step-number">Step 3 of 5</div>
+            <h2 class="step-title">Follow on Instagram</h2>
+            <p class="step-description">Follow our Instagram account to stay updated with latest content</p>
+          </div>
+          
+          <a href="https://instagram.com/YourInstagram" class="action-btn instagram" id="instagramBtn" target="_blank">
+            📱 Follow on Instagram
+          </a>
+          <button type="button" class="next-btn" id="step3Next" onclick="nextStep(4)">Next Step →</button>
+        </div>
+
+        <!-- Step 4: Instagram Post Comment -->
+        <div class="step-content" id="step4">
+          <div class="step-header">
+            <div class="step-number">Step 4 of 5</div>
+            <h2 class="step-title">Comment on Instagram Post</h2>
+            <p class="step-description">Visit our latest post and leave a beautiful comment to show your support 💝</p>
+          </div>
+          
+          <a href="https://instagram.com/p/YourPostID" class="action-btn instagram" id="postBtn" target="_blank">
+            💬 Comment on Post
+          </a>
+          <button type="button" class="next-btn" id="step4Next" onclick="nextStep(5)">Next Step →</button>
+        </div>
+
+        <!-- Step 5: Share with Friends -->
+        <div class="step-content" id="step5">
+          <div class="step-header">
+            <div class="step-number">Step 5 of 5</div>
+            <h2 class="step-title">Share with 5 Friends</h2>
+            <p class="step-description">Share this amazing giveaway opportunity with 5 friends on WhatsApp</p>
+          </div>
+          
+          <button class="action-btn whatsapp" id="shareBtn" onclick="shareGiveaway()">
+            📢 Share on WhatsApp
+          </button>
+          <button type="button" class="next-btn" id="step5Next" onclick="submitParticipation()">Submit Participation 🎉</button>
+        </div>
+
+        <!-- Success Section -->
+        <div class="success-section" id="successSection">
+          <div class="success-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+          </div>
+          
+          <h2 class="step-title" style="color: var(--success);">🎉 Participation Complete!</h2>
+          <p class="step-description" style="margin-bottom: 20px;">
+            Congratulations! You have successfully completed all steps and are now eligible for the monthly giveaway.
+          </p>
+
+          <div class="participation-code">
+            <div class="code-label">Your Participation Code</div>
+            <div class="code-value" id="participationCode">LOADING...</div>
+            <button class="copy-btn" id="copyCodeBtn" onclick="copyCode()">Copy Code</button>
+          </div>
+
+          <div style="margin-top: 30px; padding: 20px; background: var(--info-bg); border-radius: var(--radius-md); color: #1e40af;">
+            <h3 style="margin-bottom: 15px; color: #1e40af;">📧 What's Next?</h3>
+            <ul style="text-align: left; line-height: 1.8;">
+              <li>Your participation details have been sent to your email</li>
+              <li>Winners will be announced on the last day of each month</li>
+              <li>Keep this code safe - you'll need it if you win!</li>
+              <li>Follow our social media for winner announcements</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="alertContainer"></div>
+        <div class="loading-spinner" id="loadingSpinner"></div>
+      </div>
+
+      <!-- Footer -->
+      <div class="giveaway-footer">
+        <p><strong>🎯 Giveaway Rules:</strong> One participation per person per month. Winners selected randomly. Must complete all 5 steps to be eligible.</p>
+        <p style="margin-top: 10px;">© 2025 Canva Pro Monthly Giveaway • Good luck to all participants! 🍀</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Configuration
+    const API_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
+    const YOUTUBE_URL = 'https://youtube.com/@YourChannel';  // Replace with your channel
+    const INSTAGRAM_PROFILE = 'https://instagram.com/YourInstagram';  // Replace with your Instagram
+    const INSTAGRAM_POST = 'https://instagram.com/p/YourPostID';  // Replace with your post
+
+    // State Management
+    let currentStep = 1;
+    let participantData = {};
+    let stepCompleted = {
+      1: false, 2: false, 3: false, 4: false, 5: false
+    };
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load saved data if exists
+      loadSavedData();
+      updateProgress();
+      
+      // Set up external link handlers
+      setupExternalLinks();
+    });
+
+    // Utility Functions
+    function showAlert(message, type = 'info') {
+      const alertContainer = document.getElementById('alertContainer');
+      const alertDiv = document.createElement('div');
+      alertDiv.className = `alert alert-${type}`;
+      alertDiv.innerHTML = message;
+      
+      alertContainer.innerHTML = '';
+      alertContainer.appendChild(alertDiv);
+      
+      setTimeout(() => alertDiv.scrollIntoView({ behavior: 'smooth' }), 100);
+    }
+
+    function showLoading(show) {
+      document.getElementById('loadingSpinner').style.display = show ? 'block' : 'none';
+    }
+
+    function saveData(key, value) {
+      sessionStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function loadSavedData() {
+      const saved = sessionStorage.getItem('giveawayProgress');
+      if (saved) {
+        const data = JSON.parse(saved);
+        currentStep = data.currentStep || 1;
+        stepCompleted = data.stepCompleted || { 1: false, 2: false, 3: false, 4: false, 5: false };
+        participantData = data.participantData || {};
+        
+        // Restore form data
+        if (participantData.fullName) document.getElementById('fullName').value = participantData.fullName;
+        if (participantData.email) document.getElementById('email').value = participantData.email;
+        if (participantData.whatsapp) document.getElementById('whatsapp').value = participantData.whatsapp;
+        
+        showStep(currentStep);
+      }
+    }
+
+    function saveProgress() {
+      saveData('giveawayProgress', {
+        currentStep,
+        stepCompleted,
+        participantData
+      });
+    }
+
+    // Step Navigation
+    function showStep(step) {
+      // Hide all steps
+      document.querySelectorAll('.step-content').forEach(el => {
+        el.classList.remove('active');
+      });
+      
+      // Show current step
+      if (step <= 5) {
+        document.getElementById(`step${step}`).classList.add('active');
+      } else {
+        document.getElementById('successSection').classList.add('active');
+      }
+      
+      currentStep = step;
+      updateProgress();
+      saveProgress();
+    }
+
+    function nextStep(step) {
+      if (step <= 5) {
+        showStep(step);
+      }
+    }
+
+    function updateProgress() {
+      // Update step indicators
+      document.querySelectorAll('.step-indicator').forEach((el, index) => {
+        const stepNum = index + 1;
+        el.classList.remove('active', 'completed');
+        
+        if (stepNum < currentStep || stepCompleted[stepNum]) {
+          el.classList.add('completed');
+        } else if (stepNum === currentStep) {
+          el.classList.add('active');
+        }
+      });
+
+      // Update progress bar
+      const completedSteps = Object.values(stepCompleted).filter(Boolean).length;
+      const progressWidth = (completedSteps / 5) * 100;
+      document.getElementById('progressFill').style.width = progressWidth + '%';
+
+      // Update next button visibility
+      updateNextButtons();
+    }
+
+    function updateNextButtons() {
+      // Show/hide next buttons based on step completion
+      for (let i = 2; i <= 5; i++) {
+        const nextBtn = document.getElementById(`step${i}Next`);
+        if (nextBtn) {
+          nextBtn.classList.toggle('visible', stepCompleted[i]);
+        }
+      }
+    }
+
+    // Step 1: Validate Details
+    function validateStep1() {
+      const name = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const whatsapp = document.getElementById('whatsapp').value.trim();
+
+      // Validation
+      if (name.length < 2) {
+        showAlert('Please enter your full name (minimum 2 characters)', 'error');
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showAlert('Please enter a valid email address', 'error');
+        return;
+      }
+
+      if (!/^[0-9]{10,14}$/.test(whatsapp)) {
+        showAlert('Please enter a valid WhatsApp number (10-14 digits)', 'error');
+        return;
+      }
+
+      // Save data
+      participantData = { fullName: name, email, whatsapp };
+      stepCompleted[1] = true;
+      
+      showAlert('Details validated successfully! Moving to next step...', 'info');
+      setTimeout(() => nextStep(2), 1500);
+    }
+
+    // External Link Handlers
+    function setupExternalLinks() {
+      // YouTube link handler
+      document.getElementById('youtubeBtn').addEventListener('click', function() {
+        setTimeout(() => {
+          stepCompleted[2] = true;
+          updateProgress();
+          showAlert('Great! Come back after watching and commenting to continue.', 'info');
+        }, 1000);
+      });
+
+      // Instagram follow handler
+      document.getElementById('instagramBtn').addEventListener('click', function() {
+        setTimeout(() => {
+          stepCompleted[3] = true;
+          updateProgress();
+          showAlert('Awesome! Come back after following to continue.', 'info');
+        }, 1000);
+      });
+
+      // Instagram post handler
+      document.getElementById('postBtn').addEventListener('click', function() {
+        setTimeout(() => {
+          stepCompleted[4] = true;
+          updateProgress();
+          showAlert('Perfect! Come back after commenting to continue.', 'info');
+        }, 1000);
+      });
+    }
+
+    // Step 5: Share with Friends
+    function shareGiveaway() {
+      const shareText = `🎁 Amazing Canva Pro Monthly Giveaway! 🎁
+
+Win FREE Canva Pro subscriptions:
+🥇 3 winners get 1 month FREE
+🥈 2 winners get 3 months FREE
+
+Join now and complete 5 simple steps:
+${window.location.href}
+
+Hurry! Limited time offer! #CanvaProGiveaway #FreeDesignTools`;
+
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+      
+      // Open WhatsApp
+      window.open(whatsappUrl, '_blank');
+      
+      // Mark step as completed after a delay
+      setTimeout(() => {
+        stepCompleted[5] = true;
+        updateProgress();
+        showAlert('Perfect! Now you can submit your participation.', 'info');
+      }, 2000);
+    }
+
+    // Submit Participation
+    async function submitParticipation() {
+      // Check if all steps completed
+      const allCompleted = Object.values(stepCompleted).every(Boolean);
+      if (!allCompleted) {
+        showAlert('Please complete all 5 steps before submitting.', 'error');
+        return;
+      }
+
+      showLoading(true);
+
+      try {
+        // Check for duplicate participation
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          body: new URLSearchParams({
+            action: 'submit_participation',
+            fullName: participantData.fullName,
+            email: participantData.email,
+            whatsapp: participantData.whatsapp
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+          // Show participation code
+          document.getElementById('participationCode').textContent = result.data.participationCode;
+          
+          // Clear saved progress
+          sessionStorage.removeItem('giveawayProgress');
+          
+          // Show success section
+          showStep(6);
+          
+          showAlert('🎉 Participation submitted successfully! Check your email for confirmation.', 'info');
+        } else {
+          showAlert(result.message || 'Error submitting participation. Please try again.', 'error');
+        }
+
+      } catch (error) {
+        console.error('Submission error:', error);
+        showAlert('Network error. Please check your connection and try again.', 'error');
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    // Copy participation code
+    function copyCode() {
+      const codeElement = document.getElementById('participationCode');
+      const code = codeElement.textContent;
+      
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(code).then(() => {
+          const btn = document.getElementById('copyCodeBtn');
+          const originalText = btn.textContent;
+          btn.textContent = 'Copied! ✓';
+          btn.style.background = 'var(--success)';
+          
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = 'var(--gold)';
+          }, 2000);
+        });
+      } else {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = code;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        showAlert('Code copied to clipboard!', 'info');
+      }
+    }
+
+    // Auto-save form data
+    ['fullName', 'email', 'whatsapp'].forEach(id => {
+      document.getElementById(id).addEventListener('input', function(e) {
+        participantData[e.target.name] = e.target.value;
+        saveProgress();
+      });
+    });
+
+    // Phone number formatting
+    document.getElementById('whatsapp').addEventListener('input', function(e) {
+      e.target.value = e.target.value.replace(/\D/g, '');
+    });
+  </script>
+</body>
+</html>
