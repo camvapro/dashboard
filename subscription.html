@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Subscription Form - सब्स्क्रिप्शन फॉर्म</title>
+    <title>Fixed Subscription Form - File Upload Working</title>
 
     <style>
         /* Global Styles */
@@ -124,21 +124,6 @@
             animation: slideInUp 0.8s ease-out;
         }
 
-        .form-group:nth-child(even) {
-            animation-delay: 0.2s;
-        }
-
-        @keyframes slideInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         label {
             display: block;
             margin-bottom: 8px;
@@ -197,34 +182,17 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .btn:before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.5s ease;
-        }
-
-        .btn:hover:before {
-            width: 300px;
-            height: 300px;
-        }
-
         .btn-next {
             background: linear-gradient(45deg, #28a745, #20c997);
             color: #fff;
             display: none;
         }
 
-        .btn-next:hover {
-            background: linear-gradient(45deg, #218838, #1ba085);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        .btn-pay {
+            background: linear-gradient(45deg, #ffc107, #ff8f00);
+            color: #fff;
+            margin-top: 20px;
+            display: none;
         }
 
         .btn-submit {
@@ -233,10 +201,8 @@
             display: none;
         }
 
-        .btn-submit:hover {
-            background: linear-gradient(45deg, #0056b3, #004085);
+        .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
         }
 
         /* Payment Section */
@@ -284,6 +250,7 @@
             margin: 0 auto;
             display: block;
             border-radius: 10px;
+            border: 3px solid #007bff;
         }
 
         .payment-info {
@@ -293,10 +260,34 @@
             margin-top: 15px;
         }
 
-        /* File Upload Styles */
+        .payment-details {
+            background: rgba(0, 123, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #007bff;
+        }
+
+        /* Enhanced File Upload */
         .file-upload-container {
             position: relative;
             margin: 20px 0;
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-container:hover {
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .file-upload-container.dragover {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
         }
 
         .file-input {
@@ -305,22 +296,10 @@
 
         .file-label {
             display: block;
-            width: 100%;
-            padding: 15px 20px;
-            border: 2px dashed rgba(255, 255, 255, 0.5);
-            border-radius: 15px;
-            text-align: center;
-            color: #fff;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
             font-weight: 600;
-        }
-
-        .file-label:hover {
-            border-color: rgba(255, 255, 255, 0.8);
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+            font-size: 1.1em;
         }
 
         .file-preview {
@@ -329,82 +308,6 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             display: none;
-        }
-
-        /* Success Message */
-        .success-message {
-            display: none;
-            text-align: center;
-            padding: 20px;
-            background: rgba(40, 167, 69, 0.9);
-            border-radius: 15px;
-            color: #fff;
-            font-weight: 600;
-            margin-top: 20px;
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: none;
-            text-align: center;
-            color: #fff;
-            margin: 20px 0;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Click Effect */
-        .click-effect {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(0);
-            animation: rippleAnimation 0.6s linear;
-        }
-
-        @keyframes rippleAnimation {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .main {
-                padding: 25px;
-                margin: 15px;
-            }
-            
-            h1 {
-                font-size: 2em;
-            }
-            
-            .btn {
-                font-size: 1.1em;
-            }
-            
-            .qr-code {
-                width: 150px;
-                height: 150px;
-            }
         }
 
         /* Step Indicator */
@@ -436,13 +339,74 @@
         .step.completed {
             background: rgba(40, 167, 69, 0.9);
         }
+
+        /* Loading and Messages */
+        .loading {
+            display: none;
+            text-align: center;
+            color: #fff;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: rgba(40, 167, 69, 0.9);
+            border-radius: 15px;
+            color: #fff;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .error-message {
+            display: none;
+            text-align: center;
+            padding: 15px;
+            background: rgba(220, 53, 69, 0.9);
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main {
+                padding: 25px;
+                margin: 15px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .qr-code {
+                width: 150px;
+                height: 150px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Particle Background -->
     <div class="particles" id="particles"></div>
 
-    <div class="main click-effect">
+    <div class="main">
         <!-- Step Indicator -->
         <div class="step-indicator">
             <div class="step active" id="step1">1</div>
@@ -451,7 +415,10 @@
         </div>
 
         <h1>🎯 Start Subscription</h1>
-        <p class="subtitle">अपनी सब्स्क्रिप्शन शुरू करें और premium features का आनंद लें</p>
+        <p class="subtitle">अपनी सब्स्क्रिप्शन शुरू करें</p>
+
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage"></div>
 
         <!-- Main Form -->
         <form id="subscriptionForm">
@@ -459,54 +426,66 @@
             <div id="userDetails">
                 <div class="form-group">
                     <label for="fullName">👤 Full Name / पूरा नाम</label>
-                    <input type="text" id="fullName" name="fullName" required>
+                    <input type="text" id="fullName" name="fullName" placeholder="अपना पूरा नाम दर्ज करें" required>
                 </div>
 
                 <div class="form-group">
                     <label for="canvaEmail">📧 Canva Email / कैनवा ईमेल</label>
-                    <input type="email" id="canvaEmail" name="canvaEmail" required>
+                    <input type="email" id="canvaEmail" name="canvaEmail" placeholder="आपकी Canva Email ID" required>
                 </div>
 
                 <div class="form-group">
                     <label for="whatsappNumber">📱 WhatsApp Number</label>
-                    <input type="tel" id="whatsappNumber" name="whatsappNumber" required>
+                    <input type="tel" id="whatsappNumber" name="whatsappNumber" placeholder="91XXXXXXXXXX" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="subscriptionPlan">💳 Select Plan / प्लान चुनें</label>
+                    <label for="subscriptionPlan">💳 Select Plan</label>
                     <select id="subscriptionPlan" name="subscriptionPlan" required>
                         <option value="">Select Plan / प्लान चुनें</option>
                         <option value="monthly">Monthly Plan - ₹49/month</option>
                         <option value="quarterly">Quarterly Plan - ₹99/3months</option>
-                        <option value="yearly">Yearly Plan - ₹299/year</option>
+                        <option value="annual">Annual Plan - ₹299/year</option>
                     </select>
                 </div>
 
-                <button type="button" class="btn btn-next" id="nextBtn">Next / अगला ➡️</button>
+                <button type="button" class="btn btn-next" id="nextBtn">Next</button>
             </div>
 
             <!-- Step 2: Payment Section -->
             <div class="payment-section" id="paymentSection">
-                <h2 class="payment-title">💳 Payment / भुगतान करें</h2>
-                <p style="color: #fff; text-align: center; margin-bottom: 20px;">स्कैन करें और भुगतान करें</p>
+                <h2 class="payment-title">💳 Payment</h2>
+                <p style="color: #fff; text-align: center; margin-bottom: 20px;">
+                    Scan करें और <span id="selectedPlanText">Monthly Plan - ₹49</span> का भुगतान करें
+                </p>
 
                 <div class="qr-container">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23fff'/%3E%3Ctext x='100' y='100' text-anchor='middle' dy='.3em' font-size='16' fill='%23333'%3EQR Code Here%3C/text%3E%3C/svg%3E" 
-                         alt="QR Code" class="qr-code" id="qrCode">
+                    <img src="" alt="QR Code for Payment" class="qr-code" id="qrCode">
                     <div class="payment-info">
-                        <p><strong>UPI ID:</strong> canvapro@upi</p>
-                        <p><strong>Amount:</strong> <span id="paymentAmount">₹299</span></p>
+                        <div class="payment-details">
+                            <p><strong>📱 UPI ID:</strong>canvapro@upi</p>
+                            <p><strong>👤 Name:</strong> JITENDRA KUMAR</p>
+                            <p><strong>💰 Amount:</strong> <span id="paymentAmount">₹49</span></p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- File Upload -->
-                <div class="file-upload-container">
+                <!-- Pay Now Button -->
+                <button type="button" class="btn btn-pay" id="payNowBtn">💳 Pay Now</button>
+
+                <!-- Enhanced File Upload -->
+                <div class="file-upload-container" id="fileUploadContainer">
                     <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" class="file-input">
                     <label for="paymentScreenshot" class="file-label">
-                        📸 Upload Payment Screenshot / भुगतान स्क्रीनशॉट अपलोड करें
+                        <div style="font-size: 2em; margin-bottom: 10px;">📸</div>
+                        <div>Upload Payment Screenshot</div>
+                        <div>भुगतान स्क्रीनशॉट अपलोड करें</div>
+                        <div style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">
+                            Click here or drag & drop your screenshot
+                        </div>
                     </label>
                     <div class="file-preview" id="filePreview">
-                        <p>Selected file: <span id="fileName"></span></p>
+                        <p style="color: #fff;">Selected file: <span id="fileName"></span></p>
                         <img id="previewImage" style="max-width: 100%; height: auto; border-radius: 10px; margin-top: 10px;">
                     </div>
                 </div>
@@ -518,14 +497,14 @@
         <!-- Loading -->
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p>Processing... / प्रक्रिया चल रही है...</p>
+            <p>Uploading screenshot... / स्क्रीनशॉट अपलोड हो रहा है...</p>
         </div>
 
         <!-- Success Message -->
         <div class="success-message" id="successMessage">
             <h3>🎉 Success! / सफलता!</h3>
-            <p>Your subscription has been submitted successfully!</p>
-            <p>आपकी सब्स्क्रिप्शन सफलतापूर्वक जमा हो गई है!</p>
+            <p>Your subscription and screenshot have been submitted successfully!</p>
+            <p>आपकी सब्स्क्रिप्शन और स्क्रीनशॉट सफलतापूर्वक जमा हो गई है!</p>
         </div>
     </div>
 
@@ -533,19 +512,49 @@
         // Configuration
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwv4BfKDkXEUBJN46GFSMeL5eFbIdzfa8-ofbe9qEgGt3HFfJQmU50FvL4mLopQw_ltew/exec';
         
+        // Plan Configuration
+        const planConfig = {
+            monthly: {
+                amount: '49',
+                displayAmount: '₹49',
+                displayText: 'Monthly Plan - ₹49',
+                qrCode: 'icon/monthly49.png',
+                upiLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=49'
+            },
+            quarterly: {
+                amount: '99',
+                displayAmount: '₹99',
+                displayText: 'Quarterly Plan - ₹99',
+                qrCode: 'icon/quarterly99.png',
+                upiLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=99'
+            },
+            annual: {
+                amount: '299',
+                displayAmount: '₹299',
+                displayText: 'Annual Plan - ₹299',
+                qrCode: 'icon/annual299.png',
+                upiLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=299'
+            }
+        };
+        
         // DOM Elements
         const form = document.getElementById('subscriptionForm');
         const userDetails = document.getElementById('userDetails');
         const paymentSection = document.getElementById('paymentSection');
         const nextBtn = document.getElementById('nextBtn');
+        const payNowBtn = document.getElementById('payNowBtn');
         const submitBtn = document.getElementById('submitBtn');
         const fileInput = document.getElementById('paymentScreenshot');
+        const fileUploadContainer = document.getElementById('fileUploadContainer');
         const filePreview = document.getElementById('filePreview');
         const fileName = document.getElementById('fileName');
         const previewImage = document.getElementById('previewImage');
         const loading = document.getElementById('loading');
         const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
         const paymentAmount = document.getElementById('paymentAmount');
+        const selectedPlanText = document.getElementById('selectedPlanText');
+        const qrCode = document.getElementById('qrCode');
         
         // Step management
         const steps = {
@@ -553,6 +562,9 @@
             step2: document.getElementById('step2'),
             step3: document.getElementById('step3')
         };
+
+        // Global variables for form data
+        let currentFormData = null;
 
         // Initialize Particles
         function createParticles() {
@@ -568,26 +580,13 @@
             }
         }
 
-        // Click Effect
-        function addClickEffect(element) {
-            element.addEventListener('click', function(e) {
-                const rect = this.getBoundingClientRect();
-                const ripple = document.createElement('span');
-                const size = 60;
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-                ripple.classList.add('ripple');
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
+        // Error handling
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
         }
 
         // Form Validation
@@ -598,22 +597,22 @@
             const subscriptionPlan = document.getElementById('subscriptionPlan').value;
 
             if (!fullName || fullName.length < 2) {
-                alert('कृपया वैध नाम दर्ज करें / Please enter valid name');
+                showError('कृपया वैध नाम दर्ज करें / Please enter valid name');
                 return false;
             }
 
             if (!canvaEmail || !isValidEmail(canvaEmail)) {
-                alert('कृपया वैध ईमेल दर्ज करें / Please enter valid email');
+                showError('कृपया वैध ईमेल दर्ज करें / Please enter valid email');
                 return false;
             }
 
             if (!whatsappNumber || whatsappNumber.length < 10) {
-                alert('कृपया वैध फोन नंबर दर्ज करें / Please enter valid phone number');
+                showError('कृपया वैध फोन नंबर दर्ज करें / Please enter valid phone number');
                 return false;
             }
 
             if (!subscriptionPlan) {
-                alert('कृपया प्लान चुनें / Please select a plan');
+                showError('कृपया प्लान चुनें / Please select a plan');
                 return false;
             }
 
@@ -625,24 +624,24 @@
             return emailRegex.test(email);
         }
 
-        // Update Payment Amount
-        function updatePaymentAmount() {
-            const plan = document.getElementById('subscriptionPlan').value;
-            let amount = '₹299';
+        // Update Payment Details
+        function updatePaymentDetails() {
+            const selectedPlan = document.getElementById('subscriptionPlan').value;
             
-            switch(plan) {
-                case 'monthly':
-                    amount = '₹49';
-                    break;
-                case 'quarterly':
-                    amount = '₹99';
-                    break;
-                case 'yearly':
-                    amount = '₹299';
-                    break;
+            if (selectedPlan && planConfig[selectedPlan]) {
+                const config = planConfig[selectedPlan];
+                
+                paymentAmount.textContent = config.displayAmount;
+                selectedPlanText.textContent = config.displayText;
+                
+                qrCode.src = config.qrCode;
+                qrCode.onerror = function() {
+                    this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="%23007bff"/%3E%3Ctext x="100" y="90" text-anchor="middle" dy=".3em" font-size="14" fill="%23fff"%3EQR Code for%3C/text%3E%3Ctext x="100" y="110" text-anchor="middle" dy=".3em" font-size="16" fill="%23fff"%3E' + config.displayText + '%3C/text%3E%3C/svg%3E';
+                };
+                
+                payNowBtn.setAttribute('data-upi-link', config.upiLink);
+                payNowBtn.style.display = 'block';
             }
-            
-            paymentAmount.textContent = amount;
         }
 
         // Step Management
@@ -662,7 +661,7 @@
         // Show Next Step
         nextBtn.addEventListener('click', function() {
             if (validateStep1()) {
-                updatePaymentAmount();
+                updatePaymentDetails();
                 userDetails.style.display = 'none';
                 paymentSection.style.display = 'block';
                 nextBtn.style.display = 'none';
@@ -670,68 +669,161 @@
             }
         });
 
-        // File Upload Handler
-        fileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            
-            if (file) {
-                if (file.size > 10 * 1024 * 1024) {
-                    alert('File size should be less than 10MB / फाइल का साइज 10MB से कम होना चाहिए');
-                    return;
-                }
-
-                fileName.textContent = file.name;
-                
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImage.src = e.target.result;
-                    filePreview.style.display = 'block';
-                    submitBtn.style.display = 'block';
-                    updateSteps(3);
-                };
-                reader.readAsDataURL(file);
+        // Pay Now Button
+        payNowBtn.addEventListener('click', function() {
+            const upiLink = this.getAttribute('data-upi-link');
+            if (upiLink) {
+                window.location.href = upiLink;
+                setTimeout(() => {
+                    showError('अगर UPI app नहीं खुला तो manually payment करके screenshot upload करें\nIf UPI app didn\'t open, please make payment manually and upload screenshot');
+                }, 1000);
             }
         });
 
-        // Form Submission
+        // Plan change handler
+        document.getElementById('subscriptionPlan').addEventListener('change', function() {
+            if (this.value) {
+                nextBtn.style.display = 'block';
+            } else {
+                nextBtn.style.display = 'none';
+            }
+        });
+
+        // Enhanced File Upload with Drag & Drop
+        fileUploadContainer.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+
+        fileUploadContainer.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+        });
+
+        fileUploadContainer.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                handleFileSelect(files[0]);
+            }
+        });
+
+        // File Upload Handler
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleFileSelect(file);
+            }
+        });
+
+        function handleFileSelect(file) {
+            if (file.size > 10 * 1024 * 1024) {
+                showError('File size should be less than 10MB / फाइल का साइज 10MB से कम होना चाहिए');
+                return;
+            }
+
+            if (!file.type.startsWith('image/')) {
+                showError('Please select an image file / कृपया image file select करें');
+                return;
+            }
+
+            fileName.textContent = file.name;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                filePreview.style.display = 'block';
+                submitBtn.style.display = 'block';
+                updateSteps(3);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Enhanced Form Submission with Fixed File Upload
         submitBtn.addEventListener('click', async function() {
             if (!fileInput.files[0]) {
-                alert('कृपया payment screenshot अपलोड करें / Please upload payment screenshot');
+                showError('कृपया payment screenshot अपलोड करें / Please upload payment screenshot');
                 return;
             }
 
             loading.style.display = 'block';
             submitBtn.style.display = 'none';
+            errorMessage.style.display = 'none';
 
             try {
-                // First, submit form data
+                // Step 1: Submit form data first
+                console.log('Submitting form data...');
                 const formData = new FormData();
                 formData.append('fullName', document.getElementById('fullName').value);
                 formData.append('canvaEmail', document.getElementById('canvaEmail').value);
                 formData.append('whatsappNumber', document.getElementById('whatsappNumber').value);
                 formData.append('subscriptionPlan', document.getElementById('subscriptionPlan').value);
+                formData.append('paymentAmount', planConfig[document.getElementById('subscriptionPlan').value].displayAmount);
 
                 const formResponse = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
-                    body: formData
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json',
+                    }
                 });
 
                 if (!formResponse.ok) {
-                    throw new Error('Form submission failed');
+                    throw new Error(`Form submission failed: ${formResponse.status} ${formResponse.statusText}`);
                 }
 
-                // Then, upload file
+                const formResult = await formResponse.json();
+                console.log('Form submission result:', formResult);
+
+                // Step 2: Upload file with enhanced method
+                console.log('Uploading file...');
+                
+                // Method 1: Try FormData with additional context
                 const fileData = new FormData();
                 fileData.append('file', fileInput.files[0]);
+                fileData.append('customerName', document.getElementById('fullName').value);
+                fileData.append('plan', document.getElementById('subscriptionPlan').value);
+                fileData.append('uploadType', 'paymentScreenshot');
 
-                const fileResponse = await fetch(APPS_SCRIPT_URL, {
+                let fileResponse = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
-                    body: fileData
+                    body: fileData,
+                    headers: {
+                        'Accept': 'application/json',
+                    }
                 });
 
+                // If first method fails, try alternative method
                 if (!fileResponse.ok) {
-                    throw new Error('File upload failed');
+                    console.log('First upload method failed, trying alternative...');
+                    
+                    // Method 2: Send as base64
+                    const base64Data = await fileToBase64(fileInput.files[0]);
+                    const altData = new FormData();
+                    altData.append('fileBase64', base64Data);
+                    altData.append('fileName', fileInput.files[0].name);
+                    altData.append('fileType', fileInput.files[0].type);
+                    altData.append('customerName', document.getElementById('fullName').value);
+                    altData.append('plan', document.getElementById('subscriptionPlan').value);
+
+                    fileResponse = await fetch(APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        body: altData,
+                        headers: {
+                            'Accept': 'application/json',
+                        }
+                    });
                 }
+
+                if (!fileResponse.ok) {
+                    throw new Error(`File upload failed: ${fileResponse.status} ${fileResponse.statusText}`);
+                }
+
+                const fileResult = await fileResponse.json();
+                console.log('File upload result:', fileResult);
 
                 // Show success message
                 loading.style.display = 'none';
@@ -746,65 +838,24 @@
             } catch (error) {
                 loading.style.display = 'none';
                 submitBtn.style.display = 'block';
-                alert('Error: ' + error.message + '\nकृपया फिर से कोशिश करें / Please try again');
                 console.error('Submission error:', error);
+                showError(`Upload failed: ${error.message}\nकृपया फिर से कोशिश करें / Please try again`);
             }
         });
 
-        // Plan change handler
-        document.getElementById('subscriptionPlan').addEventListener('change', function() {
-            if (this.value) {
-                nextBtn.style.display = 'block';
-            } else {
-                nextBtn.style.display = 'none';
-            }
-        });
+        // Helper function to convert file to base64
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = error => reject(error);
+            });
+        }
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             createParticles();
-            
-            // Add click effects to buttons
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(button => {
-                addClickEffect(button);
-            });
-
-            // Add click effect to main container
-            addClickEffect(document.querySelector('.main'));
-
-            // Initialize typing effect for first input
-            setTimeout(() => {
-                const nameInput = document.getElementById('fullName');
-                typeEffect(nameInput, 'अपना पूरा नाम दर्ज करें');
-            }, 1000);
-        });
-
-        // Typing Effect Function
-        function typeEffect(element, text, speed = 100) {
-            let i = 0;
-            element.placeholder = '';
-            const timer = setInterval(() => {
-                if (i < text.length) {
-                    element.placeholder += text.charAt(i);
-                    i++;
-                } else {
-                    clearInterval(timer);
-                }
-            }, speed);
-        }
-
-        // Enhanced Input Effects
-        const inputs = document.querySelectorAll('input, select');
-        inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'translateY(-5px)';
-                this.parentElement.style.transition = 'transform 0.3s ease';
-            });
-
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'translateY(0)';
-            });
         });
 
         // Prevent form default submission
