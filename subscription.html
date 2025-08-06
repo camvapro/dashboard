@@ -476,9 +476,9 @@
                     <label for="subscriptionPlan">💳 Select Plan / प्लान चुनें</label>
                     <select id="subscriptionPlan" name="subscriptionPlan" required>
                         <option value="">Select Plan / प्लान चुनें</option>
-                        <option value="monthly">Monthly Plan - ₹299/month</option>
-                        <option value="quarterly">Quarterly Plan - ₹799/3months</option>
-                        <option value="yearly">Yearly Plan - ₹2999/year</option>
+                        <option value="monthly">Monthly Plan - ₹49/month</option>
+                        <option value="quarterly">Quarterly Plan - ₹99/3months</option>
+                        <option value="yearly">Yearly Plan - ₹299/year</option>
                     </select>
                 </div>
 
@@ -494,7 +494,7 @@
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23fff'/%3E%3Ctext x='100' y='100' text-anchor='middle' dy='.3em' font-size='16' fill='%23333'%3EQR Code Here%3C/text%3E%3C/svg%3E" 
                          alt="QR Code" class="qr-code" id="qrCode">
                     <div class="payment-info">
-                        <p><strong>UPI ID:</strong> your-upi-id@paytm</p>
+                        <p><strong>UPI ID:</strong> canvapro@upi</p>
                         <p><strong>Amount:</strong> <span id="paymentAmount">₹299</span></p>
                     </div>
                 </div>
@@ -531,7 +531,7 @@
 
     <script>
         // Configuration
-        const APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwv4BfKDkXEUBJN46GFSMeL5eFbIdzfa8-ofbe9qEgGt3HFfJQmU50FvL4mLopQw_ltew/exec';
         
         // DOM Elements
         const form = document.getElementById('subscriptionForm');
@@ -632,13 +632,13 @@
             
             switch(plan) {
                 case 'monthly':
-                    amount = '₹299';
+                    amount = '₹49';
                     break;
                 case 'quarterly':
-                    amount = '₹799';
+                    amount = '₹99';
                     break;
                 case 'yearly':
-                    amount = '₹2999';
+                    amount = '₹299';
                     break;
             }
             
