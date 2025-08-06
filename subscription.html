@@ -3,30 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Subscription Portal</title>
+    <title>Canva Pro Subscription | Professional Design Platform</title>
     
     <style>
         /* Google Fonts Import */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
         
-        /* Global Reset & Variables */
+        /* CSS Variables for Professional Theme */
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --dark-bg: #0a0a0a;
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: #b4b4b4;
-            --accent-blue: #3b82f6;
-            --accent-green: #10b981;
-            --accent-gold: #f59e0b;
-            --accent-red: #ef4444;
-            --shadow-light: rgba(255, 255, 255, 0.1);
-            --shadow-dark: rgba(0, 0, 0, 0.5);
-            --border-radius: 20px;
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary-color: #f8fafc;
+            --accent-color: #0ea5e9;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-light: #94a3b8;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --card-shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --border-radius: 16px;
+            --border-radius-lg: 24px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 1200px;
         }
 
+        /* Global Styles */
         * {
             margin: 0;
             padding: 0;
@@ -34,180 +41,158 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--dark-bg);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
+            min-height: 100vh;
         }
 
-        /* Animated Background */
-        .animated-bg {
+        /* Background Pattern */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
-            background: radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 35%, var(--dark-bg) 100%);
-        }
-
-        .floating-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
             z-index: -1;
-            overflow: hidden;
+            pointer-events: none;
         }
 
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--accent-blue), var(--accent-green));
-            opacity: 0.05;
-            animation: float 20s infinite linear;
-        }
-
-        .shape:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s; }
-        .shape:nth-child(2) { width: 60px; height: 60px; top: 60%; left: 80%; animation-delay: -5s; }
-        .shape:nth-child(3) { width: 40px; height: 40px; top: 40%; left: 60%; animation-delay: -10s; }
-        .shape:nth-child(4) { width: 100px; height: 100px; top: 80%; left: 20%; animation-delay: -15s; }
-
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-30px) rotate(120deg); }
-            66% { transform: translateY(30px) rotate(240deg); }
-            100% { transform: translateY(0px) rotate(360deg); }
-        }
-
-        /* Main Container */
+        /* Container */
         .container {
-            max-width: 1200px;
+            max-width: var(--max-width);
             margin: 0 auto;
             padding: 40px 20px;
-            position: relative;
         }
 
         /* Header Section */
         .header {
             text-align: center;
             margin-bottom: 60px;
-            animation: slideDown 0.8s ease-out;
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        .logo {
-            font-size: 2.5rem;
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 2rem;
             font-weight: 800;
-            background: var(--primary-gradient);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
-            display: inline-block;
         }
 
-        .header-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
-            animation: glow 2s ease-in-out infinite alternate;
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.1;
         }
 
-        .header-subtitle {
-            font-size: 1.2rem;
+        .hero-subtitle {
+            font-size: 1.25rem;
             color: var(--text-secondary);
             font-weight: 400;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 0 auto 30px;
         }
 
-        @keyframes slideDown {
-            0% { opacity: 0; transform: translateY(-30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes glow {
-            0% { text-shadow: 0 4px 20px rgba(102, 126, 234, 0.3); }
-            100% { text-shadow: 0 4px 30px rgba(102, 126, 234, 0.6); }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary-color);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid rgba(99, 102, 241, 0.2);
         }
 
         /* Step Indicator */
         .step-indicator {
             display: flex;
             justify-content: center;
-            margin-bottom: 40px;
-            animation: slideUp 0.8s ease-out 0.2s both;
+            align-items: center;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
 
         .step {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--card-bg);
-            border: 2px solid var(--card-border);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 15px;
-            color: var(--text-secondary);
-            font-weight: 600;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--border-color);
+            color: var(--text-light);
+            font-weight: 700;
             font-size: 1.1rem;
+            margin: 0 20px;
             transition: var(--transition);
             position: relative;
-            overflow: hidden;
+            box-shadow: var(--card-shadow);
         }
 
-        .step::before {
+        .step::after {
             content: '';
             position: absolute;
+            right: -42px;
             top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: var(--transition);
+            transform: translateY(-50%);
+            width: 24px;
+            height: 2px;
+            background: var(--border-color);
             z-index: -1;
         }
 
-        .step.active {
-            color: var(--text-primary);
-            border-color: var(--accent-blue);
-            transform: scale(1.1);
+        .step:last-child::after {
+            display: none;
         }
 
-        .step.active::before {
-            width: 100%;
-            height: 100%;
+        .step.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
         }
 
         .step.completed {
-            color: var(--text-primary);
-            border-color: var(--accent-green);
-            background: var(--accent-green);
+            background: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
         }
 
-        @keyframes slideUp {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .step.completed::after {
+            background: var(--success-color);
         }
 
         /* Card Styles */
         .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            border-radius: var(--border-radius);
+            background: white;
+            border-radius: var(--border-radius-lg);
             padding: 40px;
             margin-bottom: 30px;
-            box-shadow: 0 20px 40px var(--shadow-dark);
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
             transition: var(--transition);
-            animation: slideUp 0.8s ease-out 0.4s both;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
             position: relative;
             overflow: hidden;
         }
@@ -216,32 +201,34 @@
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-            transition: var(--transition);
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
         }
 
         .card:hover {
             transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 30px 60px var(--shadow-dark);
+            box-shadow: var(--card-shadow-hover);
         }
 
-        .card:hover::before {
-            left: 100%;
+        .card-header {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
         .card-title {
-            font-size: 1.8rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.75rem;
             font-weight: 700;
-            margin-bottom: 30px;
-            text-align: center;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
         }
 
         /* Form Styles */
@@ -249,30 +236,28 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .form-group {
             position: relative;
-            margin-bottom: 25px;
         }
 
         .form-label {
             display: block;
-            font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 0.95rem;
         }
 
-        .form-input, .form-select {
+        .form-input,
+        .form-select {
             width: 100%;
             padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: white;
             color: var(--text-primary);
             font-size: 1rem;
             font-weight: 500;
@@ -280,21 +265,29 @@
             outline: none;
         }
 
-        .form-input:focus, .form-select:focus {
-            border-color: var(--accent-blue);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        .form-input:focus,
+        .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
         }
 
         .form-input::placeholder {
-            color: var(--text-secondary);
+            color: var(--text-light);
             font-weight: 400;
         }
 
+        .form-select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+        }
+
         .form-select option {
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            padding: 10px;
+            padding: 12px;
+            font-weight: 500;
         }
 
         /* Button Styles */
@@ -302,18 +295,17 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
             padding: 16px 32px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             text-decoration: none;
             border: none;
-            border-radius: 12px;
+            border-radius: var(--border-radius);
             cursor: pointer;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
             min-height: 56px;
         }
 
@@ -336,26 +328,37 @@
         }
 
         .btn-primary {
-            background: var(--primary-gradient);
-            color: var(--text-primary);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
         }
 
         .btn-success {
-            background: linear-gradient(135deg, var(--accent-green), #059669);
-            color: var(--text-primary);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+            background: var(--gradient-success);
+            color: white;
+            box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
         }
 
         .btn-warning {
-            background: linear-gradient(135deg, var(--accent-gold), #d97706);
-            color: var(--text-primary);
-            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+            background: linear-gradient(135deg, var(--warning-color), #d97706);
+            color: white;
+            box-shadow: 0 4px 14px 0 rgba(245, 158, 11, 0.39);
         }
 
         .btn-full {
@@ -370,83 +373,154 @@
 
         /* Payment Section */
         .payment-card {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.02), rgba(59, 130, 246, 0.02));
+            border: 2px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .payment-card::before {
+            background: var(--gradient-success);
         }
 
         .payment-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
-        .payment-header h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
+        .payment-plan {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
         .payment-amount {
-            font-size: 3rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
             font-weight: 800;
-            color: var(--accent-green);
+            color: var(--success-color);
             margin: 20px 0;
+            text-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
         }
 
         .qr-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            margin: 30px auto;
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            margin: 40px auto;
             text-align: center;
             max-width: 400px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            border: 3px solid var(--accent-blue);
+            box-shadow: var(--card-shadow);
+            border: 3px solid var(--success-color);
+            position: relative;
+        }
+
+        .qr-container::before {
+            content: '💳 Scan to Pay';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success-color);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
         .qr-code {
             width: 300px;
             height: 300px;
-            border-radius: 15px;
-            border: 2px solid var(--accent-green);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: var(--border-radius);
+            border: 2px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             margin: 0 auto;
             display: block;
         }
 
+        .payment-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .payment-info h4 {
+            color: var(--success-color);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .payment-info p {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
         /* Transaction Section */
         .transaction-card {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.1));
-            border: 1px solid rgba(245, 158, 11, 0.3);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.02), rgba(217, 119, 6, 0.02));
+            border: 2px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .transaction-card::before {
+            background: linear-gradient(135deg, var(--warning-color), #d97706);
         }
 
         .transaction-input {
-            background: rgba(245, 158, 11, 0.1);
-            border: 2px solid rgba(245, 158, 11, 0.3);
+            background: rgba(245, 158, 11, 0.05);
+            border: 2px solid rgba(245, 158, 11, 0.2);
             text-align: center;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 1px;
-            text-transform: uppercase;
             font-size: 1.1rem;
+            color: var(--warning-color);
         }
 
         .transaction-input:focus {
-            border-color: var(--accent-gold);
-            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+            border-color: var(--warning-color);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .transaction-help {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(245, 158, 11, 0.05);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .transaction-help h4 {
+            color: var(--warning-color);
+            font-weight: 700;
+            margin-bottom: 12px;
         }
 
         /* Loading Animation */
         .loading {
             display: none;
             text-align: center;
-            padding: 40px;
+            padding: 60px 40px;
+            background: white;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
         }
 
         .spinner {
             width: 50px;
             height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.1);
+            border: 4px solid rgba(99, 102, 241, 0.1);
             border-radius: 50%;
-            border-top-color: var(--accent-blue);
+            border-top-color: var(--primary-color);
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
         }
@@ -455,100 +529,211 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Success/Error Messages */
+        .loading-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Messages */
         .message {
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
+            padding: 24px;
+            border-radius: var(--border-radius-lg);
+            margin: 30px 0;
             font-weight: 500;
             text-align: center;
             display: none;
-            animation: slideUp 0.5s ease-out;
+            animation: fadeInUp 0.5s ease-out;
         }
 
         .message-success {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: var(--accent-green);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            color: var(--success-color);
+        }
+
+        .message-success::before {
+            content: '✅';
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 12px;
         }
 
         .message-error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: var(--accent-red);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            color: var(--danger-color);
+        }
+
+        .message-error::before {
+            content: '❌';
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 12px;
         }
 
         /* Footer */
         .footer {
-            margin-top: 80px;
-            padding: 60px 20px 40px;
-            background: rgba(255, 255, 255, 0.02);
-            border-top: 1px solid var(--card-border);
-            animation: slideUp 0.8s ease-out 0.6s both;
+            margin-top: 100px;
+            padding: 80px 20px 40px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.02), rgba(59, 130, 246, 0.02));
+            border-top: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .footer-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .footer-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .footer-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
             margin: 0 auto;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
-        .footer-section h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-        }
-
-        .footer-section p, .footer-section a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            margin-bottom: 10px;
-            display: block;
+        .footer-section {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
             transition: var(--transition);
         }
 
-        .footer-section a:hover {
-            color: var(--accent-blue);
+        .footer-section:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow-hover);
         }
 
-        .footer-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .footer-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
+        .footer-section h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
             color: var(--text-primary);
-            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-secondary);
             text-decoration: none;
-            padding: 15px 20px;
-            border-radius: 12px;
+            margin-bottom: 12px;
+            display: block;
             transition: var(--transition);
             font-weight: 500;
         }
 
+        .footer-section a:hover {
+            color: var(--primary-color);
+            transform: translateX(4px);
+        }
+
+        .footer-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .footer-btn {
+            background: white;
+            color: var(--text-primary);
+            text-align: center;
+            text-decoration: none;
+            padding: 20px;
+            border-radius: var(--border-radius-lg);
+            transition: var(--transition);
+            font-weight: 600;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
         .footer-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--accent-blue);
+            background: var(--primary-color);
+            color: white;
             transform: translateY(-2px);
+            box-shadow: var(--card-shadow-hover);
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid var(--card-border);
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-bottom p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Responsive Design */
@@ -557,8 +742,8 @@
                 padding: 20px 15px;
             }
 
-            .header-title {
-                font-size: 2.2rem;
+            .hero-title {
+                font-size: 2.5rem;
             }
 
             .card {
@@ -575,6 +760,10 @@
                 height: 250px;
             }
 
+            .payment-amount {
+                font-size: 2.5rem;
+            }
+
             .step-indicator {
                 margin-bottom: 30px;
             }
@@ -586,6 +775,11 @@
                 font-size: 1rem;
             }
 
+            .step::after {
+                right: -32px;
+                width: 14px;
+            }
+
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -594,15 +788,20 @@
             .footer-buttons {
                 grid-template-columns: 1fr;
             }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
 
         @media (max-width: 480px) {
-            .header-title {
-                font-size: 1.8rem;
+            .hero-title {
+                font-size: 2rem;
             }
 
             .payment-amount {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
 
             .qr-code {
@@ -619,6 +818,11 @@
                 height: 35px;
                 margin: 0 8px;
                 font-size: 0.9rem;
+            }
+
+            .step::after {
+                right: -28px;
+                width: 12px;
             }
         }
 
@@ -638,25 +842,31 @@
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="animated-bg"></div>
-    <div class="floating-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-
     <!-- Main Container -->
     <div class="container">
-        <!-- Header -->
+        <!-- Header Section -->
         <header class="header">
-            <div class="logo">🎯 CANVA PRO</div>
-            <h1 class="header-title">Premium Subscription</h1>
-            <p class="header-subtitle">
-                Unlock unlimited creative possibilities with our premium Canva Pro subscription plans. 
-                Choose your perfect plan and start creating amazing designs today.
+            <div class="brand-logo">
+                <span>🎨</span>
+                <span>CANVA PRO</span>
+            </div>
+            
+            <h1 class="hero-title">
+                Unlock Your Creative <br>
+                <span style="background: var(--gradient-secondary); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                    Potential
+                </span>
+            </h1>
+            
+            <p class="hero-subtitle">
+                Join millions of professionals who trust Canva Pro for their design needs. 
+                Premium templates, advanced tools, and unlimited possibilities await you.
             </p>
+            
+            <div class="hero-badge">
+                <span>⭐</span>
+                <span>Trusted by 100+ Million Users Worldwide</span>
+            </div>
         </header>
 
         <!-- Step Indicator -->
@@ -671,9 +881,14 @@
 
         <!-- Main Form -->
         <form id="subscriptionForm">
-            <!-- Step 1: User Details -->
+            <!-- Step 1: Personal Information -->
             <div class="card" id="userDetailsCard">
-                <h2 class="card-title">📝 Personal Information</h2>
+                <div class="card-header">
+                    <h2 class="card-title">👋 Let's Get Started</h2>
+                    <p class="card-subtitle">
+                        Tell us about yourself to personalize your Canva Pro experience
+                    </p>
+                </div>
                 
                 <div class="form-grid">
                     <div class="form-group">
@@ -687,7 +902,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="canvaEmail" class="form-label">📧 Canva Email</label>
+                        <label for="canvaEmail" class="form-label">📧 Email Address</label>
                         <input type="email" 
                                id="canvaEmail" 
                                name="canvaEmail" 
@@ -702,52 +917,67 @@
                                id="whatsappNumber" 
                                name="whatsappNumber" 
                                class="form-input" 
-                               placeholder="+91XXXXXXXXXX" 
+                               placeholder="+91 98765 43210" 
                                required>
                     </div>
 
                     <div class="form-group">
-                        <label for="subscriptionPlan" class="form-label">💳 Choose Your Plan</label>
+                        <label for="subscriptionPlan" class="form-label">💎 Choose Your Plan</label>
                         <select id="subscriptionPlan" name="subscriptionPlan" class="form-select" required>
-                            <option value="">Select Subscription Plan</option>
-                            <option value="monthly">Monthly Plan - ₹49/month</option>
-                            <option value="quarterly">Quarterly Plan - ₹99/3months (Best Value)</option>
-                            <option value="annual">Annual Plan - ₹299/year (Most Popular)</option>
+                            <option value="">Select Your Perfect Plan</option>
+                            <option value="monthly">Monthly Pro - ₹49/month (Most Flexible)</option>
+                            <option value="quarterly">Quarterly Pro - ₹99/3months (Best Value)</option>
+                            <option value="annual">Annual Pro - ₹299/year (Most Popular)</option>
                         </select>
                     </div>
                 </div>
 
                 <button type="button" class="btn btn-primary btn-full" id="nextBtn" style="display: none;">
-                    Continue to Payment →
+                    <span>Continue to Payment</span>
+                    <span>→</span>
                 </button>
             </div>
 
             <!-- Step 2: Payment Section -->
             <div class="card payment-card payment-section" id="paymentSection">
                 <div class="payment-header">
-                    <h2>💳 Complete Payment</h2>
-                    <p>Secure payment for <span id="selectedPlanText">Monthly Plan</span></p>
+                    <h2 class="card-title">💳 Secure Payment</h2>
+                    <div class="payment-plan" id="selectedPlanBadge">
+                        <span>💎</span>
+                        <span id="selectedPlanText">Monthly Pro Plan</span>
+                    </div>
                     <div class="payment-amount" id="paymentAmount">₹49</div>
+                    <p class="card-subtitle">
+                        Complete your payment using any UPI app for instant activation
+                    </p>
                 </div>
 
                 <div class="qr-container">
                     <img src="" alt="Payment QR Code" class="qr-code" id="qrCode">
+                    <div class="payment-info">
+                        <h4>Payment Instructions</h4>
+                        <p>💡 Open any UPI app (PhonePe, GPay, Paytm, etc.)</p>
+                        <p>📱 Scan the QR code above</p>
+                        <p>💳 Complete the payment securely</p>
+                        <p>📝 Copy the Transaction ID for verification</p>
+                    </div>
                 </div>
 
                 <button type="button" class="btn btn-warning btn-full" id="payNowBtn">
-                    💳 Open UPI App & Pay Now
+                    <span>💳</span>
+                    <span>Open UPI App & Pay Now</span>
+                    <span>→</span>
                 </button>
-
-                <div class="text-center mt-20">
-                    <p style="color: var(--text-secondary);">
-                        Scan QR code with any UPI app or click the button above
-                    </p>
-                </div>
             </div>
 
-            <!-- Step 3: Transaction Details -->
+            <!-- Step 3: Transaction Verification -->
             <div class="card transaction-card transaction-section" id="transactionSection">
-                <h2 class="card-title">🏦 Transaction Verification</h2>
+                <div class="card-header">
+                    <h2 class="card-title">🏦 Payment Verification</h2>
+                    <p class="card-subtitle">
+                        Enter your transaction details to complete the subscription process
+                    </p>
+                </div>
                 
                 <div class="form-group">
                     <label for="transactionId" class="form-label">💳 Transaction ID / UTR Number</label>
@@ -759,115 +989,147 @@
                            required>
                 </div>
 
-                <div class="text-center mb-20">
-                    <p style="color: var(--text-secondary);">
-                        After successful payment, enter your Transaction ID or UTR Number received from your bank/UPI app
-                    </p>
+                <div class="transaction-help">
+                    <h4>Where to find Transaction ID?</h4>
+                    <p>💡 Check your UPI app's transaction history</p>
+                    <p>📧 Look for SMS/Email from your bank</p>
+                    <p>🧾 Transaction ID is usually 12+ characters long</p>
+                    <p>📞 Need help? WhatsApp us at +91 63056 35644</p>
                 </div>
 
                 <button type="button" class="btn btn-success btn-full" id="submitBtn" style="display: none;">
-                    ✅ Complete Subscription
+                    <span>✅</span>
+                    <span>Complete My Subscription</span>
                 </button>
             </div>
         </form>
 
         <!-- Loading -->
-        <div class="card loading" id="loading">
+        <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p>Processing your subscription...</p>
+            <p class="loading-text">Processing your subscription...</p>
+            <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 8px;">
+                This will only take a moment
+            </p>
         </div>
 
         <!-- Success Message -->
-        <div class="card message-success" id="successMessage">
-            <h3>🎉 Subscription Submitted Successfully!</h3>
-            <p>Your subscription request has been received. Our team will verify your payment and activate your Canva Pro subscription within 24 hours.</p>
-            <p class="mt-20">You will receive a confirmation message on WhatsApp once your subscription is activated.</p>
+        <div class="message message-success" id="successMessage">
+            <h3>🎉 Subscription Request Submitted!</h3>
+            <p><strong>Congratulations!</strong> Your Canva Pro subscription request has been successfully submitted.</p>
+            <p class="mt-20">
+                <strong>What's Next?</strong><br>
+                ✅ Our team will verify your payment within 2-4 hours<br>
+                📱 You'll receive a WhatsApp confirmation once activated<br>
+                🎨 Start creating amazing designs immediately after activation
+            </p>
+            <p style="margin-top: 30px; padding: 20px; background: rgba(16, 185, 129, 0.1); border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.2);">
+                <strong>📞 Need immediate assistance?</strong><br>
+                WhatsApp us at <strong>+91 63056 35644</strong> with your transaction ID
+            </p>
         </div>
     </div>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
+            <div class="footer-header">
+                <h2 class="footer-title">Ready to Create?</h2>
+                <p class="footer-subtitle">
+                    Join our community of creative professionals and unlock unlimited design possibilities
+                </p>
+            </div>
+
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h3>Contact Information</h3>
-                    <p>📧 Email: support@canvapro.com</p>
-                    <p>📱 WhatsApp: +91 63056 35644</p>
-                    <p>🌐 Website: www.canvapro.com</p>
-                    <p>📍 Location: India</p>
+                    <h3>📞 Get Support</h3>
+                    <p><strong>WhatsApp:</strong> +91 63056 35644</p>
+                    <p><strong>Email:</strong> support@canvapro.design</p>
+                    <p><strong>Response Time:</strong> Within 2 hours</p>
+                    <p><strong>Available:</strong> 24/7 Support</p>
                 </div>
 
                 <div class="footer-section">
-                    <h3>Quick Support</h3>
-                    <a href="#support">24/7 Customer Support</a>
+                    <h3>💎 Subscription Plans</h3>
+                    <a href="#monthly">Monthly Pro - ₹49 (Most Flexible)</a>
+                    <a href="#quarterly">Quarterly Pro - ₹99 (Best Value)</a>
+                    <a href="#annual">Annual Pro - ₹299 (Most Popular)</a>
+                    <a href="#compare">Compare All Features</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>🚀 Quick Help</h3>
+                    <a href="#setup">Account Setup Guide</a>
+                    <a href="#features">Premium Features List</a>
                     <a href="#faq">Frequently Asked Questions</a>
-                    <a href="#guide">Setup Guide</a>
-                    <a href="#refund">Refund Policy</a>
+                    <a href="#refund">Refund & Cancellation Policy</a>
                 </div>
 
                 <div class="footer-section">
-                    <h3>Subscription Plans</h3>
-                    <a href="#monthly">Monthly Plan - ₹49</a>
-                    <a href="#quarterly">Quarterly Plan - ₹99</a>
-                    <a href="#annual">Annual Plan - ₹299</a>
-                    <a href="#compare">Compare Plans</a>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Resources</h3>
-                    <a href="#tutorials">Video Tutorials</a>
-                    <a href="#templates">Premium Templates</a>
-                    <a href="#community">Community Forum</a>
-                    <a href="#updates">Latest Updates</a>
+                    <h3>🎨 Resources</h3>
+                    <a href="#tutorials">Design Tutorials</a>
+                    <a href="#templates">Premium Template Library</a>
+                    <a href="#community">Creative Community</a>
+                    <a href="#updates">Latest Feature Updates</a>
                 </div>
             </div>
 
             <div class="footer-buttons">
-                <a href="https://wa.me/916306356544" class="footer-btn">
-                    💬 WhatsApp Support
+                <a href="https://wa.me/916306356644?text=Hi%2C%20I%20need%20help%20with%20my%20Canva%20Pro%20subscription" class="footer-btn">
+                    <span>💬</span>
+                    <span>WhatsApp Support</span>
                 </a>
                 <a href="#subscription-status" class="footer-btn">
-                    📊 Check Subscription Status
+                    <span>📊</span>
+                    <span>Check Subscription Status</span>
                 </a>
-                <a href="#download-guide" class="footer-btn">
-                    📥 Download Setup Guide
+                <a href="#download-app" class="footer-btn">
+                    <span>📱</span>
+                    <span>Download Canva App</span>
                 </a>
-                <a href="#contact-team" class="footer-btn">
-                    👥 Contact Our Team
+                <a href="#billing-help" class="footer-btn">
+                    <span>💳</span>
+                    <span>Billing & Payment Help</span>
                 </a>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2025 Canva Pro Subscription. All rights reserved. | Made with ❤️ in India</p>
-                <p>Terms of Service | Privacy Policy | Refund Policy | Support</p>
+                <p>&copy; 2025 Canva Pro Subscription Service. All rights reserved.</p>
+                <p>Providing premium design solutions to creative professionals worldwide</p>
+                <div class="footer-links">
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#refund">Refund Policy</a>
+                    <a href="#contact">Contact Us</a>
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
         // Configuration
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwv4BfKDkXEUBJN46GFSMeL5eFbIdzfa8-ofbe9qEgGt3HFfJQmU50FvL4mLopQw_ltew/exec';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxmR2Rntel1zkUZOrSvjN6RutW1aC5DG-Z3yukRVjrHMlRRn7Sg9Nmm93uMa4cskXKtQQ/exec';
         
-        // Plan Configuration
+        // Plan Configuration with your QR code URLs
         const planConfig = {
             monthly: {
                 amount: '49',
                 displayAmount: '₹49',
-                displayText: 'Monthly Plan - ₹49',
+                displayText: 'Monthly Pro Plan',
                 qrCode: 'icon/monthly49.png',
                 upiLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=49'
             },
             quarterly: {
                 amount: '99',
                 displayAmount: '₹99',
-                displayText: 'Quarterly Plan - ₹99',
+                displayText: 'Quarterly Pro Plan',
                 qrCode: 'icon/quarterly99.png',
                 upiLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=99'
             },
             annual: {
                 amount: '299',
                 displayAmount: '₹299',
-                displayText: 'Annual Plan - ₹299',
+                displayText: 'Annual Pro Plan',
                 qrCode: 'icon/annual299.png',
                 upiLink: 'upi://pay?pa=6387617678-2@okbizaxis&pn=JITENDRA%20KUMAR&mc=7333&aid=uGICAgKCe4K6cIg&ver=01&mode=01&tr=BCR2DN7TU3FIZMQZ&am=299'
             }
@@ -886,6 +1148,7 @@
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
         const selectedPlanText = document.getElementById('selectedPlanText');
+        const selectedPlanBadge = document.getElementById('selectedPlanBadge');
         const paymentAmount = document.getElementById('paymentAmount');
         const qrCode = document.getElementById('qrCode');
         
@@ -900,10 +1163,10 @@
         function showError(message) {
             errorMessage.textContent = message;
             errorMessage.style.display = 'block';
-            errorMessage.scrollIntoView({ behavior: 'smooth' });
+            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
             setTimeout(() => {
                 errorMessage.style.display = 'none';
-            }, 5000);
+            }, 6000);
         }
 
         // Form Validation
@@ -914,7 +1177,7 @@
             const subscriptionPlan = document.getElementById('subscriptionPlan').value;
 
             if (!fullName || fullName.length < 2) {
-                showError('Please enter a valid name (minimum 2 characters)');
+                showError('Please enter your full name (minimum 2 characters)');
                 return false;
             }
 
@@ -924,7 +1187,7 @@
             }
 
             if (!whatsappNumber || whatsappNumber.length < 10) {
-                showError('Please enter a valid phone number (minimum 10 digits)');
+                showError('Please enter a valid WhatsApp number (minimum 10 digits)');
                 return false;
             }
 
@@ -951,9 +1214,11 @@
                 selectedPlanText.textContent = config.displayText;
                 paymentAmount.textContent = config.displayAmount;
                 
+                // Update QR code
                 qrCode.src = config.qrCode;
                 qrCode.onerror = function() {
-                    this.src = `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"%3E%3Crect width="300" height="300" fill="%233b82f6"/%3E%3Ctext x="150" y="130" text-anchor="middle" dy=".3em" font-size="16" fill="%23fff"%3EQR Code for%3C/text%3E%3Ctext x="150" y="150" text-anchor="middle" dy=".3em" font-size="18" fill="%23fff" font-weight="bold"%3E${config.displayText}%3C/text%3E%3Ctext x="150" y="180" text-anchor="middle" dy=".3em" font-size="14" fill="%23fff"%3EUPI: 6387617678-2@okbizaxis%3C/text%3E%3Ctext x="150" y="200" text-anchor="middle" dy=".3em" font-size="14" fill="%23fff"%3EJITENDRA KUMAR%3C/text%3E%3C/svg%3E`;
+                    // Fallback SVG QR code
+                    this.src = `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"%3E%3Crect width="300" height="300" fill="%236366f1"/%3E%3Ctext x="150" y="130" text-anchor="middle" dy=".3em" font-size="16" fill="%23fff"%3EQR Code for%3C/text%3E%3Ctext x="150" y="155" text-anchor="middle" dy=".3em" font-size="18" fill="%23fff" font-weight="bold"%3E${config.displayText}%3C/text%3E%3Ctext x="150" y="180" text-anchor="middle" dy=".3em" font-size="14" fill="%23fff"%3EAmount: ${config.displayAmount}%3C/text%3E%3Ctext x="150" y="200" text-anchor="middle" dy=".3em" font-size="12" fill="%23fff"%3EUPI: 6387617678-2@okbizaxis%3C/text%3E%3Ctext x="150" y="220" text-anchor="middle" dy=".3em" font-size="12" fill="%23fff"%3EJITENDRA KUMAR%3C/text%3E%3C/svg%3E`;
                 };
                 
                 payNowBtn.setAttribute('data-upi-link', config.upiLink);
@@ -1002,6 +1267,7 @@
         document.getElementById('subscriptionPlan').addEventListener('change', function() {
             if (this.value) {
                 nextBtn.style.display = 'block';
+                nextBtn.scrollIntoView({ behavior: 'smooth' });
             } else {
                 nextBtn.style.display = 'none';
             }
@@ -1026,11 +1292,14 @@
                 return;
             }
 
+            // Show loading
             loading.style.display = 'block';
             submitBtn.disabled = true;
             errorMessage.style.display = 'none';
+            loading.scrollIntoView({ behavior: 'smooth' });
 
             try {
+                // Prepare form data
                 const formData = new FormData();
                 formData.append('fullName', document.getElementById('fullName').value);
                 formData.append('canvaEmail', document.getElementById('canvaEmail').value);
@@ -1041,6 +1310,7 @@
                 formData.append('paymentMethod', 'UPI');
                 formData.append('paymentStatus', 'Transaction ID Provided');
 
+                // Submit to Google Apps Script
                 const response = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
                     body: formData,
@@ -1056,21 +1326,23 @@
                 const result = await response.json();
                 console.log('Submission result:', result);
 
+                // Show success
                 loading.style.display = 'none';
                 paymentSection.style.display = 'none';
                 transactionSection.style.display = 'none';
                 successMessage.style.display = 'block';
                 successMessage.scrollIntoView({ behavior: 'smooth' });
 
+                // Auto reload after 15 seconds
                 setTimeout(() => {
                     location.reload();
-                }, 10000);
+                }, 15000);
 
             } catch (error) {
                 loading.style.display = 'none';
                 submitBtn.disabled = false;
                 console.error('Submission error:', error);
-                showError(`Submission failed: ${error.message}. Please try again.`);
+                showError(`Submission failed: ${error.message}. Please try again or contact support.`);
             }
         });
 
@@ -1079,27 +1351,26 @@
             e.preventDefault();
         });
 
-        // Add smooth animations on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        // Smooth scroll for all internal links
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A' && e.target.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(e.target.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
                 }
-            });
-        }, observerOptions);
+            }
+        });
 
-        // Initialize animations
+        // Initialize animations and interactions
         document.addEventListener('DOMContentLoaded', function() {
-            // Observe elements for scroll animations
-            const animatedElements = document.querySelectorAll('.card, .footer');
-            animatedElements.forEach(el => {
-                observer.observe(el);
+            // Add subtle parallax effect to header
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const header = document.querySelector('.header');
+                if (header) {
+                    header.style.transform = `translateY(${scrolled * 0.1}px)`;
+                }
             });
         });
     </script>
