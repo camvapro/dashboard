@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Canva Pro Monthly Giveaway • Win Free Subscriptions</title>
+  <title>Camva Pro Monthly Giveaway • Win Free Subscriptions</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <meta name="description" content="Win free Canva Pro subscriptions! Monthly giveaway with 5 winners. Complete 5 simple steps to participate.">
+  <meta name="description" content="Win free Camva Pro subscriptions! Monthly giveaway with 5 winners. Complete 5 simple steps to participate.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -29,6 +29,11 @@
       --gold-light: #fef3c7;
       --silver: #6b7280;
       --bronze: #92400e;
+      
+      /* WhatsApp Green */
+      --whatsapp: #25d366;
+      --whatsapp-dark: #128c7e;
+      --whatsapp-light: #dcf8c6;
       
       /* Background */
       --bg-primary: #f8fafc;
@@ -524,11 +529,88 @@
       font-weight: 600;
       cursor: pointer;
       transition: all var(--transition);
+      margin: 0 10px;
     }
 
     .copy-btn:hover {
       background: #d97706;
       transform: translateY(-2px);
+    }
+
+    /* Send Code Section */
+    .send-code-section {
+      background: var(--whatsapp-light);
+      border: 2px solid var(--whatsapp);
+      border-radius: var(--radius-lg);
+      padding: 25px;
+      margin: 25px 0;
+      text-align: center;
+    }
+
+    .send-code-text {
+      color: var(--whatsapp-dark);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .send-code-btn {
+      background: var(--whatsapp);
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      border-radius: var(--radius-md);
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+      animation: whatsappPulse 2s ease-in-out infinite;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    @keyframes whatsappPulse {
+      0%, 100% { 
+        transform: scale(1); 
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); 
+      }
+      50% { 
+        transform: scale(1.05); 
+        box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); 
+      }
+    }
+
+    .send-code-btn:hover {
+      background: var(--whatsapp-dark);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
+      animation: none;
+    }
+
+    .send-code-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .send-code-btn:hover::before {
+      left: 100%;
+    }
+
+    .whatsapp-icon {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
     }
 
     /* Alert Messages */
@@ -615,6 +697,11 @@
         font-size: 1.5rem;
         letter-spacing: 2px;
       }
+
+      .send-code-btn {
+        padding: 14px 24px;
+        font-size: 1rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -634,6 +721,17 @@
         width: 35px;
         height: 35px;
         font-size: 0.8rem;
+      }
+
+      .code-value {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+      }
+
+      .copy-btn, .send-code-btn {
+        padding: 12px 20px;
+        margin: 5px;
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -715,7 +813,7 @@
             <p class="step-description">Watch our latest video and leave a sweet comment with a like ❤️</p>
           </div>
           
-          <a href="https://youtube.com/@YourChannel" class="action-btn youtube" id="youtubeBtn" target="_blank">
+          <a href="https://youtube.com/shorts/W7aIRxKuAF8?si=khjI6tDwmiE1iQKv" class="action-btn youtube" id="youtubeBtn" target="_blank">
             ▶️ Watch Video & Leave Comment
           </a>
           <button type="button" class="next-btn" id="step2Next" onclick="nextStep(3)">Next Step →</button>
@@ -729,7 +827,7 @@
             <p class="step-description">Follow our Instagram account to stay updated with latest content</p>
           </div>
           
-          <a href="https://instagram.com/YourInstagram" class="action-btn instagram" id="instagramBtn" target="_blank">
+          <a href="https://www.instagram.com/Zulbulai" class="action-btn instagram" id="instagramBtn" target="_blank">
             📱 Follow on Instagram
           </a>
           <button type="button" class="next-btn" id="step3Next" onclick="nextStep(4)">Next Step →</button>
@@ -743,7 +841,7 @@
             <p class="step-description">Visit our latest post and leave a beautiful comment to show your support 💝</p>
           </div>
           
-          <a href="https://instagram.com/p/YourPostID" class="action-btn instagram" id="postBtn" target="_blank">
+          <a href="https://www.instagram.com/p/CxGeGG2v0Yx/?igsh=MXI4NXh4bzVhb2dwaQ==" class="action-btn instagram" id="postBtn" target="_blank">
             💬 Comment on Post
           </a>
           <button type="button" class="next-btn" id="step4Next" onclick="nextStep(5)">Next Step →</button>
@@ -782,10 +880,25 @@
             <button class="copy-btn" id="copyCodeBtn" onclick="copyCode()">Copy Code</button>
           </div>
 
+          <!-- Send Code Section -->
+          <div class="send-code-section">
+            <div class="send-code-text">
+              💌 अब अपना Participation Code हमारे WhatsApp पर भेजें और अपनी Entry Confirm करें! 
+              <br>यह बहुत जरूरी है! 🎯
+            </div>
+            <a href="#" class="send-code-btn" id="sendCodeBtn" onclick="sendCodeToWhatsApp()">
+              <svg class="whatsapp-icon" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.488"/>
+              </svg>
+              Send Code 📤
+            </a>
+          </div>
+
           <div style="margin-top: 30px; padding: 20px; background: var(--info-bg); border-radius: var(--radius-md); color: #1e40af;">
             <h3 style="margin-bottom: 15px; color: #1e40af;">📧 What's Next?</h3>
             <ul style="text-align: left; line-height: 1.8;">
               <li>Your participation details have been sent to your email</li>
+              <li><strong>Send your code on WhatsApp to confirm entry</strong></li>
               <li>Winners will be announced on the last day of each month</li>
               <li>Keep this code safe - you'll need it if you win!</li>
               <li>Follow our social media for winner announcements</li>
@@ -800,7 +913,7 @@
       <!-- Footer -->
       <div class="giveaway-footer">
         <p><strong>🎯 Giveaway Rules:</strong> One participation per person per month. Winners selected randomly. Must complete all 5 steps to be eligible.</p>
-        <p style="margin-top: 10px;">© 2025 Canva Pro Monthly Giveaway • Good luck to all participants! 🍀</p>
+        <p style="margin-top: 10px;">© 2025 Camva Pro Monthly Giveaway • Good luck to all participants! 🍀</p>
       </div>
     </div>
   </div>
@@ -808,9 +921,10 @@
   <script>
     // Configuration
     const API_URL = 'https://script.google.com/macros/s/AKfycbxMwNekhxBX1U21WUnaaI8vouaGzZmTZWq2StSZ58ZbAjNSjvm_GCE9VC0536IYuTSc/exec';
-    const YOUTUBE_URL = 'https://youtube.com/@zulbulai?si=mNnkS4zHX5n7bM2F';  // Replace with your channel
-    const INSTAGRAM_PROFILE = 'https://instagram.com/zulbulai';  // Replace with your Instagram
-    const INSTAGRAM_POST = 'https://www.instagram.com/p/CxGeGG2v0Yx/?igsh=MXI4NXh4bzVhb2dwaQ==';  // Replace with your post
+    const YOUTUBE_URL = 'https://youtube.com/shorts/W7aIRxKuAF8?si=khjI6tDwmiE1iQKv';
+    const INSTAGRAM_PROFILE = 'https://www.instagram.com/Zulbulai';
+    const INSTAGRAM_POST = 'https://www.instagram.com/p/CxGeGG2v0Yx/?igsh=MXI4NXh4bzVhb2dwaQ==';
+    const WHATSAPP_NUMBER = '919250853188';
 
     // State Management
     let currentStep = 1;
@@ -818,14 +932,12 @@
     let stepCompleted = {
       1: false, 2: false, 3: false, 4: false, 5: false
     };
+    let participationCode = '';
 
     // Initialize
     document.addEventListener('DOMContentLoaded', function() {
-      // Load saved data if exists
       loadSavedData();
       updateProgress();
-      
-      // Set up external link handlers
       setupExternalLinks();
     });
 
@@ -857,6 +969,7 @@
         currentStep = data.currentStep || 1;
         stepCompleted = data.stepCompleted || { 1: false, 2: false, 3: false, 4: false, 5: false };
         participantData = data.participantData || {};
+        participationCode = data.participationCode || '';
         
         // Restore form data
         if (participantData.fullName) document.getElementById('fullName').value = participantData.fullName;
@@ -871,7 +984,8 @@
       saveData('giveawayProgress', {
         currentStep,
         stepCompleted,
-        participantData
+        participantData,
+        participationCode
       });
     }
 
@@ -994,16 +1108,16 @@
 
     // Step 5: Share with Friends
     function shareGiveaway() {
-      const shareText = `🎁 Amazing Canva Pro Monthly Giveaway! 🎁
+      const shareText = `🎁 Amazing Camva Pro Monthly Giveaway! 🎁
 
-Win FREE Canva Pro subscriptions:
+Win FREE Camva Pro subscriptions:
 🥇 3 winners get 1 month FREE
 🥈 2 winners get 3 months FREE
 
 Join now and complete 5 simple steps:
 ${window.location.href}
 
-Hurry! Limited time offer! #CanvaProGiveaway #FreeDesignTools`;
+Hurry! Limited time offer! #CamvaProGiveaway #FreeDesignTools`;
 
       const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
       
@@ -1044,8 +1158,9 @@ Hurry! Limited time offer! #CanvaProGiveaway #FreeDesignTools`;
         const result = await response.json();
 
         if (result.status === 'success') {
-          // Show participation code
-          document.getElementById('participationCode').textContent = result.data.participationCode;
+          // Save participation code
+          participationCode = result.data.participationCode;
+          document.getElementById('participationCode').textContent = participationCode;
           
           // Clear saved progress
           sessionStorage.removeItem('giveawayProgress');
@@ -1094,6 +1209,54 @@ Hurry! Limited time offer! #CanvaProGiveaway #FreeDesignTools`;
         
         showAlert('Code copied to clipboard!', 'info');
       }
+    }
+
+    // Send code to WhatsApp
+    function sendCodeToWhatsApp() {
+      const code = document.getElementById('participationCode').textContent;
+      const name = participantData.fullName || 'User';
+      
+      const message = `🎁 Camva Pro Monthly Giveaway Entry 🎁
+
+नमस्ते! मैंने Camva Pro Monthly Giveaway में participate किया है।
+
+👤 Name: ${name}
+🎫 Participation Code: ${code}
+📧 Email: ${participantData.email || 'Not provided'}
+
+मैंने सभी 5 steps complete कर लिए हैं:
+✅ Basic Details भरे
+✅ YouTube Video देखा और Comment किया  
+✅ Instagram Follow किया
+✅ Post पर Comment किया
+✅ Friends के साथ Share किया
+
+Please confirm my entry! 🙏
+
+#CamvaProGiveaway #MonthlyContest`;
+
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      
+      // Open WhatsApp
+      window.open(whatsappUrl, '_blank');
+      
+      // Update button text temporarily
+      const btn = document.getElementById('sendCodeBtn');
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = `
+        <svg class="whatsapp-icon" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        Sent! ✅
+      `;
+      btn.style.background = 'var(--success)';
+      
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.style.background = 'var(--whatsapp)';
+      }, 3000);
+      
+      showAlert('Code sent to WhatsApp! Please wait for confirmation.', 'info');
     }
 
     // Auto-save form data
