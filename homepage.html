@@ -14,6 +14,7 @@
       --accent-purple: #a855f7;
       --accent-pink: #ec4899;
       --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
       --success: #10b981;
       --warning: #f59e0b;
       --bg-primary: #ffffff;
@@ -239,8 +240,8 @@
       font-weight: 500;
     }
 
-    /* Features Section */
-    .features {
+    /* Pro Tools Section */
+    .pro-tools {
       padding: 100px 0;
       background: var(--bg-secondary);
     }
@@ -253,12 +254,12 @@
 
     .section-header {
       text-align: center;
-      margin-bottom: 80px;
+      margin-bottom: 60px;
     }
 
     .section-header h2 {
       font-family: 'Poppins', sans-serif;
-      font-size: 2.8rem;
+      font-size: 3rem;
       font-weight: 700;
       margin-bottom: 16px;
       color: var(--text-primary);
@@ -271,25 +272,70 @@
       margin: 0 auto;
     }
 
+    /* Category Tabs */
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+
+    .category-tab {
+      padding: 12px 24px;
+      border-radius: 25px;
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      border: 2px solid var(--border-color);
+      cursor: pointer;
+      transition: all var(--transition);
+      font-weight: 500;
+    }
+
+    .category-tab.active {
+      background: var(--brand-gradient);
+      color: white;
+      border-color: var(--brand-primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .category-tab:hover:not(.active) {
+      border-color: var(--brand-primary);
+      transform: translateY(-1px);
+    }
+
+    /* Features Carousel */
+    .features-carousel {
+      position: relative;
+      overflow: hidden;
+      margin: 40px 0;
+    }
+
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 40px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      transition: transform 0.5s ease;
+      margin-bottom: 30px;
     }
 
     .feature-card {
       background: var(--bg-primary);
-      padding: 40px;
       border-radius: var(--radius-xl);
+      padding: 30px;
       box-shadow: var(--shadow-md);
       transition: all var(--transition);
       position: relative;
       overflow: hidden;
+      text-align: center;
+      border: 2px solid transparent;
     }
 
     .feature-card:hover {
       transform: translateY(-8px);
       box-shadow: var(--shadow-xl);
+      border-color: var(--brand-primary);
     }
 
     .feature-card::before {
@@ -303,68 +349,78 @@
     }
 
     .feature-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: var(--radius-lg);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
       background: var(--brand-gradient);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 24px;
-      font-size: 1.5rem;
+      margin: 0 auto 20px;
+      font-size: 2rem;
+      color: white;
     }
 
     .feature-card h3 {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       color: var(--text-primary);
     }
 
     .feature-card p {
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.5;
+      font-size: 0.95rem;
     }
 
-    /* AI Tools Section */
-    .ai-tools {
-      padding: 100px 0;
-      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-    }
-
-    .ai-tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin-top: 60px;
-    }
-
-    .ai-tool-card {
-      background: var(--bg-primary);
-      padding: 30px;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
-      transition: all var(--transition);
-      border: 1px solid rgba(99, 102, 241, 0.1);
-    }
-
-    .ai-tool-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--brand-primary);
-    }
-
-    .ai-tool-icon {
-      width: 50px;
-      height: 50px;
+    .try-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: transparent;
+      border: 2px solid var(--brand-primary);
+      color: var(--brand-primary);
       border-radius: var(--radius-md);
-      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .try-button:hover {
+      background: var(--brand-primary);
       color: white;
+    }
+
+    /* Category Content */
+    .category-content {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .category-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* AI Tools Specific Styling */
+    .ai-tools .feature-icon {
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+    }
+
+    /* Brand Tools Specific Styling */
+    .brand-tools .feature-icon {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+    }
+
+    /* Creative Tools Specific Styling */
+    .creative-tools .feature-icon {
+      background: linear-gradient(135deg, var(--warning), #f97316);
     }
 
     /* Pricing Section */
@@ -479,68 +535,6 @@
     .pricing-button:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-md);
-    }
-
-    /* Testimonials */
-    .testimonials {
-      padding: 100px 0;
-      background: var(--bg-secondary);
-    }
-
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 40px;
-      margin-top: 60px;
-    }
-
-    .testimonial-card {
-      background: var(--bg-primary);
-      padding: 40px;
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-md);
-      transition: all var(--transition);
-    }
-
-    .testimonial-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .testimonial-text {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 24px;
-      color: var(--text-secondary);
-      font-style: italic;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .author-avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--brand-gradient);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 600;
-    }
-
-    .author-info h4 {
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .author-info p {
-      color: var(--text-light);
-      font-size: 0.9rem;
     }
 
     /* CTA Section */
@@ -666,15 +660,25 @@
         font-size: 2.2rem;
       }
 
-      .features-grid,
-      .ai-tools-grid,
-      .pricing-cards,
-      .testimonials-grid {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-cards {
         grid-template-columns: 1fr;
       }
 
       .pricing-card.featured {
         transform: none;
+      }
+
+      .category-tabs {
+        gap: 8px;
+      }
+
+      .category-tab {
+        padding: 10px 18px;
+        font-size: 0.9rem;
       }
 
       .container,
@@ -720,7 +724,6 @@
       <ul class="nav-links">
         <li><a href="#features">Features</a></li>
         <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#testimonials">Reviews</a></li>
         <li><a href="giveaway.html">Giveaway</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -762,97 +765,250 @@
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section class="features" id="features">
+  <!-- Pro Tools Section -->
+  <section class="pro-tools" id="features">
     <div class="container">
       <div class="section-header animate-on-scroll">
-        <h2>Everything you need to create professional content</h2>
-        <p>Access premium templates, unlimited content, and powerful AI tools to bring your ideas to life faster than ever.</p>
+        <h2>Pro tools for every task</h2>
+        <p>Whether you're running a business or starting a side hustle, Camva Pro gives you powerful tools and AI features to help you create, share, and grow—all in one place.</p>
       </div>
       
-      <div class="features-grid">
-        <div class="feature-card animate-on-scroll">
-          <div class="feature-icon">🎨</div>
-          <h3>Premium Content Library</h3>
-          <p>Access over 100 million premium photos, videos, graphics, fonts, and audio tracks. Create standout professional content with unlimited access to world-class assets.</p>
-        </div>
-        
-        <div class="feature-card animate-on-scroll">
-          <div class="feature-icon">🤖</div>
-          <h3>AI-Powered Design Tools</h3>
-          <p>Unlock 25+ AI tools and one-click features. Generate designs in bulk, remove backgrounds, create custom graphics, and personalize content at scale.</p>
-        </div>
-        
-        <div class="feature-card animate-on-scroll">
-          <div class="feature-icon">🏢</div>
-          <h3>Brand Management</h3>
-          <p>Keep your brand consistent with brand kits. Apply your colors, logos, and fonts instantly across all content. Create professional brand templates with one click.</p>
-        </div>
-        
-        <div class="feature-card animate-on-scroll">
-          <div class="feature-icon">📱</div>
-          <h3>Multi-Format Creation</h3>
-          <p>Seamlessly create across formats. Combine social posts, print materials, videos, and presentations in one workspace. Auto-resize for any platform.</p>
-        </div>
-        
-        <div class="feature-card animate-on-scroll">
-          <div class="feature-icon">🎬</div>
-          <h3>Video & Animation</h3>
-          <p>Create stunning videos with background removal, auto-captions, beat sync, and premium video libraries. Turn your content into engaging visual stories.</p>
-        </div>
-        
-        <div class="feature-card animate-on-scroll">
-          <div class="feature-icon">🖨️</div>
-          <h3>Print-Ready Designs</h3>
-          <p>Professional print templates for every occasion. Adapt designs to any print format with flawless quality. Get perfect prints with our satisfaction guarantee.</p>
-        </div>
+      <!-- Category Tabs -->
+      <div class="category-tabs animate-on-scroll">
+        <div class="category-tab active" data-category="ai-tools">AI Tools</div>
+        <div class="category-tab" data-category="social-media">Social Media</div>
+        <div class="category-tab" data-category="brand-tools">Brand</div>
+        <div class="category-tab" data-category="photo-tools">Photo</div>
+        <div class="category-tab" data-category="video-tools">Video</div>
+        <div class="category-tab" data-category="creative-tools">Creative</div>
+        <div class="category-tab" data-category="print-tools">Print</div>
       </div>
-    </div>
-  </section>
 
-  <!-- AI Tools Section -->
-  <section class="ai-tools">
-    <div class="container">
-      <div class="section-header animate-on-scroll">
-        <h2>25+ AI-Powered Features</h2>
-        <p>Work smarter with our conversational AI assistant and powerful automation tools.</p>
+      <!-- AI Tools Category -->
+      <div class="category-content active ai-tools" data-category="ai-tools">
+        <div class="features-grid animate-on-scroll">
+          <div class="feature-card">
+            <div class="feature-icon">🎭</div>
+            <h3>Magic Background Remover</h3>
+            <p>Remove backgrounds in one click to make products, headshots, or logos shine with perfect precision.</p>
+            <a href="freetrial.html" class="try-button">Try Background Remover</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3>AI Image Generator</h3>
+            <p>Generate picture-perfect backgrounds and graphics. Describe the scene and watch it come to life.</p>
+            <a href="freetrial.html" class="try-button">Try AI Image Generator</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">📐</div>
+            <h3>Magic Resize</h3>
+            <p>Instantly resize your designs for any platform — pixel-perfect every time with one click.</p>
+            <a href="freetrial.html" class="try-button">Try Magic Resize</a>
+          </div>
+        </div>
+
+        <div class="features-grid animate-on-scroll">
+          <div class="feature-card">
+            <div class="feature-icon">✍️</div>
+            <h3>AI Writer</h3>
+            <p>Write on-brand content in seconds, perfectly capturing your unique tone and style.</p>
+            <a href="freetrial.html" class="try-button">Try AI Writer</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🌍</div>
+            <h3>Auto Translate</h3>
+            <p>Take your brand global. Translate designs into over 100 languages instantly.</p>
+            <a href="freetrial.html" class="try-button">Try Auto Translate</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🧹</div>
+            <h3>Magic Eraser</h3>
+            <p>Instantly remove anything unwanted from your photos with AI-powered precision.</p>
+            <a href="freetrial.html" class="try-button">Try Magic Eraser</a>
+          </div>
+        </div>
       </div>
-      
-      <div class="ai-tools-grid">
-        <div class="ai-tool-card animate-on-scroll">
-          <div class="ai-tool-icon">🎭</div>
-          <h3>Background Remover</h3>
-          <p>Remove backgrounds in one click to make products, headshots, or logos shine.</p>
+
+      <!-- Social Media Category -->
+      <div class="category-content social-media" data-category="social-media">
+        <div class="features-grid animate-on-scroll">
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Instagram Stories</h3>
+            <p>Create engaging Instagram stories with premium templates and animations.</p>
+            <a href="freetrial.html" class="try-button">Try Instagram Stories</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">📘</div>
+            <h3>Facebook Posts</h3>
+            <p>Design eye-catching Facebook posts and covers that drive engagement.</p>
+            <a href="freetrial.html" class="try-button">Try Facebook Posts</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🎬</div>
+            <h3>YouTube Thumbnails</h3>
+            <p>Create click-worthy YouTube thumbnails that boost your video views.</p>
+            <a href="freetrial.html" class="try-button">Try YouTube Thumbnails</a>
+          </div>
         </div>
-        
-        <div class="ai-tool-card animate-on-scroll">
-          <div class="ai-tool-icon">🎨</div>
-          <h3>AI Image Generator</h3>
-          <p>Generate picture-perfect backgrounds and graphics from text prompts.</p>
+
+        <div class="features-grid animate-on-scroll">
+          <div class="feature-card">
+            <div class="feature-icon">🐦</div>
+            <h3>Twitter Headers</h3>
+            <p>Professional Twitter headers and posts that represent your brand perfectly.</p>
+            <a href="freetrial.html" class="try-button">Try Twitter Headers</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">💼</div>
+            <h3>LinkedIn Posts</h3>
+            <p>Create professional LinkedIn content that establishes your authority.</p>
+            <a href="freetrial.html" class="try-button">Try LinkedIn Posts</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🎵</div>
+            <h3>TikTok Videos</h3>
+            <p>Design trendy TikTok content with music sync and trending templates.</p>
+            <a href="freetrial.html" class="try-button">Try TikTok Videos</a>
+          </div>
         </div>
-        
-        <div class="ai-tool-card animate-on-scroll">
-          <div class="ai-tool-icon">📐</div>
-          <h3>Magic Resize</h3>
-          <p>Automatically reformat content for social media, print, and more with one click.</p>
+      </div>
+
+      <!-- Brand Tools Category -->
+      <div class="category-content brand-tools" data-category="brand-tools">
+        <div class="features-grid animate-on-scroll">
+          <div class="feature-card">
+            <div class="feature-icon">🏢</div>
+            <h3>Brand Kit</h3>
+            <p>Set up your brand with your colors, fonts, and logos in one place. Keep everything consistent.</p>
+            <a href="freetrial.html" class="try-button">Try Brand Kit</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3>Brand Templates</h3>
+            <p>Start with templates that automatically feature your brand's colors, fonts, and logos.</p>
+            <a href="freetrial.html" class="try-button">Try Brand Templates</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">✨</div>
+            <h3>Logo Maker</h3>
+            <p>Create professional logos with AI assistance and premium design elements.</p>
+            <a href="freetrial.html" class="try-button">Try Logo Maker</a>
+          </div>
         </div>
-        
-        <div class="ai-tool-card animate-on-scroll">
-          <div class="ai-tool-icon">✍️</div>
-          <h3>AI Writer</h3>
-          <p>Generate on-brand content in seconds, perfectly capturing your unique tone and style.</p>
+      </div>
+
+      <!-- Photo Tools Category -->
+      <div class="category-content photo-tools" data-category="photo-tools">
+        <div class="features-grid animate-on-scroll">
+          <div class="feature-card">
+            <div class="feature-icon">📸</div>
+            <h3>Photo Enhancer</h3>
+            <p>Enhance photo quality with AI-powered improvements and professional filters.</p>
+            <a href="freetrial.html" class="try-button">Try Photo Enhancer</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🌈</div>
+            <h3>Color Palette Generator</h3>
+            <p>Extract perfect color palettes from any image for your design projects.</p>
+            <a href="freetrial.html" class="try-button">Try Color Palette Generator</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">✂️</div>
+            <h3>Photo Editor</h3>
+            <p>Professional photo editing tools with layers, filters, and advanced adjustments.</p>
+            <a href="freetrial.html" class="try-button">Try Photo Editor</a>
+          </div>
         </div>
-        
-        <div class="ai-tool-card animate-on-scroll">
-          <div class="ai-tool-icon">🌍</div>
-          <h3>Auto Translate</h3>
-          <p>Take your brand global. Translate designs into 100+ languages instantly.</p>
+      </div>
+
+      <!-- Video Tools Category -->
+      <div class="category-content video-tools" data-category="video-tools">
+        <div class="features-grid animate-on-scroll">
+          <div class="feature-card">
+            <div class="feature-icon">🎬</div>
+            <h3>Video Background Remover</h3>
+            <p>Remove video backgrounds in one click—goodbye distractions, hello focus.</p>
+            <a href="freetrial.html" class="try-button">Try Video BG Remover</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🎵</div>
+            <h3>Beat Sync</h3>
+            <p>Sync your footage to the beat — no manual editing required for perfect timing.</p>
+            <a href="freetrial.html" class="try-button">Try Beat Sync</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h3>Auto Captions</h3>
+            <p>Auto-generate captions you can edit, animate, and style your way.</p>
+            <a href="freetrial.html" class="try-button">Try Auto Captions</a>
+          </div>
         </div>
-        
-        <div class="ai-tool-card animate-on-scroll">
-          <div class="ai-tool-icon">🎵</div>
-          <h3>Beat Sync</h3>
-          <p>Automatically match video clips to music rhythm. Create perfectly timed content.</p>
+      </div>
+
+      <!-- Creative Tools Category -->
+      <div class="category-content creative-tools" data-category="creative-tools">
+        <div class="features-grid animate-on-scroll">
+          <div class="feature-card">
+            <div class="feature-icon">💡</div>
+            <h3>Mind Maps</h3>
+            <p>Brainstorm and map out your ideas into actionable steps, all in a visual space.</p>
+            <a href="freetrial.html" class="try-button">Try Mind Maps</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Presentations</h3>
+            <p>Turn your ideas into compelling stories with dynamic presentations.</p>
+            <a href="freetrial.html" class="try-button">Try Presentations</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">📋</div>
+            <h3>Infographics</h3>
+            <p>Transform complex data into visually appealing and easy-to-understand infographics.</p>
+            <a href="freetrial.html" class="try-button">Try Infographics</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Print Tools Category -->
+      <div class="category-content print-tools" data-category="print-tools">
+        <div class="features-grid animate-on-scroll">
+          <div class="feature-card">
+            <div class="feature-icon">🖨️</div>
+            <h3>Business Cards</h3>
+            <p>Kickstart your print projects with professionally designed business card templates.</p>
+            <a href="freetrial.html" class="try-button">Try Business Cards</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">📄</div>
+            <h3>Brochures</h3>
+            <p>Create stunning brochures and flyers for your business or events.</p>
+            <a href="freetrial.html" class="try-button">Try Brochures</a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🎊</div>
+            <h3>Invitations</h3>
+            <p>Design beautiful invitations for weddings, parties, and special events.</p>
+            <a href="freetrial.html" class="try-button">Try Invitations</a>
+          </div>
         </div>
       </div>
     </div>
@@ -915,51 +1071,6 @@
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section class="testimonials" id="testimonials">
-    <div class="container">
-      <div class="section-header animate-on-scroll">
-        <h2>Loved by creators worldwide</h2>
-        <p>Join millions of satisfied users who create amazing designs with Camva Pro.</p>
-      </div>
-      
-      <div class="testimonials-grid">
-        <div class="testimonial-card animate-on-scroll">
-          <div class="testimonial-text">"Camva Pro has completely transformed my design workflow. The AI tools save me hours every week, and the quality is consistently professional."</div>
-          <div class="testimonial-author">
-            <div class="author-avatar">RK</div>
-            <div class="author-info">
-              <h4>Raj Kumar</h4>
-              <p>Digital Marketing Manager</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="testimonial-card animate-on-scroll">
-          <div class="testimonial-text">"The premium content library is incredible. I can find the perfect asset for any project, and the brand kit keeps everything consistent."</div>
-          <div class="testimonial-author">
-            <div class="author-avatar">PS</div>
-            <div class="author-info">
-              <h4>Priya Sharma</h4>
-              <p>Social Media Creator</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="testimonial-card animate-on-scroll">
-          <div class="testimonial-text">"As a small business owner, Camva Pro gives me the tools I need to create professional marketing materials without hiring a designer."</div>
-          <div class="testimonial-author">
-            <div class="author-avatar">AJ</div>
-            <div class="author-info">
-              <h4>Amit Jain</h4>
-              <p>Business Owner</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA Section -->
   <section class="cta-section">
     <div class="container animate-on-scroll">
@@ -1016,6 +1127,34 @@
   </footer>
 
   <script>
+    // Category Tab Switching
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.category-tab');
+      const contents = document.querySelectorAll('.category-content');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          const category = this.getAttribute('data-category');
+
+          // Remove active class from all tabs
+          tabs.forEach(t => t.classList.remove('active'));
+          // Add active class to clicked tab
+          this.classList.add('active');
+
+          // Hide all content
+          contents.forEach(content => {
+            content.classList.remove('active');
+          });
+
+          // Show selected category content
+          const selectedContent = document.querySelector(`.category-content[data-category="${category}"]`);
+          if (selectedContent) {
+            selectedContent.classList.add('active');
+          }
+        });
+      });
+    });
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -1062,7 +1201,7 @@
     });
 
     // Add loading animation to buttons
-    document.querySelectorAll('.cta-button, .hero-button, .pricing-button, .cta-btn').forEach(button => {
+    document.querySelectorAll('.cta-button, .hero-button, .pricing-button, .cta-btn, .try-button').forEach(button => {
       button.addEventListener('click', function(e) {
         if (this.href && (this.href.includes('freetrial.html') || this.href.includes('giveaway.html'))) {
           e.preventDefault();
@@ -1075,36 +1214,6 @@
           }, 1000);
         }
       });
-    });
-
-    // Add hover effects to cards
-    document.querySelectorAll('.feature-card, .ai-tool-card, .pricing-card, .testimonial-card').forEach(card => {
-      card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-8px) scale(1.02)';
-      });
-      
-      card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-      });
-    });
-
-    // Typing effect for hero title (optional enhancement)
-    const heroTitle = document.querySelector('.hero h1');
-    const titleText = heroTitle.textContent;
-    heroTitle.textContent = '';
-    
-    let i = 0;
-    function typeWriter() {
-      if (i < titleText.length) {
-        heroTitle.textContent += titleText.charAt(i);
-        i++;
-        setTimeout(typeWriter, 50);
-      }
-    }
-    
-    // Start typing effect after page load
-    window.addEventListener('load', () => {
-      setTimeout(typeWriter, 500);
     });
 
     // Stats counter animation
@@ -1141,7 +1250,20 @@
       });
     }, { threshold: 0.5 });
 
-    statsObserver.observe(statsSection);
+    if (statsSection) {
+      statsObserver.observe(statsSection);
+    }
+
+    // Add hover effects to feature cards
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-8px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
   </script>
 </body>
 </html>
