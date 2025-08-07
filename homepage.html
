@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Camva Pro - Your All-in-One Design Solution</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Take your designs to the next level with Camva Pro. Access premium content, brand tools, and AI features to reach your goals faster.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-primary: #6366f1;
+      --brand-secondary: #4f46e5;
+      --brand-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      --accent-purple: #a855f7;
+      --accent-pink: #ec4899;
+      --accent-cyan: #06b6d4;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-light: #64748b;
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+      --shadow-xl: 0 25px 50px rgba(0,0,0,0.15);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+      transition: all var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    .logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--brand-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--brand-primary);
+    }
+
+    .cta-button {
+      background: var(--brand-gradient);
+      color: white;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
+      padding: 120px 0 80px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.08)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.06)"/></svg>');
+      animation: floating 25s linear infinite;
+    }
+
+    @keyframes floating {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-100px, -100px) rotate(360deg); }
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(45deg, #fff, #f0f9ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 40px;
+      opacity: 0.95;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-button {
+      padding: 16px 32px;
+      border-radius: var(--radius-md);
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-button.primary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-button.secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .hero-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Stats Section */
+    .stats {
+      background: var(--bg-primary);
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .stats-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      text-align: center;
+    }
+
+    .stat-item h3 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--brand-primary);
+      margin-bottom: 8px;
+    }
+
+    .stat-item p {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 100px 0;
+      background: var(--bg-secondary);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-header h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+
+    .section-header p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+    }
+
+    .feature-card {
+      background: var(--bg-primary);
+      padding: 40px;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--brand-gradient);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-lg);
+      background: var(--brand-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 1.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* AI Tools Section */
+    .ai-tools {
+      padding: 100px 0;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    }
+
+    .ai-tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    .ai-tool-card {
+      background: var(--bg-primary);
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition);
+      border: 1px solid rgba(99, 102, 241, 0.1);
+    }
+
+    .ai-tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--brand-primary);
+    }
+
+    .ai-tool-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      color: white;
+    }
+
+    /* Pricing Section */
+    .pricing {
+      padding: 100px 0;
+      background: var(--bg-primary);
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      max-width: 1000px;
+      margin: 60px auto 0;
+    }
+
+    .pricing-card {
+      background: var(--bg-primary);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      box-shadow: var(--shadow-lg);
+      transition: all var(--transition);
+      position: relative;
+      border: 2px solid var(--border-color);
+    }
+
+    .pricing-card.featured {
+      border-color: var(--brand-primary);
+      transform: scale(1.05);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .pricing-card.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--brand-gradient);
+      color: white;
+      padding: 6px 20px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .pricing-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .pricing-card .price {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--brand-primary);
+      margin-bottom: 8px;
+    }
+
+    .pricing-card .period {
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 40px;
+    }
+
+    .pricing-features li {
+      padding: 8px 0;
+      color: var(--text-secondary);
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .pricing-button {
+      width: 100%;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      display: block;
+      transition: all var(--transition);
+      border: 2px solid var(--brand-primary);
+    }
+
+    .pricing-button.primary {
+      background: var(--brand-gradient);
+      color: white;
+    }
+
+    .pricing-button.secondary {
+      background: transparent;
+      color: var(--brand-primary);
+    }
+
+    .pricing-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 100px 0;
+      background: var(--bg-secondary);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .testimonial-card {
+      background: var(--bg-primary);
+      padding: 40px;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition);
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .testimonial-text {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--brand-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+
+    .author-info h4 {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .author-info p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 100px 0;
+      background: var(--brand-gradient);
+      color: white;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      opacity: 0.95;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      padding: 16px 32px;
+      border-radius: var(--radius-md);
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .cta-btn.white {
+      background: white;
+      color: var(--brand-primary);
+    }
+
+    .cta-btn.outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--text-primary);
+      color: white;
+      padding: 60px 0 30px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-section h3 {
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 12px;
+    }
+
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .footer-section a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .section-header h2 {
+        font-size: 2.2rem;
+      }
+
+      .features-grid,
+      .ai-tools-grid,
+      .pricing-cards,
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-card.featured {
+        transform: none;
+      }
+
+      .container,
+      .hero-content,
+      .nav-container {
+        padding: 0 20px;
+      }
+    }
+
+    /* Animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Loading Animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">Camva Pro</a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="giveaway.html">Giveaway</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="freetrial.html" class="cta-button">Start Free Trial</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Your all-in-one design solution</h1>
+      <p>Take your designs to the next level with premium content, brand tools, and AI features to help you reach your goals faster.</p>
+      <div class="hero-buttons">
+        <a href="freetrial.html" class="hero-button primary">Start Free Trial</a>
+        <a href="#features" class="hero-button secondary">Explore Features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="stats-container">
+      <div class="stat-item animate-on-scroll">
+        <h3>100M+</h3>
+        <p>Premium Photos & Graphics</p>
+      </div>
+      <div class="stat-item animate-on-scroll">
+        <h3>25+</h3>
+        <p>AI-Powered Tools</p>
+      </div>
+      <div class="stat-item animate-on-scroll">
+        <h3>100K+</h3>
+        <p>Premium Templates</p>
+      </div>
+      <div class="stat-item animate-on-scroll">
+        <h3>10M+</h3>
+        <p>Happy Creators</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2>Everything you need to create professional content</h2>
+        <p>Access premium templates, unlimited content, and powerful AI tools to bring your ideas to life faster than ever.</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">🎨</div>
+          <h3>Premium Content Library</h3>
+          <p>Access over 100 million premium photos, videos, graphics, fonts, and audio tracks. Create standout professional content with unlimited access to world-class assets.</p>
+        </div>
+        
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">🤖</div>
+          <h3>AI-Powered Design Tools</h3>
+          <p>Unlock 25+ AI tools and one-click features. Generate designs in bulk, remove backgrounds, create custom graphics, and personalize content at scale.</p>
+        </div>
+        
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">🏢</div>
+          <h3>Brand Management</h3>
+          <p>Keep your brand consistent with brand kits. Apply your colors, logos, and fonts instantly across all content. Create professional brand templates with one click.</p>
+        </div>
+        
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">📱</div>
+          <h3>Multi-Format Creation</h3>
+          <p>Seamlessly create across formats. Combine social posts, print materials, videos, and presentations in one workspace. Auto-resize for any platform.</p>
+        </div>
+        
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">🎬</div>
+          <h3>Video & Animation</h3>
+          <p>Create stunning videos with background removal, auto-captions, beat sync, and premium video libraries. Turn your content into engaging visual stories.</p>
+        </div>
+        
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">🖨️</div>
+          <h3>Print-Ready Designs</h3>
+          <p>Professional print templates for every occasion. Adapt designs to any print format with flawless quality. Get perfect prints with our satisfaction guarantee.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Tools Section -->
+  <section class="ai-tools">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2>25+ AI-Powered Features</h2>
+        <p>Work smarter with our conversational AI assistant and powerful automation tools.</p>
+      </div>
+      
+      <div class="ai-tools-grid">
+        <div class="ai-tool-card animate-on-scroll">
+          <div class="ai-tool-icon">🎭</div>
+          <h3>Background Remover</h3>
+          <p>Remove backgrounds in one click to make products, headshots, or logos shine.</p>
+        </div>
+        
+        <div class="ai-tool-card animate-on-scroll">
+          <div class="ai-tool-icon">🎨</div>
+          <h3>AI Image Generator</h3>
+          <p>Generate picture-perfect backgrounds and graphics from text prompts.</p>
+        </div>
+        
+        <div class="ai-tool-card animate-on-scroll">
+          <div class="ai-tool-icon">📐</div>
+          <h3>Magic Resize</h3>
+          <p>Automatically reformat content for social media, print, and more with one click.</p>
+        </div>
+        
+        <div class="ai-tool-card animate-on-scroll">
+          <div class="ai-tool-icon">✍️</div>
+          <h3>AI Writer</h3>
+          <p>Generate on-brand content in seconds, perfectly capturing your unique tone and style.</p>
+        </div>
+        
+        <div class="ai-tool-card animate-on-scroll">
+          <div class="ai-tool-icon">🌍</div>
+          <h3>Auto Translate</h3>
+          <p>Take your brand global. Translate designs into 100+ languages instantly.</p>
+        </div>
+        
+        <div class="ai-tool-card animate-on-scroll">
+          <div class="ai-tool-icon">🎵</div>
+          <h3>Beat Sync</h3>
+          <p>Automatically match video clips to music rhythm. Create perfectly timed content.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2>Choose Your Plan</h2>
+        <p>Get everything you need to create professional content and grow your business.</p>
+      </div>
+      
+      <div class="pricing-cards">
+        <div class="pricing-card animate-on-scroll">
+          <h3>Monthly</h3>
+          <div class="price">₹999</div>
+          <div class="period">per month</div>
+          <ul class="pricing-features">
+            <li>100M+ premium assets</li>
+            <li>25+ AI-powered tools</li>
+            <li>Brand kit & templates</li>
+            <li>Background remover</li>
+            <li>Magic resize</li>
+            <li>Premium support</li>
+          </ul>
+          <a href="freetrial.html" class="pricing-button secondary">Start Free Trial</a>
+        </div>
+        
+        <div class="pricing-card featured animate-on-scroll">
+          <h3>Annual</h3>
+          <div class="price">₹6,999</div>
+          <div class="period">per year (Save 42%)</div>
+          <ul class="pricing-features">
+            <li>Everything in Monthly</li>
+            <li>Priority support</li>
+            <li>Advanced AI features</li>
+            <li>Bulk creation tools</li>
+            <li>Team collaboration</li>
+            <li>30-day refund policy</li>
+          </ul>
+          <a href="freetrial.html" class="pricing-button primary">Start Free Trial</a>
+        </div>
+        
+        <div class="pricing-card animate-on-scroll">
+          <h3>Quarterly</h3>
+          <div class="price">₹2,499</div>
+          <div class="period">per 3 months</div>
+          <ul class="pricing-features">
+            <li>Everything in Monthly</li>
+            <li>Extended AI usage</li>
+            <li>Premium templates</li>
+            <li>Video editing tools</li>
+            <li>Print designs</li>
+            <li>7-day refund policy</li>
+          </ul>
+          <a href="freetrial.html" class="pricing-button secondary">Start Free Trial</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2>Loved by creators worldwide</h2>
+        <p>Join millions of satisfied users who create amazing designs with Camva Pro.</p>
+      </div>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-text">"Camva Pro has completely transformed my design workflow. The AI tools save me hours every week, and the quality is consistently professional."</div>
+          <div class="testimonial-author">
+            <div class="author-avatar">RK</div>
+            <div class="author-info">
+              <h4>Raj Kumar</h4>
+              <p>Digital Marketing Manager</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-text">"The premium content library is incredible. I can find the perfect asset for any project, and the brand kit keeps everything consistent."</div>
+          <div class="testimonial-author">
+            <div class="author-avatar">PS</div>
+            <div class="author-info">
+              <h4>Priya Sharma</h4>
+              <p>Social Media Creator</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-text">"As a small business owner, Camva Pro gives me the tools I need to create professional marketing materials without hiring a designer."</div>
+          <div class="testimonial-author">
+            <div class="author-avatar">AJ</div>
+            <div class="author-info">
+              <h4>Amit Jain</h4>
+              <p>Business Owner</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container animate-on-scroll">
+      <h2>Ready to create amazing designs?</h2>
+      <p>Start your free trial today and experience the power of Camva Pro.</p>
+      <div class="cta-buttons">
+        <a href="freetrial.html" class="cta-btn white">Start Free Trial</a>
+        <a href="giveaway.html" class="cta-btn outline">Join Monthly Giveaway</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Camva Pro</h3>
+        <p>Your all-in-one design solution for creating professional content faster and smarter.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="freetrial.html">Free Trial</a></li>
+          <li><a href="giveaway.html">Monthly Giveaway</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="help.html">Help Center</a></li>
+          <li><a href="refund.html">Refund Policy</a></li>
+          <li><a href="mailto:zulbulai@gmail.com">Email Support</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="refund.html">Refund Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Camva Pro. All rights reserved. Design your dreams into reality.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+        navbar.style.backdropFilter = 'blur(20px)';
+      } else {
+        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+        navbar.style.backdropFilter = 'blur(20px)';
+      }
+    });
+
+    // Animate on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with animate-on-scroll class
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Add loading animation to buttons
+    document.querySelectorAll('.cta-button, .hero-button, .pricing-button, .cta-btn').forEach(button => {
+      button.addEventListener('click', function(e) {
+        if (this.href && (this.href.includes('freetrial.html') || this.href.includes('giveaway.html'))) {
+          e.preventDefault();
+          const originalText = this.innerHTML;
+          this.innerHTML = '<span class="loading"></span> Loading...';
+          this.style.pointerEvents = 'none';
+          
+          setTimeout(() => {
+            window.location.href = this.href;
+          }, 1000);
+        }
+      });
+    });
+
+    // Add hover effects to cards
+    document.querySelectorAll('.feature-card, .ai-tool-card, .pricing-card, .testimonial-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-8px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Typing effect for hero title (optional enhancement)
+    const heroTitle = document.querySelector('.hero h1');
+    const titleText = heroTitle.textContent;
+    heroTitle.textContent = '';
+    
+    let i = 0;
+    function typeWriter() {
+      if (i < titleText.length) {
+        heroTitle.textContent += titleText.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50);
+      }
+    }
+    
+    // Start typing effect after page load
+    window.addEventListener('load', () => {
+      setTimeout(typeWriter, 500);
+    });
+
+    // Stats counter animation
+    function animateStats() {
+      const statItems = document.querySelectorAll('.stat-item h3');
+      
+      statItems.forEach(stat => {
+        const target = stat.textContent;
+        const num = parseInt(target.replace(/\D/g, ''));
+        const suffix = target.replace(/\d/g, '');
+        let current = 0;
+        
+        const increment = num / 50;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= num) {
+            stat.textContent = target;
+            clearInterval(timer);
+          } else {
+            stat.textContent = Math.floor(current) + suffix;
+          }
+        }, 30);
+      });
+    }
+
+    // Trigger stats animation when stats section is visible
+    const statsSection = document.querySelector('.stats');
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateStats();
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statsObserver.observe(statsSection);
+  </script>
+</body>
+</html>
