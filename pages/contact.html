@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us – Camva Pro</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Contact Camva Pro via form or WhatsApp.">
+  <style>
+    :root {
+      --brand: #6366f1;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --radius: 12px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --transition: .3s ease;
+      --whatsapp: #25d366;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family: Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height:1.6;
+      min-height:100vh;
+    }
+    .container {
+      max-width: 500px;
+      margin: 60px auto;
+      padding: 0 16px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px 24px;
+      animation: fadeIn .6s ease-out;
+    }
+    @keyframes fadeIn {
+      from {opacity:0;transform:translateY(20px);}
+      to {opacity:1;transform:none;}
+    }
+    h1 {
+      font-size:2rem;
+      color: var(--brand);
+      text-align:center;
+      margin-bottom:8px;
+    }
+    p.lead {
+      text-align:center;
+      color: var(--muted);
+      margin-bottom:24px;
+    }
+    .form-group {
+      margin-bottom:20px;
+    }
+    label {
+      display:block;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+    input, textarea {
+      width:100%;
+      padding:12px;
+      border:2px solid var(--muted);
+      border-radius: var(--radius);
+      font-size:1rem;
+      transition:border var(--transition);
+    }
+    input:focus, textarea:focus {
+      border-color: var(--brand);
+      outline:none;
+    }
+    textarea {
+      resize: vertical;
+      min-height:120px;
+    }
+    .btn {
+      display:inline-block;
+      width:100%;
+      padding:14px;
+      background: var(--brand);
+      color:#fff;
+      text-align:center;
+      border:none;
+      border-radius: var(--radius);
+      font-size:1rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:background var(--transition),transform var(--transition);
+    }
+    .btn:hover {
+      background: var(--whatsapp);
+      transform:translateY(-2px);
+    }
+    .alert {
+      margin-top:16px;
+      padding:12px 14px;
+      border-radius: var(--radius);
+      background: #fee2e2;
+      color: #991b1b;
+      border-left:4px solid var(--danger);
+    }
+    .footer {
+      text-align:center;
+      color: var(--muted);
+      font-size:.9rem;
+      margin-top:24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Contact Us</h1>
+      <p class="lead">Have a question or need help? Send us a message!</p>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Full Name*</label>
+          <input type="text" id="name" name="name" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address*</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Your Message*</label>
+          <textarea id="message" name="message" placeholder="Describe your issue or feedback" required></textarea>
+        </div>
+        <button type="submit" class="btn">Submit via WhatsApp</button>
+        <div id="alert"></div>
+      </form>
+    </div>
+    <div class="footer">
+      Or reach us directly on WhatsApp: +91 92508 53188<br>
+      Email: <a href="mailto:zulbulai@gmail.com">zulbulai@gmail.com</a>
+    </div>
+  </div>
+  <script>
+    const form = document.getElementById('contactForm');
+    const alertEl = document.getElementById('alert');
+    const SUPPORT_NUMBER = '91916387617678';
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      alertEl.innerHTML = '';
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const msg = form.message.value.trim();
+      if (!name || !email || !msg) {
+        alertEl.innerHTML = '<div class="alert">All fields are required.</div>';
+        return;
+      }
+      if (!/^[^s@]+@[^s@]+.[^s@]+$/.test(email)) {
+        alertEl.innerHTML = '<div class="alert">Please enter a valid email address.</div>';
+        return;
+      }
+      const text = 
+        `Hello Camva Pro Team 👋
+` +
+        `Name: ${name}
+` +
+        `Email: ${email}
+` +
+        `Message: ${msg}`;
+      const url = `https://wa.me/${SUPPORT_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    });
+  </script>
+</body>
+</html>
