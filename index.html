@@ -1,90 +1,1016 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>Camva Pro – Secure Gateway</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camva Pro - Professional Design Platform</title>
+    <meta name="description" content="Access premium design tools, AI-powered features, and 100,000+ templates with Camva Pro subscription">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<!-- ----------  INLINE CSS  ---------- -->
-<style>
-  :root{
-    --g1:#667eea; --g2:#764ba2; --grey:#f4f6fa; --dark:#1f2937;
-    --radius:16px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,'Segoe UI',Roboto,sans-serif}
-  body{
-    min-height:100vh;display:flex;justify-content:center;align-items:center;
-    background:linear-gradient(135deg,var(--g1),var(--g2));padding:20px;
-  }
-  .wrap{
-    width:100%;max-width:420px;background:#fff;border-radius:var(--radius);
-    box-shadow:0 20px 60px #0003;padding:40px 30px;text-align:center;
-  }
-  .logo{font-size:2.8rem;margin-bottom:12px;color:var(--g1)}
-  h1{font-size:1.6rem;color:var(--dark);margin-bottom:6px;font-weight:600}
-  p.sub{color:#555;font-size:.95rem;margin-bottom:28px}
-  input{
-    width:100%;padding:14px;border:2px solid var(--grey);border-radius:12px;
-    font-size:1.15rem;letter-spacing:2px;text-align:center;
-    transition:border .25s;outline:none;background:#fafbff
-  }
-  input:focus{border-color:var(--g1)}
-  button{
-    width:100%;margin-top:16px;padding:14px;border:none;border-radius:12px;
-    background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;
-    font-size:1.05rem;font-weight:600;cursor:pointer;transition:all .25s
-  }
-  button:hover{box-shadow:0 10px 28px #667eea44;transform:translateY(-2px)}
-  .error{color:#e74c3c;font-size:.9rem;height:20px;margin-top:10px;opacity:0;transition:opacity .3s}
-  .links{margin-top:32px;display:grid;gap:14px}
-  .links a{
-    display:block;padding:13px;border-radius:10px;text-decoration:none;text-align:center;
-    background:#fff;border:2px solid var(--g1);color:var(--g1);font-weight:600;
-    transition:all .25s;font-size:.96rem
-  }
-  .links a:hover{background:var(--g1);color:#fff;box-shadow:0 8px 22px #667eea33}
-  @media(max-width:500px){.wrap{padding:32px 20px}}
-</style>
+        :root {
+            /* Modern Color Palette */
+            --primary: #667eea;
+            --primary-dark: #5a67d8;
+            --primary-light: #a3bffa;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            
+            /* Colors */
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --info: #3b82f6;
+            
+            /* Grays */
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-colored: 0 20px 40px -10px rgba(102, 126, 234, 0.3);
+            
+            /* Transitions */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Typography */
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* =============== HEADER =============== */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -0.25rem;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-colored);
+        }
+
+        /* =============== MAIN CONTAINER =============== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .main {
+            min-height: calc(100vh - 140px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 0;
+        }
+
+        /* =============== HERO CARD =============== */
+        .hero-card {
+            background: var(--white);
+            border-radius: 2rem;
+            padding: 3rem;
+            box-shadow: var(--shadow-2xl);
+            border: 1px solid var(--gray-200);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* =============== ACCESS FORM =============== */
+        .access-form {
+            margin: 2rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+            text-align: left;
+        }
+
+        .code-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 2px;
+            background: var(--gray-50);
+            transition: var(--transition);
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .access-button {
+            width: 100%;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .access-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-colored);
+        }
+
+        .access-button:active {
+            transform: translateY(0);
+        }
+
+        /* =============== ACTION BUTTONS =============== */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+
+        .action-btn {
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            padding: 1.25rem 1.5rem;
+            border-radius: 1rem;
+            text-decoration: none;
+            color: var(--gray-800);
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .action-btn:hover {
+            color: var(--white);
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-colored);
+        }
+
+        .action-btn:hover::before {
+            left: 0;
+        }
+
+        .action-btn.primary {
+            background: var(--gradient-primary);
+            color: var(--white);
+            border-color: transparent;
+        }
+
+        .action-btn.secondary {
+            background: var(--gradient-secondary);
+            color: var(--white);
+            border-color: transparent;
+        }
+
+        .action-btn.accent {
+            background: var(--gradient-accent);
+            color: var(--white);
+            border-color: transparent;
+        }
+
+        /* =============== FEATURES GRID =============== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+            padding: 2rem 0;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            margin: 0 auto 1rem;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.25rem;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* =============== ALERT MESSAGES =============== */
+        .alert {
+            padding: 1rem 1.25rem;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+            border-left: 4px solid var(--error);
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #047857;
+            border-left: 4px solid var(--success);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =============== FOOTER =============== */
+        .footer {
+            background: var(--gray-900);
+            color: var(--gray-300);
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--white);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: var(--font-display);
+        }
+
+        .footer-links {
+            list-style: none;
+            space-y: 0.5rem;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-700);
+            padding-top: 1.5rem;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--gray-800);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* =============== RESPONSIVE DESIGN =============== */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-card {
+                margin: 1rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .footer-bottom {
+                text-align: center;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .hero-title {
+                font-size: 1.75rem;
+            }
+
+            .code-input {
+                font-size: 1rem;
+                padding: 0.875rem 1rem;
+            }
+        }
+
+        /* =============== ANIMATIONS =============== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-card {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* =============== LOADING STATE =============== */
+        .loading {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: var(--white);
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+    </style>
 </head>
-
-<!-- ----------  HTML  ---------- -->
 <body>
-  <div class="wrap">
-    <div class="logo">🔒</div>
-    <h1>Secure Access</h1>
-    <p class="sub">Enter your access code to continue</p>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo">
+                <i class="fas fa-palette"></i>
+                Camva Pro
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link">Home</a></li>
+                <li><a href="#" class="nav-link">Features</a></li>
+                <li><a href="#" class="nav-link">Pricing</a></li>
+                <li><a href="#" class="nav-link">Templates</a></li>
+                <li><a href="#" class="nav-link">Support</a></li>
+            </ul>
+            
+            <a href="#" class="nav-cta">
+                <i class="fas fa-crown"></i>
+                Go Pro
+            </a>
+        </nav>
+    </header>
 
-    <input id="pwd" type="password" maxlength="6" autocomplete="off" placeholder="••••••"/>
-    <button id="submit">Unlock</button>
-    <div id="msg" class="error"></div>
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="hero-card">
+                <h1 class="hero-title">
+                    <i class="fas fa-sparkles"></i>
+                    Welcome to Camva Pro
+                </h1>
+                <p class="hero-subtitle">
+                    Access premium design tools, AI-powered features, and 100,000+ professional templates. 
+                    Enter your access code to continue to your personalized dashboard.
+                </p>
 
-    <div class="links">
-      <a href="subscription.html">➕ New Subscription</a>
-      <a href="trial.html">🎁 1-Day Free Trial</a>
-    </div>
-  </div>
+                <!-- Access Form -->
+                <form class="access-form" id="accessForm">
+                    <div class="form-group">
+                        <label for="accessCode" class="form-label">
+                            <i class="fas fa-key"></i>
+                            Enter Access Code
+                        </label>
+                        <input 
+                            type="text" 
+                            id="accessCode" 
+                            class="code-input" 
+                            placeholder="••••••"
+                            maxlength="6"
+                            required
+                            autocomplete="off"
+                        >
+                    </div>
+                    <button type="submit" class="access-button" id="accessButton">
+                        <i class="fas fa-unlock"></i>
+                        Access Dashboard
+                    </button>
+                </form>
 
-<!-- ----------  INLINE JS  ---------- -->
-<script>
-  const pwd = document.getElementById('pwd'),
-        btn = document.getElementById('submit'),
-        msg = document.getElementById('msg');
+                <div id="alertContainer"></div>
 
-  function go(){
-    const code = pwd.value.trim();
-    if(code==='121212'){
-      window.location.href='data.html';
-    }else if(code==='734872'){
-      window.location.href='Dashboard.html';
-    }else{
-      msg.textContent='Incorrect code, try again';msg.style.opacity=1;
-      pwd.value='';pwd.focus();
-    }
-  }
+                <!-- Quick Action Buttons -->
+                <div class="action-buttons">
+                    <a href="#" class="action-btn primary" onclick="handleSubscription()">
+                        <i class="fas fa-crown"></i>
+                        Buy New Subscription
+                    </a>
+                    
+                    <a href="#" class="action-btn secondary" onclick="handleFreeTrial()">
+                        <i class="fas fa-gift"></i>
+                        1 Day Free Trial
+                    </a>
+                    
+                    <a href="#" class="action-btn accent" onclick="handleGiveaway()">
+                        <i class="fas fa-trophy"></i>
+                        Monthly Giveaway
+                    </a>
+                    
+                    <a href="#" class="action-btn" onclick="handleAffiliate()">
+                        <i class="fas fa-handshake"></i>
+                        Join Affiliate Program
+                    </a>
+                </div>
 
-  btn.onclick = go;
-  pwd.addEventListener('keyup',e=>{ if(e.key==='Enter') go(); });
-  pwd.focus();
-</script>
+                <!-- Features Highlight -->
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <h4 class="feature-title">AI-Powered</h4>
+                        <p class="feature-desc">Smart design assistance with AI tools</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <h4 class="feature-title">100K+ Templates</h4>
+                        <p class="feature-desc">Professional templates for every need</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h4 class="feature-title">Cloud Sync</h4>
+                        <p class="feature-desc">Access your work from anywhere</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4 class="feature-title">Team Collaboration</h4>
+                        <p class="feature-desc">Work together seamlessly</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>
+                        <i class="fas fa-palette"></i>
+                        Camva Pro
+                    </h4>
+                    <p style="margin-bottom: 1rem;">
+                        Professional design platform with AI-powered tools, premium templates, and advanced features for creators and businesses.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Templates</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Mobile Apps</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">System Status</a></li>
+                        <li><a href="#">Bug Reports</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div>
+                    <p>&copy; 2025 Camva Pro. All rights reserved.</p>
+                </div>
+                <div>
+                    <p>Made with <span style="color: #f093fb;">❤</span> for creators worldwide</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // =============== ACCESS CODE VALIDATION ===============
+        const ACCESS_CODES = {
+            '121212': 'data.html',
+            '734872': 'dashboard.html'
+        };
+
+        // Form submission handler
+        document.getElementById('accessForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleAccessCode();
+        });
+
+        // Auto-format code input
+        document.getElementById('accessCode').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+            if (value.length > 6) value = value.slice(0, 6);
+            e.target.value = value;
+            
+            // Auto-submit if 6 digits entered
+            if (value.length === 6) {
+                setTimeout(handleAccessCode, 300);
+            }
+        });
+
+        function handleAccessCode() {
+            const codeInput = document.getElementById('accessCode');
+            const accessButton = document.getElementById('accessButton');
+            const alertContainer = document.getElementById('alertContainer');
+            const code = codeInput.value.trim();
+            
+            // Clear previous alerts
+            alertContainer.innerHTML = '';
+            
+            // Validation
+            if (!code) {
+                showAlert('Please enter an access code', 'error');
+                return;
+            }
+            
+            if (code.length !== 6) {
+                showAlert('Access code must be 6 digits', 'error');
+                return;
+            }
+            
+            // Show loading state
+            accessButton.innerHTML = '<div class="loading"></div>Verifying...';
+            accessButton.classList.add('btn-loading');
+            codeInput.disabled = true;
+            
+            // Simulate verification delay
+            setTimeout(() => {
+                if (ACCESS_CODES[code]) {
+                    showAlert('Access granted! Redirecting...', 'success');
+                    
+                    // Add success animation
+                    document.querySelector('.hero-card').style.transform = 'scale(1.02)';
+                    
+                    // Redirect after success message
+                    setTimeout(() => {
+                        window.location.href = ACCESS_CODES[code];
+                    }, 1500);
+                    
+                } else {
+                    showAlert('Invalid access code. Please try again.', 'error');
+                    
+                    // Reset form
+                    accessButton.innerHTML = '<i class="fas fa-unlock"></i>Access Dashboard';
+                    accessButton.classList.remove('btn-loading');
+                    codeInput.disabled = false;
+                    codeInput.focus();
+                    codeInput.select();
+                    
+                    // Shake animation for error
+                    codeInput.style.animation = 'shake 0.5s ease-in-out';
+                    setTimeout(() => {
+                        codeInput.style.animation = '';
+                    }, 500);
+                }
+            }, 1500);
+        }
+
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            
+            const icon = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+            alertDiv.innerHTML = `
+                <i class="${icon}"></i>
+                <span>${message}</span>
+            `;
+            
+            alertContainer.appendChild(alertDiv);
+            
+            // Auto-remove success alerts
+            if (type === 'success') {
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, 3000);
+            }
+        }
+
+        // =============== ACTION BUTTON HANDLERS ===============
+        function handleSubscription() {
+            showNotification('Redirecting to subscription plans...', 'info');
+            setTimeout(() => {
+                window.location.href = 'subscription.html';
+            }, 1000);
+        }
+
+        function handleFreeTrial() {
+            showNotification('Starting your free trial...', 'success');
+            setTimeout(() => {
+                window.location.href = 'free-trial.html';
+            }, 1000);
+        }
+
+        function handleGiveaway() {
+            showNotification('Opening monthly giveaway...', 'info');
+            setTimeout(() => {
+                window.location.href = 'giveaway.html';
+            }, 1000);
+        }
+
+        function handleAffiliate() {
+            showNotification('Loading affiliate program...', 'info');
+            setTimeout(() => {
+                window.location.href = 'affiliate.html';
+            }, 1000);
+        }
+
+        function showNotification(message, type) {
+            // Create notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--gradient-primary);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                box-shadow: var(--shadow-xl);
+                z-index: 1000;
+                animation: slideInRight 0.3s ease-out;
+                font-weight: 600;
+            `;
+            notification.innerHTML = `
+                <i class="fas fa-info-circle"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // =============== KEYBOARD SHORTCUTS ===============
+        document.addEventListener('keydown', function(e) {
+            // Enter key on code input
+            if (e.key === 'Enter' && document.activeElement.id === 'accessCode') {
+                handleAccessCode();
+            }
+            
+            // Escape to clear form
+            if (e.key === 'Escape') {
+                document.getElementById('accessCode').value = '';
+                document.getElementById('alertContainer').innerHTML = '';
+            }
+        });
+
+        // =============== ADDITIONAL ANIMATIONS ===============
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // =============== PAGE LOAD ANIMATION ===============
+        window.addEventListener('load', function() {
+            document.querySelector('.hero-card').style.opacity = '0';
+            document.querySelector('.hero-card').style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                document.querySelector('.hero-card').style.transition = 'all 0.6s ease-out';
+                document.querySelector('.hero-card').style.opacity = '1';
+                document.querySelector('.hero-card').style.transform = 'translateY(0)';
+            }, 100);
+            
+            // Focus on input after page load
+            setTimeout(() => {
+                document.getElementById('accessCode').focus();
+            }, 800);
+        });
+    </script>
 </body>
 </html>
