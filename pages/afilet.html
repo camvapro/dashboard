@@ -406,6 +406,11 @@
             cursor: pointer;
         }
 
+        .btn-success:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
         .btn-cancel {
             flex: 1;
             background: #6c757d;
@@ -469,6 +474,7 @@
             font-size: 12px;
             font-weight: 600;
             z-index: 1001;
+            display: none;
         }
 
         .connection-success {
@@ -504,7 +510,7 @@
         </div>
 
         <!-- Connection Status -->
-        <div id="connectionStatus" class="connection-status" style="display: none;"></div>
+        <div id="connectionStatus" class="connection-status"></div>
 
         <!-- Login Section -->
         <div id="loginSection">
@@ -605,7 +611,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="customerWhatsApp">WhatsApp Number *</label>
-                            <input type="tel" id="customerWhatsApp" required placeholder="e.g: 9876543210" maxlength="10">
+                            <input type="tel" id="customerWhatsApp" required placeholder="e.g: 9876543210" maxlength="10" pattern="[0-9]{10}">
                         </div>
                         <div class="form-group">
                             <label for="planType">Subscription Plan *</label>
@@ -649,7 +655,7 @@
                     </div>
 
                     <div class="form-buttons">
-                        <button type="submit" class="btn-success">💾 Add Subscription</button>
+                        <button type="submit" class="btn-success" id="submitBtn">💾 Add Subscription</button>
                         <button type="button" class="btn-cancel" onclick="closeAddForm()">❌ Cancel</button>
                     </div>
                 </form>
@@ -659,68 +665,11 @@
 
     <script>
         // 🔧 APPS SCRIPT WEB APP URL - Replace with your actual URL
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwbLo6Uw_50L7i9-vujj5Tna3CnHeF84zY2G3zK3PFlf-dRT47g4SjkmT35dDd_Nsg/exec';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx_PZ7CqQZYQPBI6qZ3IbyGJHJbPXBLnxFsIYjDkK84kVU64DZM4763j3JacFGei5_Kkg/exec';
 
         // Global Variables
         let currentAffiliate = null;
         let dashboardData = null;
-
-        // Email Templates
-        const EMAIL_TEMPLATES = {
-            welcome: {
-                subject: 'Welcome to Camva Pro - Subscription Activated!',
-                body: `Dear [CUSTOMER_NAME],
-
-Welcome to Camva Pro! 🎉
-
-Your subscription has been successfully activated:
-• Plan: [PLAN_TYPE]
-• Amount: ₹[AMOUNT]
-• Valid until: [EXPIRY_DATE]
-
-Start creating amazing designs now!
-
-Best regards,
-Camva Pro Team`
-            },
-            expiry: {
-                subject: 'Camva Pro Subscription Expired - Renew Now!',
-                body: `Dear [CUSTOMER_NAME],
-
-Your Camva Pro subscription expired on [EXPIRY_DATE].
-
-Renew now to continue using premium features:
-• Monthly: ₹49
-• Quarterly: ₹99
-• Annual: ₹299 (Best Value!)
-
-Best regards,
-Camva Pro Team`
-            }
-        };
-
-        // WhatsApp Templates
-        const WHATSAPP_TEMPLATES = {
-            welcome: `🎉 Welcome to Camva Pro!
-
-Hi [CUSTOMER_NAME], your subscription is active!
-
-Plan: [PLAN_TYPE] (₹[AMOUNT])
-Valid until: [EXPIRY_DATE]
-
-Start creating! Need help? Reply here.`,
-
-            expiry: `⚠️ Subscription Expired
-
-Hi [CUSTOMER_NAME], your subscription expired on [EXPIRY_DATE].
-
-Renew now:
-• Monthly: ₹49
-• Quarterly: ₹99  
-• Annual: ₹299
-
-Don't lose your premium access!`
-        };
 
         // Utility Functions
         function showConnectionStatus(message, isSuccess = true) {
@@ -760,26 +709,62 @@ Don't lose your premium access!`
             }, 5000);
         }
 
+        // Enhanced Fetch Function
+        async function makeRequest(url, options = {}) {
+            console.log('🌐 Making request:', url, options);
+            
+            const defaultOptions = {
+                mode: 'cors',
+                credentials: 'omit',
+                cache: 'no-cache',
+                redirect: 'follow'
+            };
+
+            const finalOptions = { ...defaultOptions, ...options };
+
+            try {
+                const response = await fetch(url, finalOptions);
+                
+                console.log('📥 Response status:', response.status);
+                console.log('📥 Response headers:', Array.from(response.headers.entries()));
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
+                }
+
+                const text = await response.text();
+                console.log('📥 Response text:', text);
+
+                if (!text || text.trim() === '') {
+                    throw new Error('Empty response from server');
+                }
+
+                const result = JSON.parse(text);
+                console.log('📥 Parsed result:', result);
+                
+                return result;
+            } catch (error) {
+                console.error('❌ Request failed:', error);
+                throw error;
+            }
+        }
+
         // Test Connection
         async function testConnection() {
             try {
-                const response = await fetch(`${APPS_SCRIPT_URL}?action=test`, {
-                    method: 'GET'
-                });
+                console.log('🧪 Testing connection...');
+                showConnectionStatus('Testing connection...', true);
                 
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                
-                const result = await response.json();
+                const result = await makeRequest(`${APPS_SCRIPT_URL}?action=test&t=${Date.now()}`);
                 
                 if (result.success) {
-                    showConnectionStatus('✅ Connected to server');
+                    showConnectionStatus('✅ Server connected');
                     return true;
                 } else {
-                    throw new Error(result.message);
+                    throw new Error(result.message || 'Connection test failed');
                 }
             } catch (error) {
+                console.error('Connection test failed:', error);
                 showConnectionStatus('❌ Connection failed', false);
                 throw error;
             }
@@ -789,8 +774,8 @@ Don't lose your premium access!`
         async function loginAffiliate() {
             const loginCode = document.getElementById('loginCode').value.trim();
             
-            if (loginCode.length !== 6) {
-                showError('loginError', '❌ Please enter a valid 6-digit code');
+            if (!loginCode || loginCode.length !== 6) {
+                showError('loginError', '❌ Please enter a valid 6-digit login code');
                 return;
             }
 
@@ -802,35 +787,33 @@ Don't lose your premium access!`
                 // Test connection first
                 await testConnection();
                 
-                const url = `${APPS_SCRIPT_URL}?action=login&code=${encodeURIComponent(loginCode)}`;
+                console.log('🔐 Attempting login with code:', loginCode);
                 
-                const response = await fetch(url, {
-                    method: 'GET'
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-                
-                const result = await response.json();
+                const url = `${APPS_SCRIPT_URL}?action=login&code=${encodeURIComponent(loginCode)}&t=${Date.now()}`;
+                const result = await makeRequest(url);
 
-                if (result.success) {
+                if (result.success && result.affiliate) {
                     currentAffiliate = result.affiliate;
+                    console.log('✅ Login successful:', currentAffiliate);
                     
+                    // Show dashboard
                     document.getElementById('loginSection').style.display = 'none';
                     document.getElementById('dashboardSection').style.display = 'block';
                     
+                    // Update UI
                     document.getElementById('affiliateName').textContent = `Welcome ${currentAffiliate.name}! 👋`;
                     document.getElementById('affiliateId').textContent = currentAffiliate.id;
                     
                     showConnectionStatus('✅ Login successful');
-                    loadDashboardData();
+                    
+                    // Load dashboard data
+                    await loadDashboardData();
                 } else {
                     showError('loginError', '❌ ' + (result.message || 'Invalid login code'));
                 }
             } catch (error) {
                 console.error('Login error:', error);
-                showError('loginError', `❌ Connection Error: ${error.message}<br><small>Please check your internet connection and try again.</small>`);
+                showError('loginError', `❌ Login Failed: ${error.message}`);
             } finally {
                 loginBtn.disabled = false;
                 hideLoading('loginLoading');
@@ -840,20 +823,17 @@ Don't lose your premium access!`
         // Load Dashboard Data
         async function loadDashboardData() {
             try {
-                const url = `${APPS_SCRIPT_URL}?action=getDashboardData&affiliateId=${encodeURIComponent(currentAffiliate.id)}`;
-                const response = await fetch(url, {
-                    method: 'GET'
-                });
+                console.log('📊 Loading dashboard data...');
                 
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                
-                const result = await response.json();
+                const url = `${APPS_SCRIPT_URL}?action=getDashboardData&affiliateId=${encodeURIComponent(currentAffiliate.id)}&t=${Date.now()}`;
+                const result = await makeRequest(url);
 
-                if (result.success) {
+                if (result.success && result.data) {
                     dashboardData = result.data;
                     updateDashboardStats();
+                    console.log('✅ Dashboard data loaded:', dashboardData);
+                } else {
+                    console.error('Dashboard load failed:', result.message);
                 }
             } catch (error) {
                 console.error('Dashboard load error:', error);
@@ -873,6 +853,8 @@ Don't lose your premium access!`
         // Show Details Function
         async function showDetails(type) {
             try {
+                console.log('📋 Loading details for:', type);
+                
                 // Update UI
                 document.querySelectorAll('.stat-card').forEach(card => card.classList.remove('active'));
                 document.getElementById(type === 'customers' ? 'customersCard' : 
@@ -887,12 +869,8 @@ Don't lose your premium access!`
                 };
                 document.getElementById('detailsTitle').textContent = titleMap[type];
 
-                const url = `${APPS_SCRIPT_URL}?action=getDetails&affiliateId=${encodeURIComponent(currentAffiliate.id)}&type=${encodeURIComponent(type)}`;
-                const response = await fetch(url, { method: 'GET' });
-                
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                
-                const result = await response.json();
+                const url = `${APPS_SCRIPT_URL}?action=getDetails&affiliateId=${encodeURIComponent(currentAffiliate.id)}&type=${encodeURIComponent(type)}&t=${Date.now()}`;
+                const result = await makeRequest(url);
 
                 if (result.success) {
                     displayDetailsTable(result.data, type);
@@ -900,6 +878,7 @@ Don't lose your premium access!`
                 }
             } catch (error) {
                 console.error('Details load error:', error);
+                showConnectionStatus('❌ Failed to load details', false);
             }
         }
 
@@ -915,7 +894,7 @@ Don't lose your premium access!`
 
             tableHtml += '</tr></thead><tbody>';
 
-            if (data.length === 0) {
+            if (!data || data.length === 0) {
                 tableHtml += `<tr><td colspan="${type === 'revenue' ? '5' : '8'}" style="text-align: center; padding: 20px; color: #666;">No data found</td></tr>`;
             } else {
                 data.forEach(row => {
@@ -963,31 +942,28 @@ Don't lose your premium access!`
 
         // Email Functions
         function sendEmail(email, customerName, plan, amount, expiryDate, status) {
-            const template = status === 'Expired' ? EMAIL_TEMPLATES.expiry : EMAIL_TEMPLATES.welcome;
+            const subject = status === 'Expired' ? 
+                'Camva Pro Subscription Expired - Renew Now!' : 
+                'Welcome to Camva Pro - Subscription Activated!';
             
-            const subject = template.subject.replace('[CUSTOMER_NAME]', customerName);
-            const body = template.body
-                .replace(/\[CUSTOMER_NAME\]/g, customerName)
-                .replace(/\[PLAN_TYPE\]/g, plan)
-                .replace(/\[AMOUNT\]/g, amount)
-                .replace(/\[EXPIRY_DATE\]/g, expiryDate);
+            const body = status === 'Expired' ? 
+                `Dear ${customerName},\n\nYour Camva Pro subscription expired on ${expiryDate}.\n\nRenew now to continue using premium features:\n• Monthly: ₹49\n• Quarterly: ₹99\n• Annual: ₹299\n\nBest regards,\nCamva Pro Team` :
+                `Dear ${customerName},\n\nWelcome to Camva Pro! Your subscription is now active:\n• Plan: ${plan}\n• Amount: ₹${amount}\n• Valid until: ${expiryDate}\n\nStart creating amazing designs!\n\nBest regards,\nCamva Pro Team`;
             
             const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             window.open(mailtoLink);
+            showConnectionStatus('📧 Email opened');
         }
 
         // WhatsApp Functions
         function sendWhatsApp(whatsapp, customerName, plan, amount, expiryDate, status) {
-            const template = status === 'Expired' ? WHATSAPP_TEMPLATES.expiry : WHATSAPP_TEMPLATES.welcome;
-            
-            const message = template
-                .replace(/\[CUSTOMER_NAME\]/g, customerName)
-                .replace(/\[PLAN_TYPE\]/g, plan)
-                .replace(/\[AMOUNT\]/g, amount)
-                .replace(/\[EXPIRY_DATE\]/g, expiryDate);
+            const message = status === 'Expired' ? 
+                `⚠️ Subscription Expired\n\nHi ${customerName}, your subscription expired on ${expiryDate}.\n\nRenew now:\n• Monthly: ₹49\n• Quarterly: ₹99\n• Annual: ₹299\n\nDon't lose your premium access!` :
+                `🎉 Welcome to Camva Pro!\n\nHi ${customerName}, your subscription is active!\n\nPlan: ${plan} (₹${amount})\nValid until: ${expiryDate}\n\nStart creating! Need help? Reply here.`;
             
             const whatsappLink = `https://wa.me/91${whatsapp}?text=${encodeURIComponent(message)}`;
             window.open(whatsappLink, '_blank');
+            showConnectionStatus('💬 WhatsApp opened');
         }
 
         // Form Functions
@@ -1013,7 +989,7 @@ Don't lose your premium access!`
             const amount = selectedOption.getAttribute('data-amount') || '';
             document.getElementById('planAmount').value = amount;
 
-            if (amount) {
+            if (amount && document.getElementById('subscriptionDate').value) {
                 const startDate = new Date(document.getElementById('subscriptionDate').value);
                 let expiryDate = new Date(startDate);
                 
@@ -1033,78 +1009,115 @@ Don't lose your premium access!`
             }
         }
 
-        // Form Submit Handler
+        // Form Validation
+        function validateForm() {
+            const name = document.getElementById('customerName').value.trim();
+            const email = document.getElementById('customerEmail').value.trim();
+            const phone = document.getElementById('customerWhatsApp').value.trim();
+            const plan = document.getElementById('planType').value;
+            const subDate = document.getElementById('subscriptionDate').value;
+            const expDate = document.getElementById('expiryDate').value;
+
+            if (!name) return 'Customer name is required';
+            if (!email || !email.includes('@')) return 'Valid email is required';
+            if (!phone || !/^\d{10}$/.test(phone)) return 'Valid 10-digit phone number is required';
+            if (!plan) return 'Please select a subscription plan';
+            if (!subDate) return 'Subscription date is required';
+            if (!expDate) return 'Expiry date is required';
+
+            return null; // Valid
+        }
+
+        // Form Submit Handler - FIXED
         document.getElementById('subscriptionForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            console.log('📝 Form submission started');
+            
+            // Validate form
+            const validationError = validateForm();
+            if (validationError) {
+                showError('formError', '❌ ' + validationError);
+                return;
+            }
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ Adding...';
+            
+            // Prepare form data
             const formData = {
                 affiliateId: currentAffiliate.id,
-                customerName: document.getElementById('customerName').value,
-                customerEmail: document.getElementById('customerEmail').value,
-                customerWhatsApp: document.getElementById('customerWhatsApp').value,
+                customerName: document.getElementById('customerName').value.trim(),
+                customerEmail: document.getElementById('customerEmail').value.trim(),
+                customerWhatsApp: document.getElementById('customerWhatsApp').value.trim(),
                 planType: document.getElementById('planType').value,
                 planAmount: document.getElementById('planAmount').value,
                 paymentStatus: document.getElementById('paymentStatus').value,
                 subscriptionDate: document.getElementById('subscriptionDate').value,
                 expiryDate: document.getElementById('expiryDate').value,
-                notes: document.getElementById('customerNotes').value
+                notes: document.getElementById('customerNotes').value.trim()
             };
 
+            console.log('📋 Form data prepared:', formData);
+
             try {
-                const response = await fetch(APPS_SCRIPT_URL, {
+                // First test connection
+                await testConnection();
+                
+                console.log('📤 Sending POST request...');
+                
+                const postData = {
+                    action: 'addSubscription',
+                    data: formData
+                };
+
+                const result = await makeRequest(APPS_SCRIPT_URL, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        action: 'addSubscription',
-                        data: formData
-                    })
+                    body: JSON.stringify(postData)
                 });
 
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-
-                const result = await response.json();
+                console.log('📥 POST result:', result);
 
                 if (result.success) {
                     showSuccess('formSuccess', '✅ Subscription added successfully!');
+                    showConnectionStatus('✅ Subscription added successfully');
                     
+                    // Send welcome email if paid
                     if (formData.paymentStatus === 'Paid') {
                         setTimeout(() => {
-                            sendWelcomeEmail(formData.customerEmail, formData.customerName, formData.planType, formData.planAmount, formData.subscriptionDate, formData.expiryDate);
+                            sendWelcomeEmail(formData.customerEmail, formData.customerName, formData.planType, formData.planAmount, formData.expiryDate);
                         }, 1000);
                     }
                     
+                    // Close form and refresh dashboard after delay
                     setTimeout(() => {
                         closeAddForm();
                         loadDashboardData();
                     }, 2000);
                 } else {
-                    showError('formError', '❌ ' + (result.message || 'Error adding subscription'));
+                    showError('formError', '❌ ' + (result.message || 'Failed to add subscription'));
                 }
             } catch (error) {
-                console.error('Add subscription error:', error);
-                showError('formError', `❌ Error: ${error.message}`);
+                console.error('❌ Form submission error:', error);
+                showError('formError', `❌ Failed to add subscription: ${error.message}`);
+                showConnectionStatus('❌ Failed to add subscription', false);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = '💾 Add Subscription';
             }
         });
 
-        function sendWelcomeEmail(email, customerName, plan, amount, startDate, expiryDate) {
-            const template = EMAIL_TEMPLATES.welcome;
-            const subject = template.subject.replace('[CUSTOMER_NAME]', customerName);
-            const body = template.body
-                .replace(/\[CUSTOMER_NAME\]/g, customerName)
-                .replace(/\[PLAN_TYPE\]/g, plan)
-                .replace(/\[AMOUNT\]/g, amount)
-                .replace(/\[EXPIRY_DATE\]/g, expiryDate);
+        function sendWelcomeEmail(email, customerName, plan, amount, expiryDate) {
+            const subject = 'Welcome to Camva Pro - Subscription Activated! 🎉';
+            const body = `Dear ${customerName},\n\nWelcome to Camva Pro! Your subscription is now active:\n• Plan: ${plan}\n• Amount: ₹${amount}\n• Valid until: ${expiryDate}\n\nStart creating amazing designs!\n\nBest regards,\nCamva Pro Team`;
             
             const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             window.open(mailtoLink);
-            
-            setTimeout(() => {
-                showConnectionStatus('📧 Welcome email opened!');
-            }, 500);
+            showConnectionStatus('📧 Welcome email opened');
         }
 
         function logout() {
@@ -1114,6 +1127,7 @@ Don't lose your premium access!`
             document.getElementById('loginSection').style.display = 'block';
             document.getElementById('loginCode').value = '';
             closeDetails();
+            showConnectionStatus('👋 Logged out');
         }
 
         // Event Listeners
@@ -1135,9 +1149,16 @@ Don't lose your premium access!`
         window.addEventListener('load', function() {
             console.log('🚀 Camva Pro Affiliate Dashboard loaded');
             
+            // Check if URL is configured
+            if (APPS_SCRIPT_URL === 'YOUR_WEB_APP_URL_HERE') {
+                showError('loginError', '❌ Please configure APPS_SCRIPT_URL in the code with your actual Web App URL');
+                return;
+            }
+            
             // Test connection on load
             testConnection().catch(error => {
                 console.error('Initial connection test failed:', error);
+                showConnectionStatus('⚠️ Please check your internet connection', false);
             });
         });
     </script>
