@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camva Pro - Affiliate Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Login Section */
+        #loginSection {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        #loginSection h2 {
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 1.8rem;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Dashboard */
+        #dashboardSection {
+            display: none;
+        }
+
+        .dashboard-header {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .welcome-text h2 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .welcome-text p {
+            color: #666;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .stat-card.active {
+            background: #f8f9ff;
+            border: 2px solid #667eea;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Action Bar */
+        .action-bar {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .btn-add {
+            background: #28a745;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-add:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        /* Details Section */
+        .details-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f3f4;
+        }
+
+        .details-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .close-details {
+            background: #6c757d;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9ff;
+        }
+
+        .status-active {
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-expired {
+            background: #dc3545;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #ffc107;
+            color: #212529;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Communication Buttons */
+        .communication-buttons {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .btn-email,
+        .btn-whatsapp {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-email {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn-success {
+            flex: 1;
+            background: #28a745;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            flex: 1;
+            background: #6c757d;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Loading */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Messages */
+        .error-message, .success-message {
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            display: none;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* Connection Status */
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 1001;
+        }
+
+        .connection-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .connection-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .header h1 { font-size: 2rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .dashboard-header { flex-direction: column; gap: 15px; text-align: center; }
+            .form-row { flex-direction: column; }
+            .data-table { font-size: 12px; }
+            .communication-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎨 Camva Pro</h1>
+            <p>Affiliate Dashboard - Track Your Earnings</p>
+        </div>
+
+        <!-- Connection Status -->
+        <div id="connectionStatus" class="connection-status" style="display: none;"></div>
+
+        <!-- Login Section -->
+        <div id="loginSection">
+            <h2>🔐 Affiliate Login</h2>
+            <div class="error-message" id="loginError"></div>
+            
+            <div class="input-group">
+                <label for="loginCode">6-Digit Login Code</label>
+                <input type="text" id="loginCode" placeholder="e.g: 123456" maxlength="6" pattern="[0-9]{6}">
+            </div>
+            
+            <button class="btn-primary" id="loginBtn" onclick="loginAffiliate()">
+                🚀 Login
+            </button>
+            
+            <div class="loading" id="loginLoading">
+                <div class="spinner"></div>
+                <p>Logging in...</p>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboardSection">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div class="welcome-text">
+                    <h2 id="affiliateName">Welcome! 👋</h2>
+                    <p>Your Affiliate ID: <span id="affiliateId"></span></p>
+                </div>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card" onclick="showDetails('customers')" id="customersCard">
+                    <div class="stat-number" id="totalCustomers">0</div>
+                    <div class="stat-label">👥 Total Customers</div>
+                </div>
+                
+                <div class="stat-card" onclick="showDetails('active')" id="activeCard">
+                    <div class="stat-number" id="activeSubscriptions">0</div>
+                    <div class="stat-label">✅ Active Subscriptions</div>
+                </div>
+                
+                <div class="stat-card" onclick="showDetails('revenue')" id="revenueCard">
+                    <div class="stat-number" id="totalRevenue">₹0</div>
+                    <div class="stat-label">💰 Total Commission</div>
+                </div>
+                
+                <div class="stat-card" onclick="showDetails('expired')" id="expiredCard">
+                    <div class="stat-number" id="expiredSubscriptions">0</div>
+                    <div class="stat-label">❌ Expired Subscriptions</div>
+                </div>
+            </div>
+
+            <!-- Action Bar -->
+            <div class="action-bar">
+                <button class="btn-add" onclick="openAddForm()">
+                    ➕ Add New Subscription
+                </button>
+            </div>
+
+            <!-- Details Section -->
+            <div id="detailsSection" style="display: none;">
+                <div class="details-section">
+                    <div class="details-header">
+                        <div class="details-title" id="detailsTitle"></div>
+                        <button class="close-details" onclick="closeDetails()">Close</button>
+                    </div>
+                    <div id="detailsContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Subscription Modal -->
+        <div id="addModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>➕ Add New Subscription</h3>
+                    <p style="color: #666;">Fill in all customer details</p>
+                </div>
+                
+                <div class="error-message" id="formError"></div>
+                <div class="success-message" id="formSuccess"></div>
+
+                <form id="subscriptionForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerName">Customer Name *</label>
+                            <input type="text" id="customerName" required placeholder="e.g: John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="customerEmail">Email Address *</label>
+                            <input type="email" id="customerEmail" required placeholder="e.g: john@gmail.com">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerWhatsApp">WhatsApp Number *</label>
+                            <input type="tel" id="customerWhatsApp" required placeholder="e.g: 9876543210" maxlength="10">
+                        </div>
+                        <div class="form-group">
+                            <label for="planType">Subscription Plan *</label>
+                            <select id="planType" required onchange="updatePlanAmount()">
+                                <option value="">Select Plan</option>
+                                <option value="Monthly" data-amount="49">Monthly - ₹49</option>
+                                <option value="Quarterly" data-amount="99">Quarterly - ₹99</option>
+                                <option value="Annual" data-amount="299">Annual - ₹299</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="planAmount">Plan Amount</label>
+                            <input type="number" id="planAmount" readonly placeholder="Amount will auto-fill">
+                        </div>
+                        <div class="form-group">
+                            <label for="paymentStatus">Payment Status *</label>
+                            <select id="paymentStatus" required>
+                                <option value="Paid">✅ Paid</option>
+                                <option value="Pending">⏳ Pending</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="subscriptionDate">Subscription Date *</label>
+                            <input type="date" id="subscriptionDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expiryDate">Expiry Date *</label>
+                            <input type="date" id="expiryDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerNotes">Additional Notes (Optional)</label>
+                        <input type="text" id="customerNotes" placeholder="Any additional information">
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" class="btn-success">💾 Add Subscription</button>
+                        <button type="button" class="btn-cancel" onclick="closeAddForm()">❌ Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🔧 APPS SCRIPT WEB APP URL - Replace with your actual URL
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwbLo6Uw_50L7i9-vujj5Tna3CnHeF84zY2G3zK3PFlf-dRT47g4SjkmT35dDd_Nsg/exec';
+
+        // Global Variables
+        let currentAffiliate = null;
+        let dashboardData = null;
+
+        // Email Templates
+        const EMAIL_TEMPLATES = {
+            welcome: {
+                subject: 'Welcome to Camva Pro - Subscription Activated!',
+                body: `Dear [CUSTOMER_NAME],
+
+Welcome to Camva Pro! 🎉
+
+Your subscription has been successfully activated:
+• Plan: [PLAN_TYPE]
+• Amount: ₹[AMOUNT]
+• Valid until: [EXPIRY_DATE]
+
+Start creating amazing designs now!
+
+Best regards,
+Camva Pro Team`
+            },
+            expiry: {
+                subject: 'Camva Pro Subscription Expired - Renew Now!',
+                body: `Dear [CUSTOMER_NAME],
+
+Your Camva Pro subscription expired on [EXPIRY_DATE].
+
+Renew now to continue using premium features:
+• Monthly: ₹49
+• Quarterly: ₹99
+• Annual: ₹299 (Best Value!)
+
+Best regards,
+Camva Pro Team`
+            }
+        };
+
+        // WhatsApp Templates
+        const WHATSAPP_TEMPLATES = {
+            welcome: `🎉 Welcome to Camva Pro!
+
+Hi [CUSTOMER_NAME], your subscription is active!
+
+Plan: [PLAN_TYPE] (₹[AMOUNT])
+Valid until: [EXPIRY_DATE]
+
+Start creating! Need help? Reply here.`,
+
+            expiry: `⚠️ Subscription Expired
+
+Hi [CUSTOMER_NAME], your subscription expired on [EXPIRY_DATE].
+
+Renew now:
+• Monthly: ₹49
+• Quarterly: ₹99  
+• Annual: ₹299
+
+Don't lose your premium access!`
+        };
+
+        // Utility Functions
+        function showConnectionStatus(message, isSuccess = true) {
+            const status = document.getElementById('connectionStatus');
+            status.textContent = message;
+            status.className = `connection-status ${isSuccess ? 'connection-success' : 'connection-error'}`;
+            status.style.display = 'block';
+            
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+
+        function showLoading(elementId) {
+            document.getElementById(elementId).style.display = 'block';
+        }
+
+        function hideLoading(elementId) {
+            document.getElementById(elementId).style.display = 'none';
+        }
+
+        function showError(elementId, message) {
+            const errorEl = document.getElementById(elementId);
+            errorEl.innerHTML = message;
+            errorEl.style.display = 'block';
+            setTimeout(() => {
+                errorEl.style.display = 'none';
+            }, 8000);
+        }
+
+        function showSuccess(elementId, message) {
+            const successEl = document.getElementById(elementId);
+            successEl.innerHTML = message;
+            successEl.style.display = 'block';
+            setTimeout(() => {
+                successEl.style.display = 'none';
+            }, 5000);
+        }
+
+        // Test Connection
+        async function testConnection() {
+            try {
+                const response = await fetch(`${APPS_SCRIPT_URL}?action=test`, {
+                    method: 'GET'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showConnectionStatus('✅ Connected to server');
+                    return true;
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                showConnectionStatus('❌ Connection failed', false);
+                throw error;
+            }
+        }
+
+        // Login Function
+        async function loginAffiliate() {
+            const loginCode = document.getElementById('loginCode').value.trim();
+            
+            if (loginCode.length !== 6) {
+                showError('loginError', '❌ Please enter a valid 6-digit code');
+                return;
+            }
+
+            const loginBtn = document.getElementById('loginBtn');
+            loginBtn.disabled = true;
+            showLoading('loginLoading');
+
+            try {
+                // Test connection first
+                await testConnection();
+                
+                const url = `${APPS_SCRIPT_URL}?action=login&code=${encodeURIComponent(loginCode)}`;
+                
+                const response = await fetch(url, {
+                    method: 'GET'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+
+                if (result.success) {
+                    currentAffiliate = result.affiliate;
+                    
+                    document.getElementById('loginSection').style.display = 'none';
+                    document.getElementById('dashboardSection').style.display = 'block';
+                    
+                    document.getElementById('affiliateName').textContent = `Welcome ${currentAffiliate.name}! 👋`;
+                    document.getElementById('affiliateId').textContent = currentAffiliate.id;
+                    
+                    showConnectionStatus('✅ Login successful');
+                    loadDashboardData();
+                } else {
+                    showError('loginError', '❌ ' + (result.message || 'Invalid login code'));
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showError('loginError', `❌ Connection Error: ${error.message}<br><small>Please check your internet connection and try again.</small>`);
+            } finally {
+                loginBtn.disabled = false;
+                hideLoading('loginLoading');
+            }
+        }
+
+        // Load Dashboard Data
+        async function loadDashboardData() {
+            try {
+                const url = `${APPS_SCRIPT_URL}?action=getDashboardData&affiliateId=${encodeURIComponent(currentAffiliate.id)}`;
+                const response = await fetch(url, {
+                    method: 'GET'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const result = await response.json();
+
+                if (result.success) {
+                    dashboardData = result.data;
+                    updateDashboardStats();
+                }
+            } catch (error) {
+                console.error('Dashboard load error:', error);
+            }
+        }
+
+        // Update Dashboard Stats
+        function updateDashboardStats() {
+            if (!dashboardData) return;
+
+            document.getElementById('totalCustomers').textContent = dashboardData.totalCustomers || 0;
+            document.getElementById('activeSubscriptions').textContent = dashboardData.activeSubscriptions || 0;
+            document.getElementById('totalRevenue').textContent = `₹${dashboardData.totalRevenue || 0}`;
+            document.getElementById('expiredSubscriptions').textContent = dashboardData.expiredSubscriptions || 0;
+        }
+
+        // Show Details Function
+        async function showDetails(type) {
+            try {
+                // Update UI
+                document.querySelectorAll('.stat-card').forEach(card => card.classList.remove('active'));
+                document.getElementById(type === 'customers' ? 'customersCard' : 
+                                     type === 'active' ? 'activeCard' : 
+                                     type === 'revenue' ? 'revenueCard' : 'expiredCard').classList.add('active');
+
+                const titleMap = {
+                    'customers': '👥 All Customers',
+                    'active': '✅ Active Subscriptions',
+                    'revenue': '💰 Revenue Details',
+                    'expired': '❌ Expired Subscriptions'
+                };
+                document.getElementById('detailsTitle').textContent = titleMap[type];
+
+                const url = `${APPS_SCRIPT_URL}?action=getDetails&affiliateId=${encodeURIComponent(currentAffiliate.id)}&type=${encodeURIComponent(type)}`;
+                const response = await fetch(url, { method: 'GET' });
+                
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const result = await response.json();
+
+                if (result.success) {
+                    displayDetailsTable(result.data, type);
+                    document.getElementById('detailsSection').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Details load error:', error);
+            }
+        }
+
+        // Display Details Table
+        function displayDetailsTable(data, type) {
+            let tableHtml = '<table class="data-table"><thead><tr>';
+
+            if (type === 'customers' || type === 'active' || type === 'expired') {
+                tableHtml += '<th>Name</th><th>Email</th><th>WhatsApp</th><th>Plan</th><th>Amount</th><th>Status</th><th>Expiry</th><th>Actions</th>';
+            } else if (type === 'revenue') {
+                tableHtml += '<th>Customer</th><th>Plan</th><th>Commission</th><th>Date</th><th>Status</th>';
+            }
+
+            tableHtml += '</tr></thead><tbody>';
+
+            if (data.length === 0) {
+                tableHtml += `<tr><td colspan="${type === 'revenue' ? '5' : '8'}" style="text-align: center; padding: 20px; color: #666;">No data found</td></tr>`;
+            } else {
+                data.forEach(row => {
+                    tableHtml += '<tr>';
+                    if (type === 'customers' || type === 'active' || type === 'expired') {
+                        const statusClass = row.status === 'Active' ? 'status-active' : 
+                                           row.status === 'Expired' ? 'status-expired' : 'status-pending';
+                        
+                        tableHtml += `
+                            <td>${row.customerName}</td>
+                            <td>${row.email}</td>
+                            <td>${row.whatsapp}</td>
+                            <td>${row.plan}</td>
+                            <td>₹${row.amount}</td>
+                            <td><span class="${statusClass}">${row.status}</span></td>
+                            <td>${row.expiryDate}</td>
+                            <td>
+                                <div class="communication-buttons">
+                                    <button class="btn-email" onclick="sendEmail('${row.email}', '${row.customerName}', '${row.plan}', '${row.amount}', '${row.expiryDate}', '${row.status}')">
+                                        📧
+                                    </button>
+                                    <button class="btn-whatsapp" onclick="sendWhatsApp('${row.whatsapp}', '${row.customerName}', '${row.plan}', '${row.amount}', '${row.expiryDate}', '${row.status}')">
+                                        💬
+                                    </button>
+                                </div>
+                            </td>
+                        `;
+                    } else if (type === 'revenue') {
+                        const statusClass = row.status === 'Paid' ? 'status-active' : 'status-pending';
+                        tableHtml += `
+                            <td>${row.customerName}</td>
+                            <td>${row.plan}</td>
+                            <td>₹${row.commission}</td>
+                            <td>${row.date}</td>
+                            <td><span class="${statusClass}">${row.status}</span></td>
+                        `;
+                    }
+                    tableHtml += '</tr>';
+                });
+            }
+
+            tableHtml += '</tbody></table>';
+            document.getElementById('detailsContent').innerHTML = tableHtml;
+        }
+
+        // Email Functions
+        function sendEmail(email, customerName, plan, amount, expiryDate, status) {
+            const template = status === 'Expired' ? EMAIL_TEMPLATES.expiry : EMAIL_TEMPLATES.welcome;
+            
+            const subject = template.subject.replace('[CUSTOMER_NAME]', customerName);
+            const body = template.body
+                .replace(/\[CUSTOMER_NAME\]/g, customerName)
+                .replace(/\[PLAN_TYPE\]/g, plan)
+                .replace(/\[AMOUNT\]/g, amount)
+                .replace(/\[EXPIRY_DATE\]/g, expiryDate);
+            
+            const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailtoLink);
+        }
+
+        // WhatsApp Functions
+        function sendWhatsApp(whatsapp, customerName, plan, amount, expiryDate, status) {
+            const template = status === 'Expired' ? WHATSAPP_TEMPLATES.expiry : WHATSAPP_TEMPLATES.welcome;
+            
+            const message = template
+                .replace(/\[CUSTOMER_NAME\]/g, customerName)
+                .replace(/\[PLAN_TYPE\]/g, plan)
+                .replace(/\[AMOUNT\]/g, amount)
+                .replace(/\[EXPIRY_DATE\]/g, expiryDate);
+            
+            const whatsappLink = `https://wa.me/91${whatsapp}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappLink, '_blank');
+        }
+
+        // Form Functions
+        function openAddForm() {
+            document.getElementById('addModal').style.display = 'block';
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('subscriptionDate').value = today;
+        }
+
+        function closeAddForm() {
+            document.getElementById('addModal').style.display = 'none';
+            document.getElementById('subscriptionForm').reset();
+        }
+
+        function closeDetails() {
+            document.getElementById('detailsSection').style.display = 'none';
+            document.querySelectorAll('.stat-card').forEach(card => card.classList.remove('active'));
+        }
+
+        function updatePlanAmount() {
+            const planSelect = document.getElementById('planType');
+            const selectedOption = planSelect.options[planSelect.selectedIndex];
+            const amount = selectedOption.getAttribute('data-amount') || '';
+            document.getElementById('planAmount').value = amount;
+
+            if (amount) {
+                const startDate = new Date(document.getElementById('subscriptionDate').value);
+                let expiryDate = new Date(startDate);
+                
+                switch(planSelect.value) {
+                    case 'Monthly':
+                        expiryDate.setMonth(expiryDate.getMonth() + 1);
+                        break;
+                    case 'Quarterly':
+                        expiryDate.setMonth(expiryDate.getMonth() + 3);
+                        break;
+                    case 'Annual':
+                        expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+                        break;
+                }
+                
+                document.getElementById('expiryDate').value = expiryDate.toISOString().split('T')[0];
+            }
+        }
+
+        // Form Submit Handler
+        document.getElementById('subscriptionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                affiliateId: currentAffiliate.id,
+                customerName: document.getElementById('customerName').value,
+                customerEmail: document.getElementById('customerEmail').value,
+                customerWhatsApp: document.getElementById('customerWhatsApp').value,
+                planType: document.getElementById('planType').value,
+                planAmount: document.getElementById('planAmount').value,
+                paymentStatus: document.getElementById('paymentStatus').value,
+                subscriptionDate: document.getElementById('subscriptionDate').value,
+                expiryDate: document.getElementById('expiryDate').value,
+                notes: document.getElementById('customerNotes').value
+            };
+
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: 'addSubscription',
+                        data: formData
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showSuccess('formSuccess', '✅ Subscription added successfully!');
+                    
+                    if (formData.paymentStatus === 'Paid') {
+                        setTimeout(() => {
+                            sendWelcomeEmail(formData.customerEmail, formData.customerName, formData.planType, formData.planAmount, formData.subscriptionDate, formData.expiryDate);
+                        }, 1000);
+                    }
+                    
+                    setTimeout(() => {
+                        closeAddForm();
+                        loadDashboardData();
+                    }, 2000);
+                } else {
+                    showError('formError', '❌ ' + (result.message || 'Error adding subscription'));
+                }
+            } catch (error) {
+                console.error('Add subscription error:', error);
+                showError('formError', `❌ Error: ${error.message}`);
+            }
+        });
+
+        function sendWelcomeEmail(email, customerName, plan, amount, startDate, expiryDate) {
+            const template = EMAIL_TEMPLATES.welcome;
+            const subject = template.subject.replace('[CUSTOMER_NAME]', customerName);
+            const body = template.body
+                .replace(/\[CUSTOMER_NAME\]/g, customerName)
+                .replace(/\[PLAN_TYPE\]/g, plan)
+                .replace(/\[AMOUNT\]/g, amount)
+                .replace(/\[EXPIRY_DATE\]/g, expiryDate);
+            
+            const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailtoLink);
+            
+            setTimeout(() => {
+                showConnectionStatus('📧 Welcome email opened!');
+            }, 500);
+        }
+
+        function logout() {
+            currentAffiliate = null;
+            dashboardData = null;
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('loginCode').value = '';
+            closeDetails();
+        }
+
+        // Event Listeners
+        document.getElementById('loginCode').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                loginAffiliate();
+            }
+        });
+
+        document.getElementById('addModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAddForm();
+            }
+        });
+
+        document.getElementById('subscriptionDate').addEventListener('change', updatePlanAmount);
+
+        // Initial Setup
+        window.addEventListener('load', function() {
+            console.log('🚀 Camva Pro Affiliate Dashboard loaded');
+            
+            // Test connection on load
+            testConnection().catch(error => {
+                console.error('Initial connection test failed:', error);
+            });
+        });
+    </script>
+</body>
+</html>
